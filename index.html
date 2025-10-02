@@ -1,284 +1,268 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Federalists vs. Anti-Federalists Workbook</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    :root{
+      --primary-bg:#111827;
+      --container-bg:#1F2937;
+      --text-color:#E5E7EB;
+      --header-color:#F9FAFB;
+      --accent-color:#A78BFA;
+      --border-color:#374151;
+      --focus-color:#C4B5FD;
+
+      /* new */
+      --max-width: 1400px;
+      --side-gutter: 2vw;
+      --section-gap: 3rem;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    html,body{height:100%}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--primary-bg);
+      color:var(--text-color);
+      line-height:1.7;
+      /* reduced outer padding so content can breathe wider */
+      padding: min(2rem, 3vh) 0;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* WIDER, TALLER CONTAINER */
+    .workbook-container{
+      width: clamp(960px, 92vw, var(--max-width));
+      min-height: 100dvh;            /* fill viewport height */
+      margin: 0 auto;
+      background: var(--container-bg);
+      padding: 3rem clamp(1rem, var(--side-gutter), 3rem);
+      border-radius: 18px;
+      border:1px solid var(--border-color);
+      box-shadow:0 10px 30px rgba(0,0,0,.3), 0 0 0 1px rgba(255,255,255,.05) inset;
+    }
+
+    header{
+      text-align:center;
+      margin-bottom:2.5rem;
+      padding-bottom:1.25rem;
+    }
+    header h1{
+      font-weight:700;
+      color:var(--header-color);
+      font-size: clamp(2.2rem, 3vw, 3.2rem); /* scale with width */
+      margin-bottom:.35rem;
+      letter-spacing:-.5px;
+      text-shadow:0 0 15px rgba(167,139,250,.3);
+    }
+    header p{font-size:1.1rem;color:#9CA3AF}
+
+    main{display:block}
+    .workbook-section{margin-bottom: var(--section-gap)}
+    h2{
+      font-weight:600;
+      color:var(--header-color);
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      margin-bottom:1.25rem;
+      border-bottom:2px solid var(--border-color);
+      padding-bottom:.6rem;
+    }
+
+    /* VIDEO: true 16:9, scales wide */
+    .video-wrapper{
+      position:relative;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 4px 15px rgba(0,0,0,.25);
+      background:#000;
+    }
+
+    /* Use aspect-ratio when supported */
+    @supports (aspect-ratio: 16 / 9){
+      .video-wrapper{aspect-ratio:16/9;height:auto}
+      .video-wrapper iframe{width:100%;height:100%;border:0;display:block}
+    }
+    /* Fallback to padding hack */
+    @supports not (aspect-ratio: 16 / 9){
+      .video-wrapper{height:0;padding-bottom:56.25%}
+      .video-wrapper iframe{
+        position:absolute;inset:0;border:0;width:100%;height:100%;
+      }
+    }
+
+    /* Optional: full-bleed video variant */
+    .video-bleed{
+      width: calc(100vw - 2*var(--side-gutter));
+      max-width: var(--max-width);
+      margin-left: calc(50% - min(var(--max-width), 92vw)/2);
+      border-radius: 0; /* edge to edge look */
+    }
+
+    /* VOCAB + TEXTAREAS */
+    .vocab-list{list-style:none;display:grid;gap:1.25rem}
+    .vocab-item strong{color:var(--header-color);font-size:1.1rem;font-weight:600}
+
+    label{
+      display:block;font-weight:600;margin-bottom:.65rem;font-size:1.05rem;color:var(--header-color)
+    }
+    textarea{
+      width:100%;
+      min-height: 150px;                    /* taller default */
+      padding:1rem;
+      border:1px solid var(--border-color);
+      border-radius:10px;
+      background:#0f1623;
+      color:var(--text-color);
+      font: 400 1rem/1.6 'Poppins',sans-serif;
+      resize: vertical;
+      transition:border-color .25s, box-shadow .25s;
+    }
+    textarea::placeholder{color:#6B7280}
+    textarea:focus{outline:none;border-color:var(--accent-color);box-shadow:0 0 0 3px rgba(167,139,250,.25)}
+
+    /* T-CHART */
+    .t-chart{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top:1.25rem;
+    }
+    .t-chart h3{
+      text-align:center;font-weight:600;color:var(--header-color);margin-bottom:.75rem
+    }
+
+    /* subtle separators */
+    hr{
+      margin: 2.5rem 0;
+      border:0;height:1px;
+      background-image: linear-gradient(to right, transparent, var(--border-color), transparent);
+    }
+
+    /* Better use of space on mobile */
+    @media (max-width: 900px){
+      .workbook-container{
+        width: 96vw;
+        border-radius:12px;
+        padding: 2rem 1.25rem;
+      }
+      header h1{font-size: clamp(1.8rem, 6vw, 2.4rem)}
+      h2{font-size: clamp(1.25rem, 4.5vw, 1.6rem)}
+      .t-chart{grid-template-columns: 1fr}
+      textarea{min-height: 130px}
+    }
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Federalists vs. Anti-Federalists Workbook&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>:root{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--primary-bg:#111827;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--container-bg:#1F2937;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--text-color:#E5E7EB;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--header-color:#F9FAFB;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--accent-color:#A78BFA;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--border-color:#374151;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--focus-color:#C4B5FD;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>/* new */</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--max-width: 1400px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--side-gutter: 2vw;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--section-gap: 3rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>*{box-sizing:border-box;margin:0;padding:0}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>html,body{height:100%}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family:'Poppins',sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background:var(--primary-bg);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color:var(--text-color);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height:1.7;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>/* reduced outer padding so content can breathe wider */</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: min(2rem, 3vh) 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>-webkit-font-smoothing:antialiased;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>-moz-osx-font-smoothing:grayscale;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* WIDER, TALLER CONTAINER */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.workbook-container{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: clamp(960px, 92vw, var(--max-width));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height: 100dvh;<span class="Apple-converted-space">            </span>/* fill viewport height */</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: var(--container-bg);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 3rem clamp(1rem, var(--side-gutter), 3rem);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border:1px solid var(--border-color);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow:0 10px 30px rgba(0,0,0,.3), 0 0 0 1px rgba(255,255,255,.05) inset;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>header{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align:center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom:2.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding-bottom:1.25rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>header h1{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight:700;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color:var(--header-color);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: clamp(2.2rem, 3vw, 3.2rem); /* scale with width */</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom:.35rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing:-.5px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-shadow:0 0 15px rgba(167,139,250,.3);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>header p{font-size:1.1rem;color:#9CA3AF}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>main{display:block}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.workbook-section{margin-bottom: var(--section-gap)}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>h2{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight:600;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color:var(--header-color);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: clamp(1.5rem, 2vw, 2rem);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom:1.25rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-bottom:2px solid var(--border-color);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding-bottom:.6rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* VIDEO: true 16:9, scales wide */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.video-wrapper{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position:relative;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius:14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>overflow:hidden;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow:0 4px 15px rgba(0,0,0,.25);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background:#000;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* Use aspect-ratio when supported */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>@supports (aspect-ratio: 16 / 9){</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.video-wrapper{aspect-ratio:16/9;height:auto}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.video-wrapper iframe{width:100%;height:100%;border:0;display:block}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* Fallback to padding hack */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>@supports not (aspect-ratio: 16 / 9){</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.video-wrapper{height:0;padding-bottom:56.25%}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.video-wrapper iframe{</p>
-<p class="p1"><span class="Apple-converted-space">        </span>position:absolute;inset:0;border:0;width:100%;height:100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* Optional: full-bleed video variant */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.video-bleed{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: calc(100vw - 2*var(--side-gutter));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: var(--max-width);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-left: calc(50% - min(var(--max-width), 92vw)/2);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 0; /* edge to edge look */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* VOCAB + TEXTAREAS */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.vocab-list{list-style:none;display:grid;gap:1.25rem}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.vocab-item strong{color:var(--header-color);font-size:1.1rem;font-weight:600}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>label{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:block;font-weight:600;margin-bottom:.65rem;font-size:1.05rem;color:var(--header-color)</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>textarea{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width:100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height: 150px;<span class="Apple-converted-space">                    </span>/* taller default */</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding:1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border:1px solid var(--border-color);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius:10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background:#0f1623;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color:var(--text-color);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font: 400 1rem/1.6 'Poppins',sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>resize: vertical;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition:border-color .25s, box-shadow .25s;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>textarea::placeholder{color:#6B7280}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>textarea:focus{outline:none;border-color:var(--accent-color);box-shadow:0 0 0 3px rgba(167,139,250,.25)}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* T-CHART */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.t-chart{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: 1fr 1fr;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top:1.25rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.t-chart h3{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align:center;font-weight:600;color:var(--header-color);margin-bottom:.75rem</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* subtle separators */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>hr{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 2.5rem 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border:0;height:1px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-image: linear-gradient(to right, transparent, var(--border-color), transparent);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* Better use of space on mobile */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 900px){</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.workbook-container{</p>
-<p class="p1"><span class="Apple-converted-space">        </span>width: 96vw;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>border-radius:12px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>padding: 2rem 1.25rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>header h1{font-size: clamp(1.8rem, 6vw, 2.4rem)}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>h2{font-size: clamp(1.25rem, 4.5vw, 1.6rem)}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.t-chart{grid-template-columns: 1fr}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>textarea{min-height: 130px}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="workbook-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h1&gt;Federalists vs. Anti-Federalists&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;An Interactive Video Workbook&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;main&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Video Section --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;section class="workbook-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;📺 Step 1: Watch the Video&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- To go edge-to-edge inside the container, leave as is.<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">             </span>If you want *true full-bleed* across the page, add class "video-bleed" to the div below --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="video-wrapper"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;iframe src="https://drive.google.com/file/d/1tbbMVLH14fgdT2k-XORmmYPKYOIspQwG/preview" allowfullscreen&gt;&lt;/iframe&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;hr&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Vocabulary Section --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;section class="workbook-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;✍️ Step 2: Define Key Vocabulary&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;ul class="vocab-list"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;li class="vocab-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Ratification:&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;textarea placeholder="Define this term based on the video..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;li class="vocab-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Federalism:&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;textarea placeholder="Define this term based on the video..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;li class="vocab-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Bill of Rights:&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;textarea placeholder="Define this term based on the video..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;li class="vocab-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Faction:&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;textarea placeholder="Define this term based on the video..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;hr&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Guiding Questions Section --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;section class="workbook-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;🤔 Step 3: Answer the Guiding Questions&lt;/h2&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="question-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label for="q1"&gt;1. What was the fundamental disagreement between the Federalists and the Anti-Federalists about the new Constitution?&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="q1" name="q1" placeholder="Type your answer here..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="question-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label for="q2"&gt;2. Who were some of the key leaders on each side of the debate?&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="q2" name="q2" placeholder="List figures for both Federalists and Anti-Federalists..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="question-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label for="q3"&gt;3. What was the primary argument of the Anti-Federalists against a strong central government?&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="q3" name="q3" placeholder="Think about their fears regarding rights and power..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="question-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label for="q4"&gt;4. How did the Federalists, particularly in the 'Federalist Papers,' argue in favor of the Constitution?&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="q4" name="q4" placeholder="What were their main points to reassure the public?"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="question-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label for="q5"&gt;5. What major compromise was reached to ensure the ratification of the Constitution?&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="q5" name="q5" placeholder="How did this compromise address the fears of the Anti-Federalists?"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;hr&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Activities Section --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;section class="workbook-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;🚀 Step 4: Complete the Activities&lt;/h2&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="activity-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Activity 1: T-Chart Comparison&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;In the boxes below, list the core beliefs and arguments for each group.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="t-chart"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="chart-column"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;h3&gt;Federalists&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;textarea placeholder="- Favored a strong central government..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="chart-column"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;h3&gt;Anti-Federalists&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;textarea placeholder="- Favored strong state governments..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="activity-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label for="activity2"&gt;Activity 2: Choose Your Side&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;Imagine you are living in 1788. Based on the arguments you heard, would you have been a Federalist or an Anti-Federalist? Justify your choice with at least two specific reasons from the video.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="activity2" name="activity2" placeholder="I would have been a(n)... because..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+  <div class="workbook-container">
+    <header>
+      <h1>Federalists vs. Anti-Federalists</h1>
+      <p>An Interactive Video Workbook</p>
+    </header>
+
+    <main>
+      <!-- Video Section -->
+      <section class="workbook-section">
+        <h2>📺 Step 1: Watch the Video</h2>
+        <!-- To go edge-to-edge inside the container, leave as is. 
+             If you want *true full-bleed* across the page, add class "video-bleed" to the div below -->
+        <div class="video-wrapper">
+          <iframe src="https://drive.google.com/file/d/1tbbMVLH14fgdT2k-XORmmYPKYOIspQwG/preview" allowfullscreen></iframe>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- Vocabulary Section -->
+      <section class="workbook-section">
+        <h2>✍️ Step 2: Define Key Vocabulary</h2>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <strong>Ratification:</strong>
+            <textarea placeholder="Define this term based on the video..."></textarea>
+          </li>
+          <li class="vocab-item">
+            <strong>Federalism:</strong>
+            <textarea placeholder="Define this term based on the video..."></textarea>
+          </li>
+          <li class="vocab-item">
+            <strong>Bill of Rights:</strong>
+            <textarea placeholder="Define this term based on the video..."></textarea>
+          </li>
+          <li class="vocab-item">
+            <strong>Faction:</strong>
+            <textarea placeholder="Define this term based on the video..."></textarea>
+          </li>
+        </ul>
+      </section>
+
+      <hr>
+
+      <!-- Guiding Questions Section -->
+      <section class="workbook-section">
+        <h2>🤔 Step 3: Answer the Guiding Questions</h2>
+
+        <div class="question-box">
+          <label for="q1">1. What was the fundamental disagreement between the Federalists and the Anti-Federalists about the new Constitution?</label>
+          <textarea id="q1" name="q1" placeholder="Type your answer here..."></textarea>
+        </div>
+
+        <div class="question-box">
+          <label for="q2">2. Who were some of the key leaders on each side of the debate?</label>
+          <textarea id="q2" name="q2" placeholder="List figures for both Federalists and Anti-Federalists..."></textarea>
+        </div>
+
+        <div class="question-box">
+          <label for="q3">3. What was the primary argument of the Anti-Federalists against a strong central government?</label>
+          <textarea id="q3" name="q3" placeholder="Think about their fears regarding rights and power..."></textarea>
+        </div>
+
+        <div class="question-box">
+          <label for="q4">4. How did the Federalists, particularly in the 'Federalist Papers,' argue in favor of the Constitution?</label>
+          <textarea id="q4" name="q4" placeholder="What were their main points to reassure the public?"></textarea>
+        </div>
+
+        <div class="question-box">
+          <label for="q5">5. What major compromise was reached to ensure the ratification of the Constitution?</label>
+          <textarea id="q5" name="q5" placeholder="How did this compromise address the fears of the Anti-Federalists?"></textarea>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- Activities Section -->
+      <section class="workbook-section">
+        <h2>🚀 Step 4: Complete the Activities</h2>
+
+        <div class="activity-box">
+          <label>Activity 1: T-Chart Comparison</label>
+          <p>In the boxes below, list the core beliefs and arguments for each group.</p>
+          <div class="t-chart">
+            <div class="chart-column">
+              <h3>Federalists</h3>
+              <textarea placeholder="- Favored a strong central government..."></textarea>
+            </div>
+            <div class="chart-column">
+              <h3>Anti-Federalists</h3>
+              <textarea placeholder="- Favored strong state governments..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-box">
+          <label for="activity2">Activity 2: Choose Your Side</label>
+          <p>Imagine you are living in 1788. Based on the arguments you heard, would you have been a Federalist or an Anti-Federalist? Justify your choice with at least two specific reasons from the video.</p>
+          <textarea id="activity2" name="activity2" placeholder="I would have been a(n)... because..."></textarea>
+        </div>
+      </section>
+    </main>
+  </div>
+
 </body>
 </html>

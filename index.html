@@ -1,396 +1,815 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Federalists vs. Anti-Federalists Workbook</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-    :root {
-      --primary-bg: #111827;
-      --container-bg: #1f2937;
-      --text-color: #e5e7eb;
-      --header-color: #f9fafb;
-      --accent-color: #a78bfa;
-      --border-color: #374151;
-      --focus-color: #c4b5fd;
-      --card-bg: #161f2d;
-      --max-width: 1400px;
-      --side-gutter: 2vw;
-      --section-gap: 3rem;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body {
-      height: 100%;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--primary-bg);
-      color: var(--text-color);
-      line-height: 1.7;
-      padding: min(2rem, 3vh) 0;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .workbook-container {
-      width: clamp(960px, 92vw, var(--max-width));
-      min-height: 100dvh;
-      margin: 0 auto;
-      background: var(--container-bg);
-      padding: 3rem clamp(1rem, var(--side-gutter), 3rem);
-      border-radius: 18px;
-      border: 1px solid var(--border-color);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-      padding-bottom: 1.25rem;
-    }
-
-    header h1 {
-      font-weight: 700;
-      color: var(--header-color);
-      font-size: clamp(2.2rem, 3vw, 3.2rem);
-      margin-bottom: 0.35rem;
-      letter-spacing: -0.5px;
-      text-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
-    }
-
-    header p {
-      font-size: 1.1rem;
-      color: #9ca3af;
-    }
-
-    main {
-      display: block;
-    }
-
-    .workbook-section {
-      margin-bottom: var(--section-gap);
-    }
-
-    h2 {
-      font-weight: 600;
-      color: var(--header-color);
-      font-size: clamp(1.5rem, 2vw, 2rem);
-      margin-bottom: 1.25rem;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 0.6rem;
-    }
-
-    .slide-overview {
-      background: rgba(15, 22, 35, 0.6);
-      padding: 2rem;
-      border-radius: 16px;
-      border: 1px solid var(--border-color);
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
-      display: grid;
-      gap: 1.75rem;
-    }
-
-    .slide-overview h2 {
-      margin-bottom: 0;
-      border: none;
-      padding-bottom: 0;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: clamp(1.4rem, 2.2vw, 2rem);
-    }
-
-    .slide-intro {
-      font-size: 1.05rem;
-      color: #d1d5db;
-    }
-
-    .slide-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem;
-    }
-
-    .slide-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 1.5rem;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
-    }
-
-    .slide-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--header-color);
-      margin-bottom: 0.75rem;
-    }
-
-    .slide-card p {
-      color: #d1d5db;
-      font-size: 1rem;
-    }
-
-    .slide-footer {
-      font-size: 1rem;
-      color: #d1d5db;
-      border-top: 1px solid var(--border-color);
-      padding-top: 1.25rem;
-    }
-
-    .video-wrapper {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-      background: #000;
-    }
-
-    @supports (aspect-ratio: 16 / 9) {
-      .video-wrapper {
-        aspect-ratio: 16 / 9;
-        height: auto;
-      }
-
-      .video-wrapper iframe {
-        width: 100%;
-        height: 100%;
-        border: 0;
-        display: block;
-      }
-    }
-
-    @supports not (aspect-ratio: 16 / 9) {
-      .video-wrapper {
-        height: 0;
-        padding-bottom: 56.25%;
-      }
-
-      .video-wrapper iframe {
-        position: absolute;
-        inset: 0;
-        border: 0;
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    .vocab-list {
-      list-style: none;
-      display: grid;
-      gap: 1.25rem;
-    }
-
-    .vocab-item strong {
-      color: var(--header-color);
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 0.65rem;
-      font-size: 1.05rem;
-      color: var(--header-color);
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 150px;
-      padding: 1rem;
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      background: #0f1623;
-      color: var(--text-color);
-      font: 400 1rem/1.6 'Poppins', sans-serif;
-      resize: vertical;
-      transition: border-color 0.25s, box-shadow 0.25s;
-    }
-
-    textarea::placeholder {
-      color: #6b7280;
-    }
-
-    textarea:focus {
-      outline: none;
-      border-color: var(--accent-color);
-      box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25);
-    }
-
-    .question-box,
-    .activity-box {
-      margin-bottom: 1.75rem;
-    }
-
-    .t-chart {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-      margin-top: 1.25rem;
-    }
-
-    .t-chart h3 {
-      text-align: center;
-      font-weight: 600;
-      color: var(--header-color);
-      margin-bottom: 0.75rem;
-    }
-
-    hr {
-      margin: 2.5rem 0;
-      border: 0;
-      height: 1px;
-      background-image: linear-gradient(to right, transparent, var(--border-color), transparent);
-    }
-
-    @media (max-width: 900px) {
-      .workbook-container {
-        width: 96vw;
-        border-radius: 12px;
-        padding: 2rem 1.25rem;
-      }
-
-      header h1 {
-        font-size: clamp(1.8rem, 6vw, 2.4rem);
-      }
-
-      h2 {
-        font-size: clamp(1.25rem, 4.5vw, 1.6rem);
-      }
-
-      .slide-overview {
-        padding: 1.5rem;
-      }
-
-      .slide-grid,
-      .t-chart {
-        grid-template-columns: 1fr;
-      }
-
-      textarea {
-        min-height: 130px;
-      }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Formative Performance Task: Analyzing the Sale of Manhattan</title>
+<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root { --bubble-w: 320px; }
+  body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+  html[dir="rtl"] body { font-family: 'Noto Naskh Arabic', serif; }
+  textarea { transition: all .2s; resize: vertical; min-height: 112px; }
+  textarea:focus { box-shadow: 0 0 0 4px rgba(99,102,241,.2); border-color:#6366f1; }
+  tbody tr { transition: background-color .15s; } tbody tr:hover { background:#f4f5ff; }
+  .tooltip-trigger{ color:#2563eb; font-weight:600; border-bottom:2px dotted #bfdbfe; cursor:pointer; transition:all .2s; }
+  .tooltip-trigger:hover{ color:#1d4ed8; background:#eff6ff; }
+  .hidden{ display:none; }
+  /* Manhattan map hotspots */
+  .hotspot{ position:absolute; border:2px solid rgba(59,130,246,.9); background:rgba(59,130,246,.12); border-radius:.5rem; cursor:pointer; outline:none; }
+  .hotspot::after{ content:""; position:absolute; inset:-6px; border:2px dashed rgba(59,130,246,.35); border-radius:.65rem; animation:pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse{ 0%{opacity:.7; transform:scale(1)} 50%{opacity:.2; transform:scale(1.03)} 100%{opacity:.7; transform:scale(1)} }
+  /* Bubbles */
+  #map-bubble{ position:fixed; display:none; z-index:50; width:var(--bubble-w); max-width:calc(100vw - 2rem); }
+  #tooltip-bubble{ position:fixed; }
+</style>
 </head>
-<body>
-  <div class="workbook-container">
-    <header>
-      <h1>Federalists vs. Anti-Federalists</h1>
-      <p>An Interactive Video Workbook</p>
-    </header>
+<body class="bg-gradient-to-br from-gray-50 to-indigo-100 text-gray-800 p-4 md:p-8 min-h-screen">
 
-    <main>
-      <section class="workbook-section slide-overview" aria-labelledby="slide-2-title">
-        <h2 id="slide-2-title">WHY SEQ SET 1 MATTERS</h2>
-        <p class="slide-intro">Set 1 is the first Short-Essay Question in Part II of the U.S. History Regents. You will use two documents to explain the historical context and the relationship between their ideas or events.</p>
-        <div class="slide-grid">
-          <article class="slide-card">
-            <h3>0 to 5 RUBRIC</h3>
-            <p>Regents raters score your response from zero to five. That is 5 raw credits toward your exam score.</p>
-          </article>
-          <article class="slide-card">
-            <h3>ABOUT 10%</h3>
-            <p>The exam has 49 raw credits total. Set 1 is 5 out of 49, which is about 10 percent of your overall raw points.</p>
-          </article>
-        </div>
-        <p class="slide-footer">Every point here can raise your scaled Regents grade. NYSED converts raw credits to the 0–100 score with the official chart for this exam.</p>
-      </section>
+  <!-- Top controls -->
+  <div class="max-w-5xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-xl mb-6">
+    <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div>
+        <h1 id="i-title" class="text-3xl md:text-4xl font-extrabold text-gray-900">Formative Performance Task</h1>
+        <h2 id="i-sub" class="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mt-1">Analyzing the Sale of Manhattan</h2>
+      </div>
+      <div class="flex items-center gap-2">
+        <label id="i-language" for="lang" class="text-sm font-semibold text-gray-700">Language</label>
+        <select id="lang" class="border rounded-lg px-3 py-2 text-sm bg-white">
+          <option value="en">English</option>
+          <option value="es">Español (LatAm)</option>
+          <option value="fr">Français</option>
+          <option value="ar">العربية</option>
+        </select>
+      </div>
+    </div>
+    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-lg mt-4">
+      <h3 id="i-sq-title" class="text-lg font-bold text-indigo-900">Supporting Question 1:</h3>
+      <p id="i-sq-body" class="text-lg text-indigo-800 mt-1">Did the Munsee Lenape band of Algonquin benefit from the sale of Manhattan Island?</p>
+    </div>
+    <p id="i-instructions" class="mt-4 text-sm text-gray-700">
+      Carefully examine each featured source. Type your answers directly into the boxes. Click any <span class="tooltip-trigger">blue dotted word</span> for a definition.
+    </p>
+  </div>
 
-      <section class="workbook-section">
-        <h2>📺 Step 1: Watch the Video</h2>
-        <div class="video-wrapper">
-          <iframe src="https://drive.google.com/file/d/1tbbMVLH14fgdT2k-XORmmYPKYOIspQwG/preview" allowfullscreen></iframe>
-        </div>
-      </section>
+  <main class="max-w-5xl mx-auto bg-white p-6 md:p-10 rounded-2xl shadow-xl">
 
-      <hr />
+    <!-- Glossary Bubble -->
+    <div id="tooltip-bubble" class="hidden bg-white border-2 border-indigo-500 rounded-lg shadow-xl p-4 w-64 z-50">
+      <button id="tooltip-close" class="absolute top-1 right-2 text-gray-500 hover:text-gray-900 font-bold text-lg" aria-label="Close">&times;</button>
+      <h4 id="tooltip-word" class="text-lg font-bold text-indigo-700 mb-1"></h4>
+      <p id="tooltip-pronunciation" class="text-sm text-gray-600 italic mb-2"></p>
+      <p id="tooltip-definition" class="text-base text-gray-800"></p>
+    </div>
 
-      <section class="workbook-section">
-        <h2>✍️ Step 2: Define Key Vocabulary</h2>
-        <ul class="vocab-list">
-          <li class="vocab-item">
-            <strong>Ratification:</strong>
-            <textarea placeholder="Define this term based on the video..."></textarea>
-          </li>
-          <li class="vocab-item">
-            <strong>Federalism:</strong>
-            <textarea placeholder="Define this term based on the video..."></textarea>
-          </li>
-          <li class="vocab-item">
-            <strong>Bill of Rights:</strong>
-            <textarea placeholder="Define this term based on the video..."></textarea>
-          </li>
-          <li class="vocab-item">
-            <strong>Faction:</strong>
-            <textarea placeholder="Define this term based on the video..."></textarea>
-          </li>
-        </ul>
-      </section>
-
-      <hr />
-
-      <section class="workbook-section">
-        <h2>🤔 Step 3: Answer the Guiding Questions</h2>
-        <div class="question-box">
-          <label for="q1">1. What was the fundamental disagreement between the Federalists and the Anti-Federalists about the new Constitution?</label>
-          <textarea id="q1" name="q1" placeholder="Type your answer here..."></textarea>
-        </div>
-        <div class="question-box">
-          <label for="q2">2. Who were some of the key leaders on each side of the debate?</label>
-          <textarea id="q2" name="q2" placeholder="List figures for both Federalists and Anti-Federalists..."></textarea>
-        </div>
-        <div class="question-box">
-          <label for="q3">3. What was the primary argument of the Anti-Federalists against a strong central government?</label>
-          <textarea id="q3" name="q3" placeholder="Think about their fears regarding rights and power..."></textarea>
-        </div>
-        <div class="question-box">
-          <label for="q4">4. How did the Federalists, particularly in the 'Federalist Papers,' argue in favor of the Constitution?</label>
-          <textarea id="q4" name="q4" placeholder="What were their main points to reassure the public?"></textarea>
-        </div>
-        <div class="question-box">
-          <label for="q5">5. What major compromise was reached to ensure the ratification of the Constitution?</label>
-          <textarea id="q5" name="q5" placeholder="How did this compromise address the fears of the Anti-Federalists?"></textarea>
-        </div>
-      </section>
-
-      <hr />
-
-      <section class="workbook-section">
-        <h2>🚀 Step 4: Complete the Activities</h2>
-        <div class="activity-box">
-          <label>Activity 1: T-Chart Comparison</label>
-          <p>In the boxes below, list the core beliefs and arguments for each group.</p>
-          <div class="t-chart">
-            <div class="chart-column">
-              <h3>Federalists</h3>
-              <textarea placeholder="- Favored a strong central government..."></textarea>
-            </div>
-            <div class="chart-column">
-              <h3>Anti-Federalists</h3>
-              <textarea placeholder="- Favored strong state governments..."></textarea>
-            </div>
+    <!-- SOURCE A -->
+    <section class="mb-16">
+      <h3 class="text-2xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-indigo-200" id="i-a-title">
+        Source A: Pieter Jansz Schaghen, “The Schaghen Letter,” 1626
+      </h3>
+      <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
+        <div class="mb-6 lg:mb-0">
+          <h4 class="text-lg font-semibold text-gray-700 mb-3" id="i-source-material">Source Material</h4>
+          <div class="prose prose-indigo bg-gray-50 p-4 rounded-lg border max-h-[600px] overflow-y-auto">
+            <p><strong>Background:</strong> This famous letter was addressed to the governing assembly of the Dutch Republic, the <span class="tooltip-trigger" data-definition="The governing assembly (like a congress or parliament) of the Dutch Republic.">States General</span> ... <span class="tooltip-trigger" data-pronunciation="PEE-ter YAHNS SHAH-gen" data-definition="A Dutch merchant and a director of the West India Company.">Pieter Jansz Schaghen</span> ...</p>
+            <hr>
+            <p><strong>Translation:</strong></p>
+            <blockquote>
+              <p><span class="tooltip-trigger" data-definition="Formal title for the States General.">High and Mighty Lords</span>:</p>
+              <p>Yesterday the ship The Arms of Amsterdam arrived ... They bought Manhattan Island ... for 60 <span class="tooltip-trigger" data-definition="Dutch currency of the time.">guilders</span>. It is 11000 <span class="tooltip-trigger" data-definition="Dutch unit of land area.">morgens</span> ...</p>
+              <ul>
+                <li>7246 beaver <span class="tooltip-trigger" data-definition="Fur skins used for hats and coats.">pelts</span></li>
+                <li>48 mink pelts</li>
+                <li>36 <span class="tooltip-trigger" data-definition="Wild cat valued for fur.">lynx</span> pelts</li>
+                <li>34 <span class="tooltip-trigger" data-definition="Semi-aquatic rodent valued for fur.">muskrat</span> pelts</li>
+              </ul>
+              <p>... to the mercy of the <span class="tooltip-trigger" data-definition="Another name for God.">Almighty</span>. In Amsterdam, 5 November 1626.</p>
+            </blockquote>
           </div>
         </div>
-        <div class="activity-box">
-          <label for="activity2">Activity 2: Choose Your Side</label>
-          <p>Imagine you are living in 1788. Based on the arguments you heard, would you have been a Federalist or an Anti-Federalist? Justify your choice with at least two specific reasons from the video.</p>
-          <textarea id="activity2" name="activity2" placeholder="I would have been a(n)... because..."></textarea>
+        <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-md overflow-hidden self-start">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gradient-to-r from-indigo-500 to-purple-600">
+              <tr>
+                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider w-1/4" id="i-analysis-step">Analysis Step</th>
+                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider w-3/4" id="i-your-analysis">Your Analysis</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-100">
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-sourcing">Sourcing</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-sourcing-help">(author, purpose, date/location)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-cite">Cite Evidence</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-cite-help">(key details, quotes)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-bias">Bias / Insight</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-bias-help">(perspective, what's missing?)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+
+    <!-- SOURCE B: Manhattan Map (no click-to-enlarge; separate link provided) -->
+    <section class="mb-16">
+      <h3 class="text-2xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-indigo-200" id="i-b-title">
+        Source B: Map of New Amsterdam, 1660 (Castello Plan)
+      </h3>
+      <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
+        <div class="mb-6 lg:mb-0">
+          <h4 class="text-lg font-semibold text-gray-700 mb-3" id="i-source-material-2">Source Material</h4>
+          <div class="prose prose-indigo bg-gray-50 p-4 rounded-lg border">
+            <p><strong id="i-map-caption">1660 Map of the City of New Amsterdam (Castello Plan)</strong></p>
+            <p id="i-map-tip">Click the highlighted boxes to notice key features.</p>
+
+            <!-- Map wrapper with hotspots (no anchor) -->
+            <div id="mapWrap" class="relative w-full rounded-lg overflow-hidden border border-gray-200 shadow-md">
+              <img id="mapImg" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Castelloplan.jpg" alt="Castello Plan of New Amsterdam, 1660" class="w-full h-auto block select-none" draggable="false"/>
+              <!-- hotspots injected here -->
+            </div>
+
+            <!-- Separate link to view full size -->
+            <p class="mt-3 text-sm">
+              <a id="i-open-full" class="inline-flex items-center gap-1 text-indigo-700 hover:text-indigo-900 underline"
+                 href="https://upload.wikimedia.org/wikipedia/commons/0/08/Castelloplan.jpg" target="_blank" rel="noopener noreferrer">
+                Open full-size map in a new tab
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-md overflow-hidden self-start">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gradient-to-r from-indigo-500 to-purple-600">
+              <tr>
+                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider w-1/4" id="i-analysis-step-2">Analysis Step</th>
+                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider w-3/4" id="i-your-analysis-2">Your Analysis</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-100">
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-sourcing-2">Sourcing</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-sourcing-help-2">(author, purpose, date/location)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-cite-2">Cite Evidence</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-cite-help-2">(key details, features)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-bias-2">Bias / Insight</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-bias-help-2">(perspective, what's missing?)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOURCE C -->
+    <section class="mb-16">
+      <h3 class="text-2xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-indigo-200" id="i-c-title">
+        Source C: “Munsee Indians,” Ohio History Central
+      </h3>
+      <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
+        <div class="mb-6 lg:mb-0">
+          <h4 class="text-lg font-semibold text-gray-700 mb-3" id="i-source-material-3">Source Material</h4>
+          <div class="prose prose-indigo bg-gray-50 p-4 rounded-lg border max-h-[600px] overflow-y-auto">
+            <p>The <span class="tooltip-trigger" data-pronunciation="MUN-see" data-definition="A band of the Lenape people. They are the original inhabitants of the Manhattan area.">Munsee</span> ...</p>
+            <p>...</p>
+          </div>
+        </div>
+        <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-md overflow-hidden self-start">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gradient-to-r from-indigo-500 to-purple-600">
+              <tr>
+                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider w-1/4" id="i-analysis-step-3">Analysis Step</th>
+                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider w-3/4" id="i-your-analysis-3">Your Analysis</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-100">
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-sourcing-3">Sourcing</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-sourcing-help-3">(author, purpose, date/location)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-cite-3">Cite Evidence</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-cite-help-3">(key details, quotes)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-bias-3">Bias / Insight</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-bias-help-3">(perspective, what's missing?)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOURCE D: Wisconsin First Nations (integrated embed with toggle) -->
+    <section class="mb-16" id="wfn">
+      <h3 class="text-2xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-indigo-200" id="i-d-title">
+        Source D: “Map: Wisconsin First Nations”
+      </h3>
+      <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
+        <div class="mb-6 lg:mb-0">
+          <h4 class="text-lg font-semibold text-gray-700 mb-3" id="i-source-material-4">Source Material</h4>
+
+          <!-- Integrated embed -->
+          <section id="wfn-map-embed" class="max-w-[1000px] mx-auto">
+            <!-- Toggle -->
+            <div class="my-4 text-center">
+              <button id="wfn-show" type="button" aria-pressed="false"
+                      class="px-3 py-2 rounded-md border bg-white hover:bg-slate-50 text-slate-800">
+                Show Counties and Cities
+              </button>
+              <button id="wfn-hide" type="button" aria-pressed="true"
+                      class="px-3 py-2 rounded-md border bg-white hover:bg-slate-50 text-slate-800 hidden">
+                Hide Counties and Cities
+              </button>
+            </div>
+
+            <!-- Map + key -->
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <img id="wfn-map-nocounty"
+                     src="https://wisconsinfirstnations.org/wp-content/themes/Revera/images/map/mapnoborder6.jpg"
+                     alt="Tribal Lands map of Wisconsin without county lines"
+                     class="w-full h-auto block"/>
+                <img id="wfn-map-withcounty"
+                     src="https://wisconsinfirstnations.org/wp-content/themes/Revera/images/map/mapwborder6.jpg"
+                     alt="Tribal Lands map of Wisconsin with county lines and cities"
+                     class="w-full h-auto hidden"/>
+              </div>
+
+              <aside id="wfn-map-key" class="border p-4 rounded-md text-sm">
+                <h2 id="wfn-key-title" class="text-base font-semibold m-0 mb-2">Map Key</h2>
+
+                <div class="flex items-center gap-2 my-2">
+                  <span id="wfn-key-1800">Tribal Lands circa 1800</span>
+                  <img src="https://wisconsinfirstnations.org/wp-content/themes/Revera/images/map/map-key-treaty-lands.png"
+                       alt="Legend swatch for Tribal Lands circa 1800"/>
+                </div>
+
+                <div class="flex items-center gap-2 my-2">
+                  <span id="wfn-key-present">Present-day Native Nations</span>
+                  <img src="https://wisconsinfirstnations.org/wp-content/themes/Revera/images/map/map-key-present-day-tribal-lands.png"
+                       alt="Legend swatch for Present-day Native Nations"/>
+                </div>
+
+                <p id="wfn-foot" class="text-slate-600 mt-2">
+                  <sup>*</sup> Brothertown is not state or federally recognized.
+                </p>
+              </aside>
+            </div>
+          </section>
+
+          <p id="i-d-tip" class="mt-3 text-sm text-gray-700">
+            Open the interactive map. Look for “Stockbridge-Munsee Community”. Consider where Wisconsin is in relation to Manhattan.
+          </p>
+          <a id="i-open-map" href="https://wisconsinfirstnations.org/map/" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition-colors no-underline">
+            View Map in New Tab
+          </a>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-md overflow-hidden self-start">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gradient-to-r from-indigo-500 to-purple-600">
+              <tr>
+                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider w-1/4" id="i-analysis-step-4">Analysis Step</th>
+                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider w-3/4" id="i-your-analysis-4">Your Analysis</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-100">
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-sourcing-4">Sourcing</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-sourcing-help-4">(author, purpose, date/location)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-cite-4">Cite Evidence</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-cite-help-4">(key details, features)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 align-top font-semibold text-gray-800">
+                  <span id="i-bias-4">Bias / Insight</span>
+                  <p class="text-sm font-normal text-gray-600 mt-1" id="i-bias-help-4">(perspective, what's missing?)</p>
+                </td>
+                <td class="px-6 py-4 align-top"><textarea class="w-full p-3 border-2 border-gray-200 rounded-lg"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUMMARY + RACE -->
+    <section class="mb-12">
+      <h3 class="text-2xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-indigo-200" id="i-summary-title">In Summary</h3>
+      <label for="summary" class="block text-lg font-semibold text-gray-700 mb-3" id="i-summary-label">Based on all four sources, answer the supporting question in 3–5 sentences.</label>
+      <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg shadow-md mb-4">
+        <h4 class="text-xl font-bold text-gray-800 mb-3 text-center">RACE</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-blue-100 p-3 rounded-md border border-blue-200">
+            <p class="font-bold text-blue-800">R<span class="font-normal">: <span id="i-r">Restate</span></span></p>
+            <p class="text-sm text-blue-700" id="i-r-desc">Restate the question as a statement.</p>
+          </div>
+          <div class="bg-green-100 p-3 rounded-md border border-green-200">
+            <p class="font-bold text-green-800">A<span class="font-normal">: <span id="i-a">Answer</span></span></p>
+            <p class="text-sm text-green-700" id="i-a-desc">Give your claim to finish the sentence.</p>
+          </div>
+          <div class="bg-yellow-100 p-3 rounded-md border border-yellow-200">
+            <p class="font-bold text-yellow-800">C<span class="font-normal">: <span id="i-c">Cite Evidence</span></span></p>
+            <p class="text-sm text-yellow-700" id="i-c-desc">Cite specific evidence from the text.</p>
+          </div>
+          <div class="bg-red-100 p-3 rounded-md border border-red-200">
+            <p class="font-bold text-red-800">E<span class="font-normal">: <span id="i-e">Explain</span></span></p>
+            <p class="text-sm text-red-700" id="i-e-desc">Explain how the evidence supports your answer.</p>
+          </div>
+        </div>
+      </div>
+      <textarea id="summary" class="w-full h-40 p-3 border-2 border-gray-200 rounded-lg focus:border-indigo-500"></textarea>
+    </section>
+
+    <footer class="text-center text-gray-500 text-xs mt-12 pt-6 border-t border-gray-200">
+      <p>THIS WORK IS LICENSED UNDER A CREATIVE COMMONS ATTRIBUTION-NONCOMMERCIAL-SHAREALIKE 4.0 INTERNATIONAL LICENSE.</p>
+      <p class="mt-1">Adapted from materials by Salt Lake City Schools and C3 Teachers.</p>
+    </footer>
+  </main>
+
+  <!-- Bubbles -->
+  <div id="map-bubble" class="bg-white border-2 border-indigo-500 rounded-xl shadow-2xl p-4">
+    <button id="map-bubble-close" class="absolute -top-3 -end-3 bg-white border-2 border-slate-300 rounded-full w-8 h-8 text-slate-600 hover:text-slate-900" aria-label="Close">✕</button>
+    <h3 id="mb-title" class="text-lg font-bold text-indigo-700 mb-1"></h3>
+    <p id="mb-body" class="text-sm text-slate-800 leading-relaxed"></p>
   </div>
+
+<script>
+/* ===================== I18N ===================== */
+const STR = {
+  en: {
+    title:"Formative Performance Task",
+    sub:"Analyzing the Sale of Manhattan",
+    language:"Language",
+    sqTitle:"Supporting Question 1:",
+    sqBody:"Did the Munsee Lenape band of Algonquin benefit from the sale of Manhattan Island?",
+    instructions:"Carefully examine each featured source. Type your answers directly into the boxes. Click any blue dotted word for a definition.",
+    sourceMaterial:"Source Material",
+    analysisStep:"Analysis Step",
+    yourAnalysis:"Your Analysis",
+    sourcing:"Sourcing",
+    sourcingHelp:"(author, purpose, date/location)",
+    cite:"Cite Evidence",
+    citeHelp:"(key details, quotes)",
+    bias:"Bias / Insight",
+    biasHelp:"(perspective, what's missing?)",
+    mapTitle:"Source B: Map of New Amsterdam, 1660 (Castello Plan)",
+    mapCaption:"1660 Map of the City of New Amsterdam (Castello Plan)",
+    mapTip:"Click the highlighted boxes to notice key features.",
+    openFull:"Open full-size map in a new tab",
+    dTitle:"Source D: “Map: Wisconsin First Nations”",
+    dTip:"Open the interactive map. Look for “Stockbridge-Munsee Community”. Consider where Wisconsin is in relation to Manhattan.",
+    openMap:"View Map in New Tab",
+    summaryTitle:"In Summary",
+    summaryLabel:"Based on all four sources, answer the supporting question in 3–5 sentences.",
+    R:"Restate", A:"Answer", C:"Cite Evidence", E:"Explain",
+    Rdesc:"Restate the question as a statement.",
+    Adesc:"Give your claim to finish the sentence.",
+    Cdesc:"Cite specific evidence from the text.",
+    Edesc:"Explain how the evidence supports your answer.",
+    // WFN embed strings
+    wfnShow:"Show Counties and Cities",
+    wfnHide:"Hide Counties and Cities",
+    wfnKey:"Map Key",
+    wfn1800:"Tribal Lands circa 1800",
+    wfnPresent:"Present-day Native Nations",
+    wfnFoot:"* Brothertown is not state or federally recognized.",
+    spots:{
+      fort:{title:"Fort Amsterdam",body:"Dutch military and administrative center at the tip of Manhattan. Notice the star-shaped walls and central courtyard."},
+      wall:{title:"City Wall (future Wall Street)",body:"Defensive wall along the northern edge of town. This line later became Wall Street."},
+      canals:{title:"Canals and Bridges",body:"Dutch-style canals cut through the settlement. Bridges connect triangular street blocks."},
+      orchards:{title:"Gardens and Orchards",body:"Many plots are gardens or orchards. Food production sat right beside homes."},
+      harbor:{title:"Harbor Traffic",body:"Ships crowd the harbor, showing the fur trade and Atlantic commerce that sustained the colony."}
+    }
+  },
+  es: {
+    title:"Tarea formativa",
+    sub:"Análisis de la venta de Manhattan",
+    language:"Idioma",
+    sqTitle:"Pregunta guía 1:",
+    sqBody:"¿Se benefició la banda Munsee Lenape de la venta de la isla de Manhattan?",
+    instructions:"Examina cada fuente. Escribe tus respuestas en las casillas. Haz clic en las palabras punteadas en azul para ver la definición.",
+    sourceMaterial:"Material de la fuente",
+    analysisStep:"Paso de análisis",
+    yourAnalysis:"Tu análisis",
+    sourcing:"Origen de la fuente",
+    sourcingHelp:"(autor, propósito, fecha/lugar)",
+    cite:"Citar evidencia",
+    citeHelp:"(detalles clave, citas)",
+    bias:"Sesgo / Idea",
+    biasHelp:"(perspectiva, ¿qué falta?)",
+    mapTitle:"Fuente B: Mapa de Nueva Ámsterdam, 1660 (Plano de Castello)",
+    mapCaption:"Mapa de 1660 de la ciudad de Nueva Ámsterdam (Plano de Castello)",
+    mapTip:"Haz clic en los recuadros resaltados para notar rasgos clave.",
+    openFull:"Abrir el mapa en tamaño completo en otra pestaña",
+    dTitle:"Fuente D: «Mapa: Wisconsin First Nations»",
+    dTip:"Abre el mapa interactivo. Busca “Stockbridge-Munsee Community”. Piensa dónde está Wisconsin en relación con Manhattan.",
+    openMap:"Abrir mapa en una pestaña nueva",
+    summaryTitle:"En resumen",
+    summaryLabel:"Con base en las cuatro fuentes, responde la pregunta guía en 3–5 oraciones.",
+    R:"Reformular", A:"Responder", C:"Citar evidencia", E:"Explicar",
+    Rdesc:"Reformula la pregunta como afirmación.",
+    Adesc:"Da tu afirmación para completar la idea.",
+    Cdesc:"Cita evidencia específica del texto.",
+    Edesc:"Explica cómo la evidencia apoya tu respuesta.",
+    wfnShow:"Mostrar condados y ciudades",
+    wfnHide:"Ocultar condados y ciudades",
+    wfnKey:"Leyenda del mapa",
+    wfn1800:"Tierras tribales hacia 1800",
+    wfnPresent:"Naciones originarias actuales",
+    wfnFoot:"* Brothertown no cuenta con reconocimiento estatal ni federal.",
+    spots:{
+      fort:{title:"Fuerte Ámsterdam",body:"Centro militar y administrativo neerlandés en la punta de Manhattan. Observa las murallas en forma de estrella y el patio central."},
+      wall:{title:"Muralla de la ciudad (futura Wall Street)",body:"Muralla defensiva en el borde norte del poblado. Luego fue Wall Street."},
+      canals:{title:"Canales y puentes",body:"Canales al estilo neerlandés atraviesan el asentamiento. Puentes conectan manzanas triangulares."},
+      orchards:{title:"Huertas y jardines",body:"Muchas parcelas son huertas o jardines. La producción de alimentos estaba junto a las viviendas."},
+      harbor:{title:"Tráfico del puerto",body:"Los barcos llenan el puerto, señal del comercio de pieles y del Atlántico que sostenía a la colonia."}
+    }
+  },
+  fr: {
+    title:"Tâche formative",
+    sub:"Analyse de la vente de Manhattan",
+    language:"Langue",
+    sqTitle:"Question directrice 1 :",
+    sqBody:"La bande munsee lenape a-t-elle profité de la vente de Manhattan ?",
+    instructions:"Examinez chaque source. Saisissez vos réponses dans les cases. Cliquez sur un mot en pointillé bleu pour la définition.",
+    sourceMaterial:"Texte de la source",
+    analysisStep:"Étape d’analyse",
+    yourAnalysis:"Votre analyse",
+    sourcing:"Origine de la source",
+    sourcingHelp:"(auteur, but, date/lieu)",
+    cite:"Citer des preuves",
+    citeHelp:"(détails clés, citations)",
+    bias:"Biais / Analyse",
+    biasHelp:"(point de vue, manques)",
+    mapTitle:"Source B : plan de La Nouvelle-Amsterdam, 1660 (plan Castello)",
+    mapCaption:"Plan de 1660 de La Nouvelle-Amsterdam (plan Castello)",
+    mapTip:"Cliquez sur les encadrés pour observer les éléments clés.",
+    openFull:"Ouvrir la carte en grand format dans un nouvel onglet",
+    dTitle:"Source D : « Carte : Wisconsin First Nations »",
+    dTip:"Ouvrez la carte interactive. Cherchez « Stockbridge-Munsee Community ». Situez le Wisconsin par rapport à Manhattan.",
+    openMap:"Ouvrir la carte dans un nouvel onglet",
+    summaryTitle:"En résumé",
+    summaryLabel:"À partir des quatre sources, répondez en 3–5 phrases.",
+    R:"Reformuler", A:"Répondre", C:"Citer des preuves", E:"Expliquer",
+    Rdesc:"Reformulez la question en affirmation.",
+    Adesc:"Exposez votre thèse.",
+    Cdesc:"Citez des preuves précises.",
+    Edesc:"Expliquez en quoi elles soutiennent votre réponse.",
+    wfnShow:"Afficher les comtés et les villes",
+    wfnHide:"Masquer les comtés et les villes",
+    wfnKey:"Légende",
+    wfn1800:"Terres tribales vers 1800",
+    wfnPresent:"Nations autochtones actuelles",
+    wfnFoot:"* Brothertown n’est pas reconnue par l’État ni au niveau fédéral.",
+    spots:{
+      fort:{title:"Fort Amsterdam",body:"Centre militaire et administratif néerlandais à l’extrémité de Manhattan. Remarquez les remparts en étoile et la cour centrale."},
+      wall:{title:"Muraille (future Wall Street)",body:"Mur défensif au nord de la ville. Cette ligne deviendra Wall Street."},
+      canals:{title:"Canaux et ponts",body:"Des canaux à la néerlandaise traversent la colonie. Des ponts relient des îlots triangulaires."},
+      orchards:{title:"Jardins et vergers",body:"De nombreuses parcelles sont des jardins ou vergers. La production alimentaire jouxte les habitations."},
+      harbor:{title:"Trafic portuaire",body:"Des navires encombrent le port, signe du commerce des fourrures et de l’Atlantique."}
+    }
+  },
+  ar: {
+    title:"مهمة تكوينية",
+    sub:"تحليل بيع مانهاتن",
+    language:"اللغة",
+    sqTitle:"سؤال داعم 1:",
+    sqBody:"هل استفادت جماعة المونسي من شعب لنابي من بيع جزيرة مانهاتن؟",
+    instructions:"افحص كل مصدر. اكتب إجاباتك في الخانات. اضغط على الكلمات ذات النقاط الزرقاء لعرض التعريف.",
+    sourceMaterial:"نص المصدر",
+    analysisStep:"خطوة التحليل",
+    yourAnalysis:"تحليلك",
+    sourcing:"مصدر الوثيقة",
+    sourcingHelp:"(المؤلف، الغرض، التاريخ/المكان)",
+    cite:"الاستشهاد بالأدلة",
+    citeHelp:"(تفاصيل أساسية، اقتباسات)",
+    bias:"انحياز / فكرة",
+    biasHelp:"(وجهة النظر، ما الذي يغيب؟)",
+    mapTitle:"المصدر ب: خريطة أمستردام الجديدة 1660 (مخطط كاستيلو)",
+    mapCaption:"خريطة عام 1660 لمدينة أمستردام الجديدة (مخطط كاستيلو)",
+    mapTip:"اضغط على المربعات المظللة لملاحظة السمات المهمة.",
+    openFull:"افتح الخريطة بالحجم الكامل في لسان جديد",
+    dTitle:"المصدر د: «خريطة: أمم ويسكونسن الأولى»",
+    dTip:"افتح الخريطة التفاعلية. ابحث عن «Stockbridge-Munsee Community». حدّد موقع ويسكونسن نسبةً إلى مانهاتن.",
+    openMap:"فتح الخريطة في لسان جديد",
+    summaryTitle:"الخلاصة",
+    summaryLabel:"استنادًا إلى المصادر الأربعة، أجب في 3–5 جمل.",
+    R:"إعادة الصياغة", A:"الإجابة", C:"الاستشهاد", E:"الشرح",
+    Rdesc:"أعد صياغة السؤال كجملة.",
+    Adesc:"قدّم ادعاءك.",
+    Cdesc:"استشهد بأدلة محددة.",
+    Edesc:"اشرح كيف تدعم الأدلة إجابتك.",
+    wfnShow:"إظهار المقاطعات والمدن",
+    wfnHide:"إخفاء المقاطعات والمدن",
+    wfnKey:"مفتاح الخريطة",
+    wfn1800:"أراضٍ قبلية نحو 1800",
+    wfnPresent:"الأمم الأصلية الحالية",
+    wfnFoot:"* جماعة بروذرتاون غير معترف بها على مستوى الولاية أو الاتحاد.",
+    spots:{
+      fort:{title:"حصن أمستردام",body:"المركز العسكري والإداري الهولندي عند طرف مانهاتن. لاحظ الأسوار النجمية والساحة الداخلية."},
+      wall:{title:"سور المدينة (شارع وول لاحقًا)",body:"سور دفاعي على الحافة الشمالية للبلدة. أصبح لاحقًا شارع وول."},
+      canals:{title:"القنوات والجسور",body:"قنوات على الطراز الهولندي تقطع المستوطنة. الجسور تصل كتل شوارع مثلثة."},
+      orchards:{title:"الحدائق والبساتين",body:"عديد القطع حدائق أو بساتين. كان إنتاج الغذاء ملاصقًا للمنازل."},
+      harbor:{title:"حركة الميناء",body:"السفن تملأ الميناء، علامة على تجارة الفراء والتجارة الأطلسية."}
+    }
+  }
+};
+
+/* ===================== Manhattan Map hotspots ===================== */
+const CALLOUTS = [
+  { id:"fort",     top:79.0, left:4.0,  width:14.5, height:13.0 },
+  { id:"wall",     top:15.0, left:57.0, width:39.0, height:8.0  },
+  { id:"canals",   top:46.0, left:34.5, width:33.0, height:15.0 },
+  { id:"orchards", top:16.0, left:13.0, width:38.0, height:18.0 },
+  { id:"harbor",   top:88.0, left:18.0, width:55.0, height:10.0 }
+];
+
+/* ===================== Runtime wiring ===================== */
+const qs = (s)=>document.querySelector(s);
+const langSel = qs('#lang');
+let currentLang = 'en';
+
+function setLang(code){
+  currentLang = code;
+  const t = STR[code];
+  document.documentElement.dir = (code==='ar')?'rtl':'ltr';
+  document.documentElement.lang = code;
+
+  qs('#i-title').textContent = t.title;
+  qs('#i-sub').textContent = t.sub;
+  qs('#i-language').textContent = t.language;
+  qs('#i-sq-title').textContent = t.sqTitle;
+  qs('#i-sq-body').textContent = t.sqBody;
+  qs('#i-instructions').textContent = t.instructions;
+
+  // A labels
+  qs('#i-source-material').textContent = t.sourceMaterial;
+  qs('#i-analysis-step').textContent = t.analysisStep;
+  qs('#i-your-analysis').textContent = t.yourAnalysis;
+  qs('#i-sourcing').textContent = t.sourcing;
+  qs('#i-sourcing-help').textContent = t.sourcingHelp;
+  qs('#i-cite').textContent = t.cite;
+  qs('#i-cite-help').textContent = t.citeHelp;
+  qs('#i-bias').textContent = t.bias;
+  qs('#i-bias-help').textContent = t.biasHelp;
+
+  // B labels
+  qs('#i-b-title').textContent = t.mapTitle;
+  qs('#i-source-material-2').textContent = t.sourceMaterial;
+  qs('#i-analysis-step-2').textContent = t.analysisStep;
+  qs('#i-your-analysis-2').textContent = t.yourAnalysis;
+  qs('#i-sourcing-2').textContent = t.sourcing;
+  qs('#i-sourcing-help-2').textContent = t.sourcingHelp;
+  qs('#i-cite-2').textContent = t.cite;
+  qs('#i-cite-help-2').textContent = t.citeHelp;
+  qs('#i-bias-2').textContent = t.bias;
+  qs('#i-bias-help-2').textContent = t.biasHelp;
+  qs('#i-map-caption').textContent = t.mapCaption;
+  qs('#i-map-tip').textContent = t.mapTip;
+  qs('#i-open-full').textContent = t.openFull;
+
+  // C labels
+  qs('#i-source-material-3').textContent = t.sourceMaterial;
+  qs('#i-analysis-step-3').textContent = t.analysisStep;
+  qs('#i-your-analysis-3').textContent = t.yourAnalysis;
+  qs('#i-sourcing-3').textContent = t.sourcing;
+  qs('#i-sourcing-help-3').textContent = t.sourcingHelp;
+  qs('#i-cite-3').textContent = t.cite;
+  qs('#i-cite-help-3').textContent = t.citeHelp;
+  qs('#i-bias-3').textContent = t.bias;
+  qs('#i-bias-help-3').textContent = t.biasHelp;
+
+  // D labels
+  qs('#i-d-title').textContent = t.dTitle;
+  qs('#i-source-material-4').textContent = t.sourceMaterial;
+  qs('#i-analysis-step-4').textContent = t.analysisStep;
+  qs('#i-your-analysis-4').textContent = t.yourAnalysis;
+  qs('#i-sourcing-4').textContent = t.sourcing;
+  qs('#i-sourcing-help-4').textContent = t.sourcingHelp;
+  qs('#i-cite-4').textContent = t.cite;
+  qs('#i-cite-help-4').textContent = t.citeHelp;
+  qs('#i-bias-4').textContent = t.bias;
+  qs('#i-bias-help-4').textContent = t.biasHelp;
+  qs('#i-d-tip').textContent = t.dTip;
+  qs('#i-open-map').textContent = t.openMap;
+
+  // WFN embed text
+  qs('#wfn-show').textContent = t.wfnShow;
+  qs('#wfn-hide').textContent = t.wfnHide;
+  qs('#wfn-key-title').textContent = t.wfnKey;
+  qs('#wfn-key-1800').textContent = t.wfn1800;
+  qs('#wfn-key-present').textContent = t.wfnPresent;
+  qs('#wfn-foot').textContent = t.wfnFoot;
+
+  // Summary
+  qs('#i-summary-title').textContent = t.summaryTitle;
+  qs('#i-summary-label').textContent = t.summaryLabel;
+  qs('#i-r').textContent = t.R; qs('#i-a').textContent = t.A; qs('#i-c').textContent = t.C; qs('#i-e').textContent = t.E;
+  qs('#i-r-desc').textContent = t.Rdesc; qs('#i-a-desc').textContent = t.Adesc; qs('#i-c-desc').textContent = t.Cdesc; qs('#i-e-desc').textContent = t.Edesc;
+
+  // Close any open bubbles
+  closeMapBubble(); closeGlossary();
+}
+
+langSel.addEventListener('change', e=>setLang(e.target.value));
+
+/* ===================== Manhattan Map hotspots ===================== */
+const mapWrap = document.getElementById('mapWrap');
+const mapImg = document.getElementById('mapImg');
+let hotspotEls = [];
+
+function buildHotspots(){
+  hotspotEls.forEach(h=>h.remove()); hotspotEls=[];
+  CALLOUTS.forEach(c=>{
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'hotspot';
+    btn.style.top    = c.top+'%';
+    btn.style.left   = c.left+'%';
+    btn.style.width  = c.width+'%';
+    btn.style.height = c.height+'%';
+    btn.dataset.id = c.id;
+    btn.addEventListener('click', (e)=>{ e.stopPropagation(); openMapBubble(btn); });
+    mapWrap.appendChild(btn);
+    hotspotEls.push(btn);
+  });
+}
+
+const mapBubble = document.getElementById('map-bubble');
+const mbTitle   = document.getElementById('mb-title');
+const mbBody    = document.getElementById('mb-body');
+
+function openMapBubble(btn){
+  const t = STR[currentLang].spots[btn.dataset.id];
+  mbTitle.textContent = t.title; mbBody.textContent = t.body;
+
+  mapBubble.style.display='block';
+  mapBubble.style.visibility='hidden';
+
+  const rect = btn.getBoundingClientRect();
+  const bRect = mapBubble.getBoundingClientRect();
+  const P=10,S=10,vw=innerWidth,vh=innerHeight;
+
+  const candidates = [
+    {top:rect.top,left:rect.right+S},
+    {top:rect.top,left:rect.left-bRect.width-S},
+    {top:rect.bottom+S,left:rect.left},
+    {top:rect.top-bRect.height-S,left:rect.left}
+  ];
+  let pos=candidates[0];
+  for(const c of candidates){
+    const fitsH = c.left>=P && (c.left+bRect.width+P)<=vw;
+    const fitsV = c.top>=P && (c.top+bRect.height+P)<=vh;
+    if(fitsH && fitsV){ pos=c; break; }
+  }
+  let top=Math.max(P,Math.min(pos.top,vh-bRect.height-P));
+  let left=Math.max(P,Math.min(pos.left,vw-bRect.width-P));
+
+  mapBubble.style.top=top+'px';
+  mapBubble.style.left=left+'px';
+  mapBubble.style.visibility='visible';
+}
+function closeMapBubble(){ mapBubble.style.display='none'; }
+document.getElementById('map-bubble-close').addEventListener('click', (e)=>{ e.stopPropagation(); closeMapBubble(); });
+document.addEventListener('click', (e)=>{ if(!mapBubble.contains(e.target)) closeMapBubble(); });
+addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMapBubble(); });
+
+if (mapImg.complete) buildHotspots(); else mapImg.onload = buildHotspots;
+addEventListener('resize', ()=>{ closeMapBubble(); });
+
+/* ===================== Glossary tooltip ===================== */
+const bubble = document.getElementById('tooltip-bubble');
+const bubbleWord = document.getElementById('tooltip-word');
+const bubblePron = document.getElementById('tooltip-pronunciation');
+const bubbleDef  = document.getElementById('tooltip-definition');
+const closeBtn   = document.getElementById('tooltip-close');
+
+function placeGlossary(target){
+  bubble.classList.remove('hidden');
+  const prev = bubble.style.visibility; bubble.style.visibility='hidden';
+
+  const rect = target.getBoundingClientRect();
+  const bRect = bubble.getBoundingClientRect();
+  const vw=innerWidth, vh=innerHeight, P=10, S=8;
+
+  const candidates = [
+    {top:rect.top, left:rect.right+S},
+    {top:rect.top, left:rect.left-bRect.width-S},
+    {top:rect.bottom+S, left:rect.left},
+    {top:rect.top-bRect.height-S, left:rect.left}
+  ];
+  let pos=candidates[0];
+  for(const c of candidates){
+    const fitsH = c.left>=P && (c.left+bRect.width+P)<=vw;
+    const fitsV = c.top>=P && (c.top+bRect.height+P)<=vh;
+    if(fitsH && fitsV){ pos=c; break; }
+  }
+  let top=Math.max(P,Math.min(pos.top,vh-bRect.height-P));
+  let left=Math.max(P,Math.min(pos.left,vw-bRect.width-P));
+  bubble.style.top=top+'px'; bubble.style.left=left+'px';
+  bubble.style.visibility=prev||'visible';
+}
+function openGlossaryFor(el){
+  const word = el.innerText;
+  const definition = el.dataset.definition||'';
+  const pronunciation = el.dataset.pronunciation||'';
+  bubbleWord.textContent = word;
+  bubbleDef.textContent = definition;
+  if(pronunciation){ bubblePron.textContent=`[ ${pronunciation} ]`; bubblePron.classList.remove('hidden'); }
+  else { bubblePron.textContent=''; bubblePron.classList.add('hidden'); }
+  placeGlossary(el);
+}
+function closeGlossary(){ bubble.classList.add('hidden'); }
+
+document.querySelectorAll('.tooltip-trigger').forEach(t=>{
+  t.setAttribute('tabindex','0');
+  t.addEventListener('click', (e)=>{ e.stopPropagation(); openGlossaryFor(t); });
+  t.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openGlossaryFor(t);} });
+});
+closeBtn.addEventListener('click', (e)=>{ e.stopPropagation(); closeGlossary(); });
+document.addEventListener('click', (e)=>{ if(!bubble.contains(e.target)) closeGlossary(); });
+addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeGlossary(); });
+
+/* ===================== WFN embed toggle ===================== */
+(function () {
+  const btnShow = document.getElementById('wfn-show');
+  const btnHide = document.getElementById('wfn-hide');
+  const imgNoCounty = document.getElementById('wfn-map-nocounty');
+  const imgWithCounty = document.getElementById('wfn-map-withcounty');
+
+  function showWithCounty() {
+    imgNoCounty.classList.add('hidden');
+    imgWithCounty.classList.remove('hidden');
+    btnShow.classList.add('hidden');
+    btnHide.classList.remove('hidden');
+    btnShow.setAttribute('aria-pressed', 'true');
+    btnHide.setAttribute('aria-pressed', 'false');
+  }
+  function hideWithCounty() {
+    imgNoCounty.classList.remove('hidden');
+    imgWithCounty.classList.add('hidden');
+    btnShow.classList.remove('hidden');
+    btnHide.classList.add('hidden');
+    btnShow.setAttribute('aria-pressed', 'false');
+    btnHide.setAttribute('aria-pressed', 'true');
+  }
+
+  btnShow.addEventListener('click', showWithCounty);
+  btnHide.addEventListener('click', hideWithCounty);
+})();
+
+/* ===================== Init ===================== */
+document.addEventListener('DOMContentLoaded', ()=>{ setLang('en'); });
+</script>
 </body>
 </html>

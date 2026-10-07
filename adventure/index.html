@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142a2c">
+  <title>Can the New Country Survive? — A historical adventure</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="scenes.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Can the New Country Survive? home"><span class="seal" aria-hidden="true">✦</span><span>THE CONFEDERATION FILES<small>A historical decision adventure</small></span></a>
+    <nav aria-label="Adventure tools"><button id="notebook-open">Notebook <span id="note-count">0</span></button><button id="glossary-open">Glossary</button><button id="restart">Start over</button></nav>
+  </header>
+  <main class="layout">
+    <aside class="field-guide" aria-label="Simulation status">
+      <p class="eyebrow">AMERICA · 1781–1787</p>
+      <h1>Can the new <br>country <em>survive?</em></h1>
+      <p class="premise">Thirteen states. A fragile union.<br>Three ways to see the same crisis.</p>
+      <div class="map-art" aria-hidden="true">
+        <svg viewBox="0 0 320 235" role="presentation"><defs><pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0H0V25" fill="none" stroke="#b5c5b8" stroke-opacity=".12"/></pattern></defs><rect width="320" height="235" fill="url(#grid)"/><path d="M206 20l21 8 7 22-16 12 16 20-20 12-8 26-24 10-5 23-25 13-3 21-31 16-18 23-19-6 7-21 12-13 3-23 20-13 4-29 22-16 1-24 25-13 7-22z" fill="#46615b" stroke="#acc0a8" stroke-width="1.5"/><path d="M190 60l27 2M168 85l47 9M145 117l60 3M126 142l52 11M107 168l42 19M98 197l20 6" stroke="#abc0a8" stroke-opacity=".5" fill="none"/><path d="M205 84Q180 101 168 143Q147 174 113 202" stroke="#dfb76f" stroke-dasharray="4 6" fill="none"/><circle cx="205" cy="84" r="5" fill="#efc981"/><circle cx="168" cy="143" r="5" fill="#efc981"/><text x="225" y="88" fill="#ecede0" font-size="11">BOSTON</text><text x="181" y="150" fill="#ecede0" font-size="11">PHILADELPHIA</text><text x="18" y="225" fill="#b9c6bd" font-size="10" letter-spacing="2">SCHEMATIC · NOT TO SCALE</text></svg>
+      </div>
+      <div id="role-card" class="role-card"><span>Your perspective</span><strong>Not yet chosen</strong></div>
+      <div class="meters" id="meters"></div>
+      <p class="meter-note">Simulation indicators — not historical statistics or your grade. <button id="meter-help" aria-label="Explain simulation indicators">ⓘ</button></p>
+      <div class="journey"><div><span>Your journey</span><strong id="progress-text">0 / 18</strong></div><progress id="progress" value="0" max="18" aria-label="Story completion"></progress><p id="save-status" role="status">Progress stays in this browser.</p></div>
+    </aside>
+    <section class="story-region" aria-label="Adventure">
+      <div class="chapter-line"><span id="chapter">THE FIRST EXPERIMENT</span><span id="date">MARCH 1781</span></div>
+      <article class="story-card" id="story-card">
+        <div class="scene-meta"><span id="badge" class="badge">DOCUMENTED</span><span id="scene-label">DISPATCH 01</span></div>
+        <h2 id="scene-title" tabindex="-1"></h2>
+        <p class="history-rule" id="history-rule" hidden>Your choices pause here. This event really happened.</p>
+        <div id="narrative" class="narrative"></div>
+        <div id="callback" class="callback" hidden></div>
+        <div id="source-area"></div>
+        <div id="activity"></div>
+        <p id="choice-prompt" class="choice-prompt"></p>
+        <div id="choices" class="choices"></div>
+        <p id="feedback" class="feedback" role="status" tabindex="-1" hidden></p>
+        <div id="summary"></div>
+        <footer class="card-footer"><span id="scene-footnote"></span><button id="read-aloud">Read to me</button><button id="speech-pause" hidden>Pause reading</button></footer>
+      </article>
+      <footer class="lesson-rule"><span aria-hidden="true">✦</span> Change your perspective. Test your strategy. Keep history intact.<span>About 35 minutes · No timed choices</span></footer>
+    </section>
+  </main>
+  <dialog id="drawer" aria-labelledby="drawer-title"><div class="dialog-head"><h2 id="drawer-title"></h2><button id="drawer-close" aria-label="Close panel">Close ×</button></div><div id="drawer-body"></div></dialog>
+  <dialog id="restart-dialog" aria-labelledby="restart-title"><h2 id="restart-title">Begin a new journey?</h2><p>This clears this adventure’s saved progress and reflection in this browser.</p><div class="dialog-actions"><button id="restart-cancel">Keep my progress</button><button id="restart-confirm">Start over</button></div></dialog>
+  <noscript><p class="noscript">This adventure needs JavaScript to follow choices. Enable it and reload.</p></noscript>
+</body>
+</html>

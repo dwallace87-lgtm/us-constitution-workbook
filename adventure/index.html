@@ -8,7 +8,7 @@
 :root{
   --ink:#0b1426; --navy:#14213d; --navy2:#1f3360; --blue:#3d6fa3;
   --red:#b5352a; --red-d:#7f231b; --gold:#e8b43a; --cream:#f3e9d2; --paper:#fbf5e6;
-  --text:#1b1a17; --muted:#5b5446; --ok:#2c6e40; --bad:#a3271d;
+  --text:#1b1a17; --sage:#3f6f55; --muted:#5b5446; --ok:#2c6e40; --bad:#a3271d;
   --f-display:'Alfa Slab One', Rockwell, 'Roboto Slab', Georgia, serif;
   --f-pixel:'Press Start 2P', ui-monospace, 'Courier New', monospace;
   --f-body:'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -42,9 +42,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .meter .lbl{font-family:var(--f-pixel);font-size:9px;letter-spacing:.08em}
 .segs{display:flex;gap:2px}
 .seg{width:11px;height:14px;border:2px solid var(--cream);background:transparent}
-.meter[data-k=union] .seg.on{background:var(--cream)}
-.meter[data-k=treasury] .seg.on{background:var(--gold)}
-.meter[data-k=unrest] .seg.on{background:var(--red);border-color:#f0b0a8}
+.meter[data-k=hope] .seg.on{background:var(--gold)}
+.meter[data-k=trust] .seg.on{background:var(--cream)}
+.meter[data-k=tension] .seg.on{background:var(--red);border-color:#f0b0a8}
 .meter .num{font-family:var(--f-pixel);font-size:9px;font-variant-numeric:tabular-nums;color:#c9c0aa}
 .simtag{font-family:var(--f-pixel);font-size:8px;color:#9fa9c2;border:1px dashed #6b7898;padding:4px 6px;cursor:help;background:none}
 .hud-right{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -76,6 +76,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .badge.role{background:var(--blue);color:#fff}
 .badge.sim{background:#e3ddd0;color:var(--ink);border-style:dashed}
 .badge.int{background:var(--red);color:#fff}
+.badge.sel{background:var(--sage);color:#fff}
 .panel h2{font-family:var(--f-display);font-weight:400;font-size:clamp(1.7rem,3.2vw,2.35rem);line-height:1.05;margin:0;color:var(--navy);text-wrap:balance;outline:none}
 .body p{margin:0 0 .7em;max-width:62ch}
 .body p:last-child{margin-bottom:0}
@@ -144,7 +145,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .start-row{display:flex;flex-wrap:wrap;gap:16px 18px;align-items:center}
 .ghost{font-family:var(--f-pixel);font-size:10px;letter-spacing:.06em;background:transparent;color:var(--cream);border:3px solid var(--cream);padding:14px 14px;min-height:52px}
 .ghost:hover{background:var(--navy2)}
-.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:40px}
 .rule{border-top:4px solid var(--gold);padding-top:12px}
 .rule h3{font-family:var(--f-pixel);font-size:10px;letter-spacing:.08em;color:var(--gold);margin:0 0 8px;line-height:1.6}
 .rule p{margin:0;font-size:16px;color:#ddd3bb}
@@ -190,6 +191,44 @@ table.sc td:last-child{text-align:right;font-family:var(--f-pixel);font-size:10p
 .debrief p{margin:0 0 8px;font-size:16px}
 pre.rep{white-space:pre-wrap;font-size:13px;background:#fff;border:2px dashed var(--ink);padding:12px;max-height:240px;overflow:auto;margin:0}
 
+/* ---------- SEL: feelings, values, journal, people ---------- */
+.feelgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ftile{display:flex;flex-direction:column;align-items:center;gap:8px;border:3px solid var(--ink);background:var(--cream);padding:12px 6px 10px;box-shadow:4px 4px 0 var(--ink);font-family:var(--f-pixel);font-size:8px;letter-spacing:.05em;color:var(--ink);min-height:44px}
+.ftile canvas{width:44px;height:44px;image-rendering:pixelated;display:block}
+.ftile:hover{background:#fff}
+.ftile[aria-pressed=true]{background:var(--sage);color:#fff}
+.ftile:active{transform:translate(4px,4px);box-shadow:none}
+.under{border:3px solid var(--sage);background:#eef4ef;padding:12px 14px;font-size:16.5px}
+.under b{display:block;font-family:var(--f-pixel);font-size:9px;letter-spacing:.06em;color:var(--sage);margin-bottom:6px;line-height:1.5}
+.valgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.vtile{font-family:var(--f-pixel);font-size:8px;letter-spacing:.04em;line-height:1.5;border:3px solid var(--ink);background:var(--cream);color:var(--ink);padding:12px 6px;min-height:52px;box-shadow:3px 3px 0 var(--ink)}
+.vtile[aria-pressed=true]{background:var(--navy);color:var(--gold)}
+.vtile[disabled]{opacity:.4}
+.think{border:3px dashed var(--navy);background:#fff;padding:12px 14px;font-size:16.5px}
+.think b{display:block;font-family:var(--f-pixel);font-size:9px;letter-spacing:.06em;color:var(--navy);margin-bottom:6px}
+.panel .jr{min-height:150px;font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:1.6;background:repeating-linear-gradient(#fff 0 26px,#e7dfcc 26px 27px);padding-top:4px}
+.chk{display:flex;gap:10px;align-items:center;font-size:15.5px}
+.chk input{width:22px;height:22px;flex:none}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.dossier{display:grid;grid-template-columns:132px minmax(0,1fr);gap:16px;align-items:start}
+.dossier canvas{width:132px;height:132px;image-rendering:pixelated;border:4px solid var(--ink);box-shadow:5px 5px 0 var(--red-d);display:block}
+.dossier .cls{font-family:var(--f-pixel);font-size:9px;color:var(--red-d);letter-spacing:.05em;line-height:1.6;margin:0 0 4px}
+.dossier .nm{font-family:var(--f-display);font-size:1.9rem;line-height:1;color:var(--navy);margin:0}
+.dossier .lf{font-family:var(--f-pixel);font-size:9px;color:var(--muted);margin:6px 0 0}
+.stats{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;margin:0;font-size:15.5px}
+.stats dt{font-family:var(--f-pixel);font-size:8px;letter-spacing:.05em;color:var(--sage);padding-top:5px}
+.stats dd{margin:0}
+.people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pbtn{display:flex;flex-direction:column;align-items:center;gap:6px;border:3px solid var(--ink);background:#fff;padding:10px 6px;font-family:var(--f-pixel);font-size:8px;line-height:1.5;color:var(--ink);text-align:center}
+.pbtn canvas{width:64px;height:64px;image-rendering:pixelated}
+.pbtn[disabled]{background:#e8e2d4;color:#7a7262;border-style:dashed;cursor:default}
+.journey{display:flex;flex-wrap:wrap;gap:8px}
+.jchip{display:flex;align-items:center;gap:6px;border:2px solid var(--ink);background:#fff;padding:4px 8px 4px 4px;font-size:13.5px}
+.jchip canvas{width:28px;height:28px;image-rendering:pixelated}
+.jchip b{font-family:var(--f-pixel);font-size:8px}
+.sech{font-family:var(--f-pixel);font-size:10px;letter-spacing:.06em;color:var(--navy);margin:8px 0 0}
+@media (max-width:520px){.feelgrid,.valgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.dossier{grid-template-columns:minmax(0,1fr)}.people{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 /* ---------- Modal / popover ---------- */
 dialog{border:4px solid var(--ink);box-shadow:0 0 0 4px var(--cream),12px 12px 0 4px var(--red-d);background:var(--paper);color:var(--text);padding:0;width:min(680px,calc(100vw - 32px));max-height:calc(100vh - 48px)}
 dialog::backdrop{background:rgba(11,20,38,.78)}
@@ -220,7 +259,8 @@ blockquote.sum{font-family:var(--f-body);font-size:16.5px}
 @media (max-width:900px){
   .screen,.title,.report{grid-template-columns:minmax(0,1fr)}
   .art{position:static}
-  .roles,.rules{grid-template-columns:minmax(0,1fr)}
+  .roles{grid-template-columns:minmax(0,1fr)}
+  .rules{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cards{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:520px){
@@ -259,7 +299,7 @@ blockquote.sum{font-family:var(--f-body);font-size:16.5px}
 
 <script>
 /* =========================================================
-   DATA: glossary, notebook cards, sources
+   DATA: glossary, cards, people, sources
    ========================================================= */
 const GLOSS={
   articles:['Articles of Confederation','The first constitution of the United States. It joined the states in a confederation while leaving the states very powerful.'],
@@ -269,16 +309,19 @@ const GLOSS={
   creditor:['creditor','A person or organization that is owed money.'],
   debtor:['debtor','A person or government that owes money.'],
   tax:['tax','Money a government requires people or property owners to pay for public purposes.'],
-  requisition:['requisition','Here, a request by Congress for a state to supply its share of money or resources. A request, not an order Congress could enforce.'],
+  requisition:['requisition','Here, a request by Congress for a state to supply its share of money. A request, not an order Congress could enforce.'],
   treasury:['treasury','The government’s pool of public money.'],
+  certificate:['pay certificate','A paper IOU given to soldiers instead of cash. As it lost value, many veterans sold theirs cheap just to get by.'],
   foreclosure:['foreclosure / seizure','The legal taking or sale of property when debts are not paid.'],
   legislature:['legislature','A group with authority to make laws.'],
   militia:['militia','A military force drawn from citizens and organized under government authority.'],
   arsenal:['arsenal','A place where weapons and military supplies are stored.'],
+  regulators:['Regulators','What the protesters called themselves: people “regulating,” or setting right, a government they believed had gone wrong.'],
   rebellion:['rebellion','Organized resistance against established government authority.'],
+  amnesty:['amnesty','An official pardon for a group of people.'],
+  indictment:['indictment','A formal written charge accusing someone of a crime.'],
   amend:['amend','To formally change a governing document or law.'],
   unanimous:['unanimous','Everyone entitled to vote agrees.'],
-  ratify:['ratify','To formally approve something, especially a constitution or agreement.'],
   convention:['convention','A formal meeting of delegates called to discuss and decide on a shared issue.']
 };
 const CARDS={
@@ -287,158 +330,258 @@ const CARDS={
   notpowerless:['NOT POWERLESS','Congress handled war, diplomacy and western lands, and passed the Northwest Ordinance (1787).'],
   unanimity:['ALL 13 OR NOTHING','Changing the Articles needed every state legislature to agree (Article XIII).'],
   jurisdiction:['WHO TAXED WHOM?','Massachusetts, not Congress, set the taxes that western farmers protested.'],
-  springfield:['JAN. 25, 1787','The attempt on the Springfield arsenal fails. State forces later break organized resistance.'],
-  reactions:['TWO REACTIONS','Knox saw danger and demanded stronger government. Jefferson, in Paris, was far calmer.'],
-  timeline:['REFORM CAME FIRST','Jay’s letter (Mar. 1786) and the Annapolis Convention (Sept. 1786) came before Springfield.'],
+  springfield:['JAN. 25, 1787','Four insurgents killed at the Springfield arsenal. The attack collapses.'],
+  merchants:['PRIVATE MONEY','Lincoln’s army was paid with loans from 125+ Boston merchants, not by Congress.'],
+  voters:['VOTERS ANSWER','1787: Hancock replaces Bowdoin. The legislature cuts taxes and pauses debt collection.'],
+  timeline:['REFORM CAME FIRST','Jay’s letter (Mar. 1786) and Annapolis (Sept. 1786) came before Springfield.'],
   article1:['ARTICLE I, SECTION 8','The Constitution gives Congress power to tax, regulate commerce, raise armies and call forth the militia.']
 };
-const SRC={
-  art2:{t:'Articles of Confederation · Article II',who:'The Continental Congress, approved by all 13 state legislatures',when:'In force March 1, 1781',ctx:'Americans had just fought a war against a distant, powerful government.',q:'“Each state retains its sovereignty, freedom, and independence, and every power, jurisdiction, and right, which is not by this confederation expressly delegated to the United States, in Congress assembled.”',ask:'Who keeps a power if the Articles don’t clearly give it to Congress?',link:'https://www.archives.gov/milestone-documents/articles-of-confederation',ln:'Full text at the National Archives'},
-  art8:{t:'Articles of Confederation · Article VIII',who:'The Continental Congress',when:'In force March 1, 1781',ctx:'How will the United States pay for war and shared expenses?',q:'“All charges of war, and all other expenses … shall be defrayed out of a common treasury, which shall be supplied by the several states … The taxes for paying that proportion shall be laid and levied by the authority and direction of the legislatures of the several states.”',ask:'Who actually collects the money?',link:'https://www.archives.gov/milestone-documents/articles-of-confederation',ln:'Full text at the National Archives'},
-  art13:{t:'Articles of Confederation · Article XIII',who:'The Continental Congress',when:'In force March 1, 1781',ctx:'What does it take to change the rules?',q:'“… nor shall any alteration at any time hereafter be made in any of them; unless such alteration be agreed to in a Congress of the United States, and be afterwards confirmed by the legislatures of every state.”',ask:'Why is “just change the rule” harder than it sounds?',link:'https://www.archives.gov/milestone-documents/articles-of-confederation',ln:'Full text at the National Archives'},
-  nwo:{t:'The Northwest Ordinance',who:'The Confederation Congress',when:'July 13, 1787',ctx:'Settlers were moving into land northwest of the Ohio River.',sum:true,q:'Summary: The ordinance set up a government for the Northwest Territory, laid out steps for territories to become equal states, protected some individual rights, and banned slavery in the territory.',ask:'What could the Confederation government accomplish?',link:'https://www.archives.gov/milestone-documents/northwest-ordinance',ln:'Read it at the National Archives'},
-  knox:{t:'Henry Knox to George Washington',who:'Henry Knox, Confederation Secretary at War',when:'October 23, 1786',to:'George Washington, at Mount Vernon',ctx:'Armed crowds are closing courts in western Massachusetts. Knox has just visited the state.',q:'“The people who are the insurgents have never paid any, or but very little taxes — But they see the weakness of government; They feel at once their own poverty, compared with the opulent, and their own force, and they are determined to make use of the latter, in order to remedy the former.”',ask:'What does Knox fear? Is his claim about taxes a neutral fact, or his interpretation?',link:'https://founders.archives.gov/?q=Knox%20Washington%2023%20October%201786',ln:'Search Founders Online for the full letter'},
-  jefferson:{t:'Thomas Jefferson to James Madison',who:'Thomas Jefferson, U.S. minister to France',when:'January 30, 1787',to:'James Madison',ctx:'Jefferson is in Paris, an ocean away, reading reports of the Massachusetts uprising.',q:'“I hold it that a little rebellion now and then is a good thing, and as necessary in the political world as storms in the physical.”',ask:'Why might Jefferson be less frightened than Knox? Does distance matter?',link:'https://founders.archives.gov/?q=Jefferson%20Madison%2030%20January%201787',ln:'Search Founders Online for the full letter'},
-  jay:{t:'John Jay to George Washington',who:'John Jay, Confederation Secretary for Foreign Affairs',when:'March 16, 1786',to:'George Washington',ctx:'Months before any court closings in Massachusetts.',q:'“… an opinion begins to prevail that a general Convention for revising the articles of Confederation would be expedient.”',ask:'What does the DATE of this letter prove about the reform timeline?',link:'https://founders.archives.gov/?q=Jay%20Washington%2016%20March%201786',ln:'Search Founders Online for the full letter'},
-  const:{t:'U.S. Constitution · Article I, Section 8',who:'The Constitutional Convention',when:'Signed September 17, 1787',ctx:'Delegates answer problems they saw under the Articles.',q:'“The Congress shall have Power To lay and collect Taxes, Duties, Imposts and Excises … To regulate Commerce with foreign Nations, and among the several States … To raise and support Armies … To provide for calling forth the Militia to execute the Laws of the Union, suppress Insurrections and repel Invasions.”',ask:'Which problems from your mission is this language trying to answer?',link:'https://www.archives.gov/founding-docs/constitution-transcript',ln:'Full text at the National Archives'}
+/* Pixel portraits are illustrations, not likenesses. */
+const PEOPLE={
+  shays:{nm:'Daniel Shays',life:'c. 1747 – 1825',cls:'VETERAN CAPTAIN · REGULATOR',look:{skin:'#e2b48c',coat:'#2f4f86',face:'#d9c79a',hat:1,hair:'#5a3b22',ep:1},
+    rows:[['ROOTS','Born in Hopkinton, Mass., to Irish immigrant parents. Worked as a landless farm laborer as a young man.'],['FAMILY','Married Abigail Gilbert in 1772. They raised six children on a farm in Shutesbury, Mass.'],['SERVICE','Bunker Hill, Saratoga, Stony Point. Promoted to captain, 5th Massachusetts Regiment, 1777.'],['ITEM','A sword from the Marquis de Lafayette (1780). Sold it to pay his debts.'],['AFTER THE WAR','Sued for debts. Never fully paid for his service.'],['FATE','Fled to Vermont. Sentenced to death, pardoned in 1788. Granted a federal pension late in life. Died poor in Sparta, N.Y., Sept. 29, 1825.']],
+    note:'Historians think powerful critics may have exaggerated his role, turning one name into the face of thousands.'},
+  sash:{nm:'Moses Sash',life:'1755 – 1827',cls:'VETERAN · FARMER · REGULATOR',look:{skin:'#5a3a24',coat:'#6a4a2e',face:'#8a6a44',hat:1,hair:'#1b130d'},
+    rows:[['ROOTS','Born in Stoughton, Mass., to a family free for at least two generations.'],['SERVICE','Enlisted 1777. Re-enlisted 1780 for three years, 7th Massachusetts, near West Point.'],['HOME','Bought land in Worthington in 1783. Town records call him “Moses Sash, black yeoman.”'],['1787','Marched on Springfield, Jan. 25. Arrested in South Hadley, Jan. 30. Indicted Apr. 9.'],['FATE','Pardoned along with nearly all participants. Received a veteran’s pension in 1820. Died in Hartford, Conn., 1827.']],
+    note:'His indictment names him one of “Shays’ Council,” a leader. He had served as a private.'},
+  hall:{nm:'Prince Hall',life:'c. 1735 – 1807',cls:'BOSTON COMMUNITY LEADER',look:{skin:'#4e3020',coat:'#22252b',face:'#22252b',hat:0,hair:'#cfcfcf',crav:1},
+    rows:[['WHO','A leader of Boston’s free Black community and founder of its African Lodge of Freemasons.'],['ACTIVISM','Petitioned the Massachusetts legislature to end slavery (1777).'],['1786','Wrote to Governor James Bowdoin offering to raise Black volunteers to help defend the state.'],['RESULT','The governor declined the offer.']],
+    note:'Like Sash, Hall claimed a place in the Revolution’s promises. They chose opposite sides of the same crisis.'},
+  lincoln:{nm:'Benjamin Lincoln',life:'1733 – 1810',cls:'GENERAL · STATE COMMANDER',look:{skin:'#e8bf98',coat:'#2f4f86',face:'#d9c79a',hat:1,hair:'#e8e8e8',ep:1},
+    rows:[['SERVICE','Continental Army general during the Revolution.'],['1787','Led the Massachusetts army against the Regulators, paid for by loans from Boston merchants.'],['PETERSHAM','Marched through a snowstorm and surprised the rebel camp, Feb. 4, 1787.']],
+    note:'His army existed because private lenders paid for it. No national army came.'},
+  knox:{nm:'Henry Knox',life:'1750 – 1806',cls:'SECRETARY AT WAR',look:{skin:'#efc6a0',coat:'#2f4f86',face:'#d9c79a',hat:0,hair:'#e8e8e8',ep:1,wide:1},
+    rows:[['BEFORE','A Boston bookseller who became Washington’s artillery chief.'],['1786','Confederation Secretary at War. Warned Washington the uprising showed the “weakness of government.”']],
+    note:'His letters helped turn a Massachusetts crisis into national alarm.'},
+  jefferson:{nm:'Thomas Jefferson',life:'1743 – 1826',cls:'U.S. MINISTER TO FRANCE',look:{skin:'#efc6a0',coat:'#6b3d2a',face:'#6b3d2a',hat:0,hair:'#b5562e',crav:1},
+    rows:[['1787','Living in Paris, reading reports months late.'],['VIEW','Wrote that “a little rebellion now and then is a good thing.”']],
+    note:'Distance can shape how frightening an event feels.'}
 };
-
+const SRC={
+  art2:{t:'Articles of Confederation · Article II',btn:'ARTICLE II',who:'The Continental Congress, approved by all 13 state legislatures',when:'In force March 1, 1781',ctx:'Americans had just fought a war against a distant, powerful government.',q:'“Each state retains its sovereignty, freedom, and independence, and every power, jurisdiction, and right, which is not by this confederation expressly delegated to the United States, in Congress assembled.”',ask:'Who keeps a power if the Articles don’t clearly give it to Congress?',link:'https://www.archives.gov/milestone-documents/articles-of-confederation',ln:'Full text at the National Archives'},
+  art8:{t:'Articles of Confederation · Article VIII',btn:'ARTICLE VIII',who:'The Continental Congress',when:'In force March 1, 1781',ctx:'How will the United States pay for war and shared expenses?',q:'“All charges of war, and all other expenses … shall be defrayed out of a common treasury, which shall be supplied by the several states … The taxes for paying that proportion shall be laid and levied by the authority and direction of the legislatures of the several states.”',ask:'Who actually collects the money?',link:'https://www.archives.gov/milestone-documents/articles-of-confederation',ln:'Full text at the National Archives'},
+  art13:{t:'Articles of Confederation · Article XIII',btn:'ARTICLE XIII',who:'The Continental Congress',when:'In force March 1, 1781',ctx:'What does it take to change the rules?',q:'“… nor shall any alteration at any time hereafter be made in any of them; unless such alteration be agreed to in a Congress of the United States, and be afterwards confirmed by the legislatures of every state.”',ask:'Why is “just change the rule” harder than it sounds?',link:'https://www.archives.gov/milestone-documents/articles-of-confederation',ln:'Full text at the National Archives'},
+  nwo:{t:'The Northwest Ordinance',btn:'NORTHWEST ORDINANCE',who:'The Confederation Congress',when:'July 13, 1787',ctx:'Settlers were moving into land northwest of the Ohio River.',sum:true,q:'Summary: The ordinance set up a government for the Northwest Territory, laid out steps for territories to become equal states, protected some individual rights, and banned slavery in the territory.',ask:'What could the Confederation government accomplish?',link:'https://www.archives.gov/milestone-documents/northwest-ordinance',ln:'Read it at the National Archives'},
+  sash:{t:'Indictment of Moses Sash',btn:'SASH INDICTMENT, 1787',who:'Hampshire County court, Massachusetts',when:'April 9, 1787',ctx:'Sash was arrested in South Hadley on January 30, 1787, allegedly gathering guns.',q:'“a negro man & Labourer being a disorderly, riotous & seditious person”',extra:'Written on the back of the document: “a Captain & one of Shaises Councill.”',ask:'What words does the court use to describe Sash? What do those words leave out about who he was?',link:'https://www.worthingtonhistoricalsociety.org/wordpress/moses-sash-black-worthingtonian-of-shays-rebellion/',ln:'Worthington Historical Society on Moses Sash'},
+  knox:{t:'Henry Knox to George Washington',btn:'KNOX LETTER, 1786',who:'Henry Knox, Confederation Secretary at War',when:'October 23, 1786',to:'George Washington, at Mount Vernon',ctx:'Armed crowds are closing courts in western Massachusetts. Knox has just visited the state.',q:'“The people who are the insurgents have never paid any, or but very little taxes — But they see the weakness of government; They feel at once their own poverty, compared with the opulent, and their own force, and they are determined to make use of the latter, in order to remedy the former.”',ask:'What does Knox fear? Is his claim about taxes a neutral fact, or his interpretation?',link:'https://founders.archives.gov/?q=Knox%20Washington%2023%20October%201786',ln:'Search Founders Online for the full letter'},
+  jefferson:{t:'Thomas Jefferson to James Madison',btn:'JEFFERSON LETTER, 1787',who:'Thomas Jefferson, U.S. minister to France',when:'January 30, 1787',to:'James Madison',ctx:'Jefferson is in Paris, an ocean away, reading reports of the Massachusetts uprising.',q:'“I hold it that a little rebellion now and then is a good thing, and as necessary in the political world as storms in the physical.”',ask:'Why might Jefferson be less frightened than Knox? Does distance matter?',link:'https://founders.archives.gov/?q=Jefferson%20Madison%2030%20January%201787',ln:'Search Founders Online for the full letter'},
+  jay:{t:'John Jay to George Washington',btn:'JAY LETTER, 1786',who:'John Jay, Confederation Secretary for Foreign Affairs',when:'March 16, 1786',to:'George Washington',ctx:'Months before any court closings in Massachusetts.',q:'“… an opinion begins to prevail that a general Convention for revising the articles of Confederation would be expedient.”',ask:'What does the DATE of this letter prove about the reform timeline?',link:'https://founders.archives.gov/?q=Jay%20Washington%2016%20March%201786',ln:'Search Founders Online for the full letter'},
+  const:{t:'U.S. Constitution · Article I, Section 8',btn:'ART. I, SEC. 8',who:'The Constitutional Convention',when:'Signed September 17, 1787',ctx:'Delegates answer problems they saw under the Articles.',q:'“The Congress shall have Power To lay and collect Taxes, Duties, Imposts and Excises … To regulate Commerce with foreign Nations, and among the several States … To raise and support Armies … To provide for calling forth the Militia to execute the Laws of the Union, suppress Insurrections and repel Invasions.”',ask:'Which problems from your mission is this language trying to answer?',link:'https://www.archives.gov/founding-docs/constitution-transcript',ln:'Full text at the National Archives'}
+};
+const FEELS=[
+ ['angry','ANGRY','#b5352a','Anger often signals that something feels unfair. What line has been crossed for your character?'],
+ ['afraid','AFRAID','#5d6b8a','Fear shows up to protect what we care about. What is your character trying to protect?'],
+ ['betrayed','BETRAYED','#6b3d5a','Betrayal means trust was broken. Who did your character trust, and what did they expect?'],
+ ['hopeful','HOPEFUL','#c99a22','Hope keeps people working for change. What is your character’s hope pinned on?'],
+ ['proud','PROUD','#2f4f86','Pride says “I earned this.” What has your character earned that now feels threatened?'],
+ ['ashamed','ASHAMED','#7a6a52','Shame often grows from things outside our control, like debt after unpaid service. Is it really your character’s fault?'],
+ ['determined','DETERMINED','#3f6f55','Determination is energy that needs a direction. Where will your character point it?'],
+ ['torn','TORN','#8a5a2e','Feeling torn means two things you care about are pulling against each other. Can you name both?']
+];
+const VALUES=['FAMILY','FAIRNESS','SAFETY','LOYALTY','LAW & ORDER','FREEDOM','COMMUNITY','HONOR'];
+</script>
+<script>
 /* =========================================================
    STORY NODES
-   p = progress %, kind: story | deadend | cfu | sources | sort | chain
+   kind: story | deadend | cfu | feel | values | journal | sort | chain | roles
    ========================================================= */
+const talkEcho={
+  farmer:{listen:'Asa nodded slowly. “I don’t want this either.” You part as neighbors, even if you disagree. ',argue:'Asa’s face went hard. “Then I guess we’re on different sides.” ',walk:'You left Asa standing in the road. It stays with you. '},
+  state:{listen:'Lyman steadied himself. “Thank you for hearing me.” You still have a duty, but now you know a face behind the reports. ',argue:'Lyman walked out without a word. The room feels colder. ',walk:'You changed the subject. Lyman stopped asking. '},
+  congress:{listen:'The delegate softened. “If reform protects small states, Rhode Island might listen.” ',argue:'The delegate stood up. “Then we’re done talking.” ',walk:'You let the conversation drop. Nothing moved. '}
+};
+const valEcho=s=>{const v=S.lastValues;return v&&v.length?`You said you value **${v.join('** and **')}**. Keep that in mind.\n\n`:''};
+
 const N={
-C0:{p:3,year:'MARCH 1781',place:'THE THIRTEEN STATES',scene:'title',badges:['doc'],title:'The New Government',
- body:`The Revolutionary War is still underway, but the thirteen states have finally approved a plan for governing together: the [[Articles of Confederation|articles]].\n\nAmericans remember what it felt like to be ruled by a distant government. Their new system keeps **most power close to the states**. Your choices will test what happens when that system faces pressure.`,
- choices:[{l:'Begin the mission',to:'C1',go:1}]},
-C1:{p:7,year:'1781',place:'THE CHARTER',scene:'charter',badges:['doc'],title:'Why Build It This Way?',src:['art2'],card:'sovereignty',
- body:`Under the Articles, each state keeps its [[sovereignty]], freedom and independence. Congress handles shared problems like war, diplomacy and western lands, but **there is no separate national president**, and Congress depends on the states for money and enforcement.\n\nThis was not an accident. It was designed by people who feared concentrating too much power in one national government.`,
- choices:[{l:'Continue to the Power Check',to:'C2'}]},
-C2:{p:11,year:'1781–1786',place:'POWER CHECK',scene:'congress',badges:['doc'],kind:'cfu',title:'Power Check: Who Pays?',src:['art8'],
- body:`Before you enter the story, make one prediction. Congress needs money to pay national expenses, but several states don’t send what Congress requests.\n\nThis is a **knowledge check**, not a personality choice. It won’t change your character’s fate, and you can earn full mastery after feedback and retries.`,
- cfu:{key:'c2',pts:1,q:'Which statement best fits the Articles?',next:'C3',card:'requisition',flag:'learned_requisition',opts:[
+/* ---------- PROLOGUE: THE MAN ---------- */
+P0:{p:3,year:'1780',place:'HUDSON VALLEY, NEW YORK',scene:'sword',badges:['doc'],title:'The Captain’s Sword',people:['shays'],
+ body:"Captain **Daniel Shays** put years into the Revolution, fighting at Bunker Hill, Saratoga, and Stony Point. In 1780, Lafayette gives him a sword to honor his service. That sounds like a big deal—and it is. But an honor doesn't pay the bills. The army still owes Shays money. That fall, he resigns and heads home to Abigail and their children in Massachusetts.",
+ choices:[{l:'Follow him home',to:'P1',go:1}]},
+P1:{p:6,year:'1780s',place:'SHUTESBURY, MASSACHUSETTS',scene:'sword',badges:['doc','sa'],kind:'feel',title:'Selling the Sword',
+ body:"Back home, the bills don't stop just because the war did. Shays faces lawsuits over debts he can't pay. His military pay still hasn't come through in full, so he sells Lafayette's sword for cash. Other officers look down on the decision.\n\nFor Shays—and plenty of other veterans—winning independence hasn't made everyday life easier.",
+ prompt:'Put yourself in his boots. How might Shays feel as he hands over the sword?',next:'C0'},
+
+/* ---------- THE SYSTEM ---------- */
+C0:{p:9,year:'MARCH 1781',place:'THE THIRTEEN STATES',scene:'title',badges:['doc'],title:'Why Would a Hero Go Broke?',
+ body:"You fought for a new country. Now you're wondering why that country can't pay what it owes. To understand Shays's situation, start with the government's ground rules.\n\nIn 1781, all thirteen states approve the [[Articles of Confederation|articles]]. After fighting a distant king and Parliament, Americans want **most power to stay close to home, with the states**.",
+ choices:[{l:'See how it works',to:'C1'}]},
+C1:{p:12,year:'1781',place:'THE CHARTER',scene:'charter',badges:['doc'],title:'Why Build It This Way?',src:['art2'],card:'sovereignty',
+ body:"The states aren't looking to hand over the keys. Each keeps its [[sovereignty]], freedom, and independence. Congress handles shared issues like war, diplomacy, and western lands, but **there's no separate national executive president**. For money and enforcement, Congress depends heavily on the states.\n\nThat's the plan, not an oversight. Americans worry that a powerful national government could become another authority they can't control.",
+ choices:[{l:'Take the Power Check',to:'C2'}]},
+C2:{p:15,year:'1781–1786',place:'POWER CHECK',scene:'congress',badges:['doc'],kind:'cfu',title:'Power Check: Who Pays?',src:['art8'],
+ body:"Congress owes soldiers like Shays money. The problem? Several states aren't sending what Congress requests. Wanting to pay a bill and having the power to collect the money are two different things.\n\nThis is a **knowledge check**, not a judgment of your character. If you miss it, use the feedback and try again. You can still earn full mastery.",
+ cfu:{key:'c2',pts:1,q:'Which statement best fits the Articles?',next:'C3',card:'requisition',opts:[
   {l:'Congress directly taxes citizens.',to:'D-C2'},
-  {l:'Congress depends on the states to supply the treasury.',ok:1,fb:'Right. Article VIII: the common treasury is “supplied by the several states,” and state legislatures lay the taxes. Congress could only make a [[requisition]].'},
+  {l:'Congress depends on the states to supply the treasury.',ok:1,fb:'Right. Article VIII: the common treasury is “supplied by the several states,” and state legislatures lay the taxes. Congress could only make a [[requisition]]. That’s one reason soldiers went unpaid.'},
   {l:'A national president orders the states to pay.',to:'D-C2'}]}},
-'D-C2':{p:11,year:'1781–1786',place:'POWER CHECK',scene:'stop',kind:'deadend',label:'POWER CHECK',title:'That Move Doesn’t Fit the Articles',
- body:`Congress cannot simply impose a general national [[tax]] on individuals, and there is **no national president** who can order states to pay. The common [[treasury]] depends on supplies from the states.\n\nNo game over here. Go back and choose the option that matches the document.`,
+'D-C2':{p:15,year:'1781–1786',place:'POWER CHECK',scene:'stop',kind:'deadend',label:'POWER CHECK',title:'That Move Doesn’t Fit the Articles',
+ body:"That move runs into the rules. Congress can't impose a general national [[tax]] on individual people, and there's **no separate national executive president** who can order the states to pay. The common [[treasury]] relies on state contributions.\n\nYou're not out of the game. Head back and pick the option the Articles actually allow.",
  choices:[{l:'Return to the question',to:'C2',go:1}]},
-C3:{p:15,year:'1781–1787',place:'CONFEDERATION CONGRESS',scene:'congress',badges:['doc'],title:'Not Powerless',src:['nwo'],card:'notpowerless',
- body:`The Articles created real national institutions, not “no government.” Congress conducted diplomacy, handled war and peace, managed western territory, and later passed the **Northwest Ordinance**.\n\nBut big actions needed broad state agreement, and to [[amend]] the Articles every state [[legislature]] had to agree. The problem isn’t that Congress can do nothing. It’s that some powers are hard to use when states disagree.`,
- choices:[{l:'Choose your perspective',to:'R0',go:1}]},
+C3:{p:18,year:'1781–1787',place:'CONFEDERATION CONGRESS',scene:'congress',badges:['doc'],title:'Not Powerless',src:['nwo'],card:'notpowerless',
+ body:"Limited power doesn't mean no power. Congress handles diplomacy, war and peace, and western territory. It later passes the **Northwest Ordinance**, an important plan for territorial government and new states.\n\nBut major decisions need broad agreement. To [[amend]] the Articles, every state legislature has to sign off. Congress has real responsibilities; getting thirteen states on the same page can be the hard part.",
+ choices:[{l:'Choose your life',to:'R0',go:1}]},
 R0:{p:20,kind:'roles'},
 
 /* ---------- FARMER / VETERAN ---------- */
-F1:{p:26,year:'1783',place:'WESTERN MASSACHUSETTS',scene:'farm',badges:['role','doc'],title:'Home From War',
- body:`You are a fictional Revolutionary War veteran back on a small farm. Peace has not made life easy. You owe private [[debt|debt]]s, taxes are due, and hard money is scarce.\n\nNeighbors say courts can order property sold when debts go unpaid. You believed independence would protect ordinary citizens. Now you wonder what **liberty** means when your farm is at risk.`,
- choices:[{l:'Pay my taxes first, even if my debts grow',to:'F2',set:{farmer_first:'pay'}},{l:'Join neighbors preparing a petition',to:'F2',set:{farmer_first:'petition'}},{l:'Find out whether Congress can help',to:'F2',set:{farmer_first:'congress'}}]},
-F2:{p:32,year:'1786',place:'HAMPSHIRE COUNTY, MASS.',scene:'farm',badges:['role'],title:'Which Government?',
- body:`By 1786 the pressure is worse. Massachusetts needs revenue to pay its public debts, while rural families struggle with taxes and private debts.\n\nOne neighbor says, “Congress should just cancel these state taxes.” Another says the problem belongs in **Boston**, not Congress. Where do you direct your anger?`,
- choices:[{l:'Petition the Massachusetts legislature',to:'F3',set:{jurisdiction:'state'}},{l:'Ask Congress to cancel the Massachusetts taxes',to:'D-F2',retry:1},{l:'Organize with neighbors in my town',to:'F3',set:{jurisdiction:'local'}}]},
-'D-F2':{p:32,year:'1786',place:'JURISDICTION CHECK',scene:'stop',kind:'deadend',label:'JURISDICTION CHECK',title:'Wrong Government',
- body:`Congress cannot erase a tax passed by Massachusetts. Your character’s hardship is real, but **the tax policy comes from the state government**.\n\nThis distinction matters: Shays’ Rebellion grew from Massachusetts grievances, while weaknesses in the Articles shaped the larger national picture. Go back and aim at the government that controls this tax.`,
+F1:{p:24,year:'1783',place:'A HILL TOWN, WESTERN MASS.',scene:'kitchen',badges:['role','doc'],title:'Home From War',
+ body:"You're a fictional veteran returning to a small farm. **Hannah**, your wife, has kept it running while you were gone. Your three kids have grown up without you around.\n\nThe war is won, but your [[pay certificates|certificate]] are worth far less than the amount printed on them. Coins are hard to find. Taxes are due, and the storekeeper wants to be paid.",
+ choices:[{l:'Pay my taxes first, even if debts grow',to:'F1F',set:{farmer_first:'pay'},fx:{hope:-1}},{l:'Join neighbors writing a petition',to:'F1F',set:{farmer_first:'petition'},fx:{hope:1}},{l:'Ask whether Congress can help',to:'F1F',set:{farmer_first:'congress'}}]},
+F1F:{p:27,year:'1783',place:'YOUR KITCHEN',scene:'kitchen',badges:['role','sa'],kind:'feel',title:'Hannah Asks',
+ body:"After the kids fall asleep, Hannah sits down across from you. “Okay, how are you really doing?”\n\nYou could brush it off. You could also admit that coming home hasn't been what you expected. There's no right feeling to pick here. Naming it gives your character a moment to think before deciding what to do next.",
+ prompt:'Be honest. What is your character feeling right now?',next:'F2'},
+F2:{p:31,year:'1786',place:'HAMPSHIRE COUNTY, MASS.',scene:'farm',badges:['role'],title:'Which Government?',
+ body:"By 1786, things are getting tighter. Massachusetts needs to pay its war debts, and state taxes demand hard coin that many families simply don't have. Your neighbors are falling behind too.\n\n“Congress should cancel these taxes,” one says. Another points toward **Boston**: “Wrong government.” Who actually has the authority to change the tax bill?",
+ choices:[{l:'Petition the Massachusetts legislature',to:'F3',set:{jurisdiction:'state'}},{l:'Ask Congress to cancel the Massachusetts taxes',to:'D-F2',retry:1},{l:'Organize with neighbors in town',to:'F3',set:{jurisdiction:'local'}}]},
+'D-F2':{p:31,year:'1786',place:'JURISDICTION CHECK',scene:'stop',kind:'deadend',label:'JURISDICTION CHECK',title:'Wrong Government',
+ body:"You're knocking on the wrong door. Congress can't cancel a tax passed by Massachusetts. Your character's situation is serious, but **the state government sets this tax**.\n\nKeep those two levels separate: Massachusetts grievances helped drive Shays' Rebellion; the Articles shaped the broader national situation. Go back and direct your next move toward the government with the authority to act.",
  choices:[{l:'Return to the decision',to:'F2',go:1}]},
-F3:{p:38,year:'AUGUST 1786',place:'NORTHAMPTON COURT',scene:'court',badges:['role','doc'],title:'Court Day',
- body:`A county court is about to open. Farmers gather outside because court judgments can lead to debt collection and [[foreclosure]].\n\nSome want to petition peacefully. Others want to stop the court from meeting at all. You recognize men who served in the Revolution. Their argument is powerful: how can a republic be legitimate if people believe it ignores their suffering?`,
- choices:[{l:'Join the peaceful petition',to:'F4',set:{protest:'petition'}},{l:'Help stop the court from sitting',to:'F4',set:{protest:'court_block'},fx:{unrest:1}},{l:'Go home',to:'F4',set:{protest:'withdraw'}}]},
-F4:{p:44,year:'FALL 1786',place:'WESTERN MASSACHUSETTS',scene:'court',badges:['role','sim'],title:'Consequences',
- body:s=>({petition:'You stood with the petitioners. ',court_block:'You helped keep the court from sitting. ',withdraw:'You went home. '}[s.flags.protest]||'')+`Petitions keep channels open but guarantee nothing. Blocking a court delays lawsuits but challenges the state’s authority. Staying home avoids arrest, yet the debt crisis doesn’t disappear.\n\nThe movement is organizing across western Massachusetts. You hear the name **Daniel Shays**, a former Continental Army captain, more often.`,
- choices:[{l:'Keep pushing for peaceful reform',to:'F5'},{l:'Join the armed organizers',to:'F5',fx:{unrest:1}},{l:'Step back from the movement',to:'F5'}]},
-F5:{p:50,year:'LATE 1786',place:'WESTERN MASSACHUSETTS',scene:'arsenal',badges:['role'],title:'A Line to Cross',
- body:`Armed groups are now part of the confrontation. You’re asked to join men preparing to move toward **Springfield**, where weapons are stored at the federal [[arsenal]].\n\nThis is not a “good person / bad person” test. The game records your strategy, then returns you to what actually happened.`,
- choices:[{l:'March toward Springfield',to:'F6',set:{final:'armed'},fx:{unrest:1}},{l:'Refuse arms, keep demanding reform',to:'F6',set:{final:'nonviolent'}},{l:'Withdraw completely',to:'F6',set:{final:'withdraw'}}]},
-F6:{p:56,year:'JANUARY 1787',place:'NEAR SPRINGFIELD',scene:'arsenal',badges:['doc'],title:'Toward Springfield',crisis:1,
- body:`The march on the Springfield arsenal has become the turning point. Whatever you chose, Daniel Shays and other insurgents approach the arsenal. Its weapons could strengthen their movement, but state [[militia]] forces are waiting.\n\nThe screen pauses before the clash. Next is a **History Check**: from here on, player choices can’t change the outcome.`,
+F3:{p:35,year:'SUMMER 1786',place:'YOUR KITCHEN',scene:'kitchen',badges:['role','rs'],title:'The Notice',
+ body:"The storekeeper has taken you to court over your [[debt]]. A notice arrives at home. If you can't pay, a court can order property sold—your cow, tools, or land. Debtors can also face jail.\n\nTwelve-year-old Ruth asks, “Are we going to lose the house?” Hannah looks at you. You don't have an easy answer, but you still have to answer.",
+ choices:[{l:'Be honest with Ruth, without scaring her',to:'F4',set:{kids:'truth'},fx:{trust:1}},{l:'Keep the worry to myself',to:'F4',set:{kids:'hide'},fx:{hope:-1}},{l:'Say “We’ll ask the neighbors for help”',to:'F4',set:{kids:'help'},fx:{hope:1}}]},
+F4:{p:39,year:'AUGUST 29, 1786',place:'NORTHAMPTON COURTHOUSE',scene:'court',badges:['role','doc'],title:'Court Day',
+ body:"Farmers crowd the Northampton courthouse. Many fought in the Revolution. They call themselves [[Regulators|regulators]] because they believe they're setting a broken government right.\n\nIn this role-play, you spot **Daniel Shays**, the officer who sold his sword. Some people want to petition. Others want to stop the court from hearing cases. You're standing among neighbors—and a decision you can't avoid.",
+ choices:[{l:'Join the peaceful petition',to:'F5',set:{protest:'petition'}},{l:'Help stop the court from sitting',to:'F5',set:{protest:'court_block'},fx:{tension:1,hope:1}},{l:'Go home to my family',to:'F5',set:{protest:'withdraw'},fx:{hope:-1}}]},
+F5:{p:43,year:'FALL 1786',place:'THE ROAD HOME',scene:'farm',badges:['role','rs'],title:'Your Neighbor Asa',
+ body:s=>({petition:'You chose to petition. Other Regulators still prevented the Northampton court from sitting. ',court_block:'You joined the crowd that kept the Northampton court from sitting. ',withdraw:'You went home. Other Regulators still prevented the Northampton court from sitting. '}[s.flags.protest]||'')+"**Asa Porter**, your fictional neighbor, lives a mile down the road. You helped plow his field when he broke his arm. Now he's joined the county militia.\n\n“If the courts close again,” he tells you, “I might be ordered to stop you.” He's still your neighbor, but you may end up on opposite sides. What do you say?",
+ choices:[{l:'Hear Asa out before I respond',to:'F6',set:{talk:'listen'},fx:{trust:1,tension:-1}},{l:'Tell Asa he’s letting his neighbors down',to:'F6',set:{talk:'argue'},fx:{tension:1}},{l:'Walk away without a word',to:'F6',set:{talk:'walk'},fx:{hope:-1}}]},
+F6:{p:47,year:'JANUARY 1787',place:'WESTERN MASSACHUSETTS',scene:'arsenal',badges:['role','dm'],kind:'values',title:'Stop. Think. Choose.',
+ body:s=>talkEcho.farmer[s.flags.talk]+"Armed Regulators are preparing to march on the federal [[arsenal]] at Springfield. Before you decide whether to go, slow down. Who could be affected—Hannah, Ruth, Asa, the people you served with?\n\n**Choose two values** that matter most to your character. This doesn't tell you which choice is right. It helps you explain why you'd make it.",next:'F7'},
+F7:{p:51,year:'JANUARY 1787',place:'WESTERN MASSACHUSETTS',scene:'arsenal',badges:['role'],title:'A Line to Cross',
+ body:s=>valEcho(s)+"Men are gathering muskets. You can march with them, keep pushing for reform without taking up arms, or step back from the movement. Every option comes with a cost.\n\nThere's no “good person / bad person” score here. Your choice shapes your character's experience. The **History Check** will show what happened, regardless of which path you choose.",
+ choices:[{l:'March toward Springfield',to:'F8',set:{final:'armed'},fx:{tension:1}},{l:'Refuse arms, keep demanding reform',to:'F8',set:{final:'nonviolent'}},{l:'Step away for my family',to:'F8',set:{final:'withdraw'},fx:{hope:-1}}]},
+F8:{p:55,year:'JANUARY 24, 1787',place:'BY CANDLELIGHT',scene:'kitchen',badges:['role','sa'],kind:'journal',title:'A Letter to Hannah',
+ body:"It's the night before Springfield, and sleep isn't happening. Whatever you decided, you keep thinking about Hannah and the kids.\n\nIn this fictional scene, you put your thoughts on paper. You don't need a perfect speech. Tell Hannah what you're choosing, what worries you, and what you hope she understands.",
+ prompt:'Write 2–4 sentences to Hannah as your character. What do you want her to know?',next:'F9'},
+F9:{p:58,year:'JANUARY 25, 1787',place:'NEAR SPRINGFIELD',scene:'arsenal',badges:['doc'],title:'Toward Springfield',crisis:1,
+ body:"Snow covers the road. Whatever you chose for your character, Daniel Shays and other Regulators approach Springfield's arsenal. Its weapons could strengthen their movement. State [[militia]] forces are waiting to defend it.\n\nThe role-play pauses before the clash. Next comes a **History Check**: your choices can change your perspective, but they can't change the documented outcome.",
  choices:[{l:'See what actually happened',to:'H1',go:1}]},
 
 /* ---------- STATE LEADER ---------- */
-S1:{p:26,year:'1786',place:'BOSTON',scene:'statehouse',badges:['role','doc'],title:'The Treasury Problem',
- body:`You are a fictional member of the Massachusetts [[legislature]]. The state owes heavy Revolutionary War debts and needs revenue. Creditors expect payment, but rural residents say taxes and court costs are crushing them.\n\nLower taxes ease hardship but cut revenue. Strict collection steadies the budget but deepens anger. Choose your first response.`,
- choices:[{l:'Favor tax relief',to:'S2',set:{fiscal:'relief'},fx:{unrest:-1}},{l:'Defend current collection',to:'S2',set:{fiscal:'strict'},fx:{unrest:1}},{l:'Seek a compromise',to:'S2',set:{fiscal:'mixed'}}]},
-S2:{p:32,year:'SUMMER 1786',place:'BOSTON',scene:'statehouse',badges:['role','sim'],title:'Petitions Arrive',
- body:`Petitions and county conventions report grievances from western towns. Some demand tax relief and lower court costs. Others warn that government can’t function if people refuse lawful payments.\n\nThe Unrest meter tracks simulated pressure. **It does not grade your morality.** Your reasoning matters more than a “good-looking” meter.`,
- choices:[{l:'Support immediate relief',to:'S3',fx:{unrest:-1}},{l:'Keep the existing fiscal program',to:'S3',fx:{unrest:1}},{l:'Offer a mixed response',to:'S3'}]},
-S3:{p:38,year:'FALL 1786',place:'BOSTON',scene:'court',badges:['role','doc'],title:'Courts Are Closing',
- body:`News arrives that protesters have surrounded courts and stopped proceedings. Courts are part of **state** government, so this challenges state authority.\n\nOne colleague wants to ask the Confederation Congress to cancel Massachusetts taxes. Another wants [[militia]] forces now. A third wants negotiation plus limited relief.`,
- choices:[{l:'Ask Congress to cancel Massachusetts taxes',to:'D-S3',retry:1},{l:'Prepare the militia',to:'S4',set:{response:'force'},fx:{unrest:1}},{l:'Negotiate and offer limited relief',to:'S4',set:{response:'mixed'}}]},
-'D-S3':{p:38,year:'FALL 1786',place:'AUTHORITY CHECK',scene:'stop',kind:'deadend',label:'AUTHORITY CHECK',title:'This One Is Yours',
- body:`You are responsible for a Massachusetts crisis. The Confederation Congress **cannot cancel your state’s taxes or take over its courts**.\n\nAsking Congress for cooperation is possible. Handing your state’s tax decisions to Congress is not. Go back and choose with state authority in mind.`,
+S1:{p:24,year:'1786',place:'BOSTON',scene:'statehouse',badges:['role','doc'],title:'The Treasury Problem',
+ body:"You're a fictional member of the Massachusetts [[legislature]], and the budget is a problem you can't put off. The state owes war debts. Its [[creditor]]s expect payment in coin.\n\nRural families say taxes and court costs are pushing them over the edge. Cut taxes, and revenue falls. Collect aggressively, and anger grows. How do you start handling that tradeoff?",
+ choices:[{l:'Favor tax relief',to:'S2',set:{fiscal:'relief'},fx:{tension:-1,hope:1}},{l:'Defend current collection',to:'S2',set:{fiscal:'strict'},fx:{tension:1}},{l:'Seek a compromise',to:'S2',set:{fiscal:'mixed'}}]},
+S2:{p:28,year:'SUMMER 1786',place:'BOSTON',scene:'charter',badges:['role','so'],title:'The Widow’s Petition',
+ body:"A widow's petition lands on your desk. Her husband died in the war, and the tax collector took her only cow. She's asking for **more time to pay**, not a handout.\n\nShe's fictional, but struggling families really did petition the legislature. Many demands went unanswered. Meanwhile, the state's lenders want their money. Whose needs do you address first?",
+ choices:[{l:'Push for relief for families like hers',to:'S2F',set:{petition:'relief'},fx:{tension:-1,trust:1}},{l:'Keep the current program',to:'S2F',set:{petition:'strict'},fx:{tension:1,trust:-1}},{l:'Offer extra time, but no tax cut',to:'S2F',set:{petition:'mixed'}}]},
+S2F:{p:31,year:'SUMMER 1786',place:'BOSTON',scene:'charter',badges:['role','sa'],kind:'feel',title:'Reading Her Petition',
+ body:"You set the petition down, but it stays with you. It's one thing to debate revenue. It's another to picture the family behind the bill.\n\nWhat is your character feeling? Name it without grading it. Then think about how that feeling might influence your next decision—and what else you still need to consider.",
+ prompt:'As you set down her petition, what does your character feel?',next:'S3'},
+S3:{p:35,year:'FALL 1786',place:'BOSTON',scene:'court',badges:['role','doc'],title:'Courts Are Closing',
+ body:"Reports arrive: armed [[Regulators|regulators]] have surrounded courts and stopped proceedings. These are **state** courts, so the challenge lands on your government's desk.\n\nOne colleague wants Congress to cancel Massachusetts taxes. Another wants the [[militia]] ready immediately. A third wants talks and limited relief. What can your government actually do—and what are you prepared to try?",
+ choices:[{l:'Ask Congress to cancel Massachusetts taxes',to:'D-S3',retry:1},{l:'Prepare the militia',to:'S4',set:{response:'force'},fx:{tension:1}},{l:'Negotiate and offer limited relief',to:'S4',set:{response:'mixed'}}]},
+'D-S3':{p:35,year:'FALL 1786',place:'AUTHORITY CHECK',scene:'stop',kind:'deadend',label:'AUTHORITY CHECK',title:'This One Is Yours',
+ body:"This problem is on Massachusetts's desk. Congress **can't cancel your state's taxes or take over its courts**.\n\nYou can ask for cooperation on shared concerns. You can't hand Congress a state power it doesn't possess. Head back and choose a response that fits the authority your government actually has.",
  choices:[{l:'Return to the decision',to:'S3',go:1}]},
-S4:{p:44,year:'WINTER 1786',place:'BOSTON',scene:'statehouse',badges:['role','doc'],title:'Order and Legitimacy',
- body:`History keeps moving. Massachusetts officials treat the court closures and armed organizing as a serious threat. The state prepares military force while arguments continue over taxes, debt and representation.\n\nTroops and supplies cost money. That exposes the difference between **a state acting inside its own borders** and Congress trying to gather national resources.`,
- choices:[{l:'Prioritize force',to:'S5'},{l:'Seek negotiation',to:'S5'},{l:'Prepare force, keep talks open',to:'S5'}]},
-S5:{p:50,year:'JANUARY 1787',place:'BOSTON',scene:'statehouse',badges:['role','sim'],title:'How Do You Respond?',
- body:`The confrontation is moving toward Springfield. Choose your priority: deterrence through armed force, negotiation and concessions, or a mixed strategy. **None guarantees peace.**\n\nYour choice moves the Unrest meter one point in the simulation. It does not rewrite what happened.`,
- choices:[{l:'Force',to:'S6',set:{response:'force'},fx:{unrest:1}},{l:'Negotiation',to:'S6',set:{response:'negotiation'},fx:{unrest:-1}},{l:'Mixed strategy',to:'S6',set:{response:'mixed'}}]},
-S6:{p:56,year:'JANUARY 1787',place:'SPRINGFIELD',scene:'arsenal',badges:['doc'],title:'Defend the Arsenal',crisis:1,
- body:`State [[militia]] forces are positioned to defend the federal [[arsenal]] at Springfield. Massachusetts can act through its own government, yet national leaders are watching what the Confederation can and can’t do.\n\nThe simulation stops before the clash. The next screen fixes the historical outcome.`,
+S4:{p:39,year:'NOVEMBER 1786',place:'THE STATE HOUSE',scene:'statehouse',badges:['role','rs'],title:'Your Colleague’s Brother',
+ body:"Your fictional colleague, **Representative Lyman**, pulls you aside. His younger brother joined the Regulators. “He's not trying to destroy the country,” Lyman says. “He's drowning in debt.”\n\nThe governor wants a firm response. Lyman wants you to see a person, not just a threat. Hearing him out doesn't settle the policy question—but how do you respond to him?",
+ choices:[{l:'Hear Lyman out. Ask about his brother.',to:'S5',set:{talk:'listen'},fx:{trust:1,tension:-1}},{l:'Say the law has to apply to everyone',to:'S5',set:{talk:'argue'},fx:{tension:1}},{l:'Change the subject',to:'S5',set:{talk:'walk'},fx:{trust:-1}}]},
+S5:{p:43,year:'NOVEMBER 1786',place:'BOSTON',scene:'statehouse',badges:['role','doc','dm'],kind:'values',title:'Stop. Think. Choose.',
+ body:s=>talkEcho.state[s.flags.talk]+"Another development: **Prince Hall**, a leader in Boston's free Black community, has offered to raise volunteers to defend the state. Governor Bowdoin declines.\n\nThe crisis doesn't split everyone neatly into the same two camps. Before your next decision, **choose two values** your character wants to uphold. What will you protect, and what might your choice put at risk?",next:'S6',people:['hall']},
+S6:{p:47,year:'JANUARY 1787',place:'BOSTON',scene:'statehouse',badges:['role','sim'],title:'How Do You Respond?',
+ body:s=>valEcho(s)+"The Regulators are heading toward Springfield. You can prioritize armed force, negotiations and concessions, or a combination. **None guarantees peace.**\n\nMake the case for your approach. Your choice affects the simulation's Hope, Trust, and Tension indicators—not your academic score. At the History Check, you'll see what Massachusetts officials and the Regulators actually did.",
+ choices:[{l:'Force',to:'S7',set:{response:'force'},fx:{tension:1}},{l:'Negotiation',to:'S7',set:{response:'negotiation'},fx:{tension:-1,trust:1}},{l:'Mixed strategy',to:'S7',set:{response:'mixed'}}]},
+S7:{p:53,year:'JANUARY 1787',place:'LATE NIGHT IN BOSTON',scene:'charter',badges:['role','sa'],kind:'journal',title:'What Keeps You Up',
+ body:"The decision is made, but your mind hasn't settled down. At home, the candle burns low. You think about the widow, Lyman's brother, the lenders, and the people depending on the government to keep order.\n\nWrite as your character. What still bothers you? What do you owe the people whose lives this decision could change?",
+ prompt:'Write a diary entry as your character: what keeps you up tonight, and what do you owe the people out west?',next:'S8'},
+S8:{p:58,year:'JANUARY 25, 1787',place:'SPRINGFIELD',scene:'arsenal',badges:['doc'],title:'Defend the Arsenal',crisis:1,
+ body:"State [[militia]] forces are ready to defend Springfield's federal [[arsenal]]. Some people on opposing sides fought for the same independence. Now they disagree over what that independence should mean.\n\nThe simulation pauses before the confrontation. You're about to leave the fictional decision-making behind and examine the documented event.",
  choices:[{l:'See what actually happened',to:'H1',go:1}]},
 
 /* ---------- CONFEDERATION CONGRESS ---------- */
-G1:{p:26,year:'1785',place:'CONGRESS · NEW YORK CITY',scene:'congress',badges:['role','doc'],title:'Congress Asks',
- body:`You represent one state, and **each state has one vote**. National expenses remain, but the common [[treasury]] depends on money supplied by the states, and some send less than Congress requests.\n\nSoldiers, creditors and foreign governments still expect to be paid. What do you try first?`,
- choices:[{l:'Request state contributions again',to:'G2',set:{strategy:'requisition'},fx:{treasury:1}},{l:'Propose changing the system',to:'G2',set:{strategy:'reform'}},{l:'Delay and hope it resolves',to:'G2',set:{strategy:'dismiss'},fx:{treasury:-1}}]},
-G2:{p:32,year:'1786',place:'CONGRESS · NEW YORK CITY',scene:'congress',badges:['role','doc'],title:'Just Tax Them?',src:['art8','art13'],
- body:`A delegate proposes a simple fix: “Let Congress collect a national tax directly.”\n\nIt sounds efficient, but the Articles give Congress **no independent general taxing power**. Shared costs are supplied through the states, and changing the Articles requires [[unanimous]] approval of the state legislatures. One option below hits a constitutional wall.`,
- choices:[{l:'Pass a national tax anyway',to:'D-G2',set:{direct_tax:true},retry:1},{l:'Seek an amendment',to:'G3',card:'unanimity'},{l:'Keep requisitioning the states',to:'G3',set:{learned_requisition:true}}]},
-'D-G2':{p:32,year:'1786',place:'CONSTITUTIONAL CHECK',scene:'stop',kind:'deadend',label:'CONSTITUTIONAL DEAD END',title:'A Vote Isn’t a Power',
- body:`Your tax bill can’t become a valid national tax just because Congress votes for it. Under the Articles, shared expenses are supplied **through the states**. To change the Articles themselves, **every** state legislature must agree.\n\nYou’ve found the difference between wanting a policy and having the legal authority to enact it.`,
- choices:[{l:'Return and choose a real option',to:'G2',go:1}],card:'unanimity'},
-G3:{p:38,year:'SEPTEMBER 1786',place:'ANNAPOLIS, MARYLAND',scene:'congress',badges:['role','doc'],title:'Reform Before Rebellion',
- body:`Money isn’t the only problem. States chase their own trade interests, and Congress lacks the broad commerce power the Constitution would later grant.\n\nDelegates meet at **Annapolis** to discuss trade and call for a broader [[convention]]. Note the timeline: pressure to revise the Confederation exists **before** Shays’ Rebellion reaches its climax.`,
- choices:[{l:'Support a broader convention',to:'G4',set:{reform:true}},{l:'Wait and see',to:'G4'},{l:'Oppose expanding national power',to:'G4',set:{reform:false}}]},
-G4:{p:44,year:'FALL 1786',place:'CONGRESS · NEW YORK CITY',scene:'congress',badges:['role','sim'],title:'News From Massachusetts',
- body:`Reports describe courts being closed and armed resistance spreading. Congress can discuss national security and call on the states, but **dependable money and troops are hard to assemble**.\n\nYour choice sets a simulation flag. It cannot create powers the Articles don’t grant.`,
- choices:[{l:'Request support from the states',to:'G5',fx:{union:1}},{l:'Push harder for structural reform',to:'G5',set:{strategy:'reform'}},{l:'Treat it as Massachusetts’s problem',to:'G5',fx:{union:-1}}]},
-G5:{p:50,year:'WINTER 1786',place:'CONGRESS · NEW YORK CITY',scene:'congress',badges:['doc'],kind:'cfu',title:'Power vs. Capacity',
- body:`The Springfield crisis sharpens the question. **Being allowed to act is not the same as having money, troops and compliance.**\n\nAvoid the shortcut “Congress could do nothing.” The more accurate lesson is about capacity.`,
- cfu:{key:'g5',pts:0,q:'Which statement is most accurate?',next:'G6',opts:[
-  {l:'Congress legally did not exist.',fb:'Congress existed and held real powers over war, diplomacy and western lands.'},
-  {l:'Congress had real powers but depended heavily on state resources.',ok:1,fb:'Yes. Congress could authorize, request and coordinate, but money and troops mostly came through the states.'},
-  {l:'A national president commanded the response.',fb:'The Articles created no national president.'}]}},
-G6:{p:56,year:'JANUARY 1787',place:'CONGRESS · NEW YORK CITY',scene:'arsenal',badges:['doc'],title:'Springfield News',crisis:1,
- body:`News reaches Congress that insurgents are moving toward the federal [[arsenal]] at Springfield. Local grievances, armed resistance, public debt and doubts about the Confederation have collided.\n\nYour path now merges with the farmer and state leader paths. The next screen fixes the historical outcome.`,
+G1:{p:24,year:'1785',place:'CONGRESS · NEW YORK CITY',scene:'congress',badges:['role','doc'],title:'Congress Asks',
+ body:"You represent one state in Congress, and **each state gets one vote**. Congress owes soldiers, lenders, and foreign governments. The [[treasury]] depends heavily on state contributions, but many states send less than requested.\n\nThe bills are real. So are the limits on your authority. What's your first move: request more support, push for reform, or hold off?",
+ choices:[{l:'Request state contributions again',to:'G2',set:{strategy:'requisition'}},{l:'Propose changing the system',to:'G2',set:{strategy:'reform'}},{l:'Hold off and hope things improve',to:'G2',set:{strategy:'dismiss'},fx:{trust:-1}}]},
+G2:{p:28,year:'1786',place:'CONGRESS · NEW YORK CITY',scene:'charter',badges:['role','so'],title:'A Letter From a Soldier',
+ body:"A fictional veteran writes that he served five years, then sold his [[pay certificates|certificate]] cheaply to keep his family fed. Now he's facing debtors' jail.\n\n“I gave years of my life to this country,” he writes. “What do I tell my family now?”\n\nCongress has almost no money. You can write back, but you can't guarantee the payment he needs.",
+ choices:[{l:'Write back honestly: Congress can’t pay yet',to:'G2F',set:{letter:'honest'},fx:{trust:1}},{l:'Promise payment you can’t guarantee',to:'G2F',set:{letter:'promise'},fx:{hope:1,trust:-1}},{l:'Set the letter aside',to:'G2F',set:{letter:'ignore'},fx:{hope:-1}}]},
+G2F:{p:31,year:'1786',place:'CONGRESS · NEW YORK CITY',scene:'charter',badges:['role','sa'],kind:'feel',title:'Holding His Letter',
+ body:"You can debate national finances all day. This letter makes those numbers personal. Someone who served the country is asking what its promises are worth.\n\nWhat does your character feel while reading it? There's no graded answer. Notice the feeling, then consider what you can honestly promise—and what your government has the power to deliver.",
+ prompt:'Holding his letter, what does your character feel?',next:'G3'},
+G3:{p:35,year:'1786',place:'CONGRESS · NEW YORK CITY',scene:'congress',badges:['role','doc'],title:'Just Tax Them?',src:['art8','art13'],
+ body:"A delegate has an idea: “Why don't we collect a national tax and pay the soldiers?” It sounds straightforward. The legal problem isn't.\n\nThe Articles give Congress **no independent general taxing power**. Shared expenses depend on states, and an amendment needs every state [[legislature]] to agree: [[unanimous]] approval. Which move is actually available to you?",
+ choices:[{l:'Pass a national tax anyway',to:'D-G3',set:{direct_tax:true},retry:1},{l:'Seek an amendment',to:'G4',card:'unanimity'},{l:'Keep requesting money from the states',to:'G4'}]},
+'D-G3':{p:35,year:'1786',place:'CONSTITUTIONAL CHECK',scene:'stop',kind:'deadend',label:'CONSTITUTIONAL DEAD END',title:'A Vote Isn’t a Power',card:'unanimity',
+ body:"Passing a bill doesn't magically give Congress the power behind it. Under the Articles, common expenses are funded **through the states**. Changing that arrangement requires **every state legislature** to approve an amendment.\n\nYou've hit the gap between wanting a policy and having the authority to carry it out. Go back and choose a move the Articles permit.",
+ choices:[{l:'Return and choose a real option',to:'G3',go:1}]},
+G4:{p:39,year:'SEPTEMBER 1786',place:'ANNAPOLIS, MARYLAND',scene:'congress',badges:['role','doc'],title:'Reform Before Rebellion',
+ body:"The states are clashing over trade too. Congress lacks the broad interstate commerce power the Constitution will later grant. Delegates meet at **Annapolis** and call for a wider [[convention]].\n\nCheck the date: **September 1786**. Efforts to reform the Confederation are already underway before the Springfield confrontation. The rebellion won't start this debate from scratch.",
+ choices:[{l:'Support a broader convention',to:'G5',set:{reform:true}},{l:'Wait and see',to:'G5'},{l:'Oppose expanding national power',to:'G5',set:{reform:false}}]},
+G5:{p:43,year:'FALL 1786',place:'CONGRESS · NEW YORK CITY',scene:'congress',badges:['role','rs'],title:'The Delegate Who Disagrees',
+ body:"A fictional Rhode Island delegate challenges your reform proposal. His state rejected a national import-tax plan in 1782. “We fought a distant government that taxed us,” he says. “Why build another one?”\n\nYou're focused on unpaid bills. He's focused on protecting state authority. You disagree, but his concern isn't random. How do you keep this conversation moving?",
+ choices:[{l:'Ask what protections his state needs',to:'G6',set:{talk:'listen'},fx:{trust:1,tension:-1}},{l:'Tell him his state is blocking everyone else',to:'G6',set:{talk:'argue'},fx:{tension:1}},{l:'Drop it and move on',to:'G6',set:{talk:'walk'}}]},
+G6:{p:47,year:'WINTER 1786',place:'CONGRESS · NEW YORK CITY',scene:'congress',badges:['role','doc','dm'],kind:'values',title:'Stop. Think. Choose.',
+ body:s=>talkEcho.congress[s.flags.talk]+"Reports describe closed courts and armed resistance in Massachusetts. Congress authorizes new troops, officially for the western frontier, but funding still depends heavily on states. Few soldiers are raised.\n\nThere's a difference between **authorizing action and having the resources to follow through**. Before you choose a response, select two values your character wants to keep in view.",next:'G7'},
+G7:{p:51,year:'WINTER 1786',place:'CONGRESS · NEW YORK CITY',scene:'congress',badges:['role','sim'],title:'What Do You Push For?',
+ body:s=>valEcho(s)+"Congress can debate, request support, and coordinate. But a vote doesn't produce money or troops when the necessary resources don't arrive.\n\nWhat do you push for now: state support, structural reform, or leaving the dispute primarily to Massachusetts? Your choice sets your character's strategy. It doesn't give Congress powers the Articles haven't granted.",
+ choices:[{l:'Ask the states for support',to:'G8',set:{push:'states'},fx:{trust:1}},{l:'Push harder for structural reform',to:'G8',set:{push:'reform'}},{l:'Leave it primarily to Massachusetts',to:'G8',set:{push:'none'},fx:{trust:-1}}]},
+G8:{p:55,year:'JANUARY 1787',place:'YOUR BOARDING HOUSE',scene:'charter',badges:['role','sa'],kind:'journal',title:'Writing Back',
+ body:"The veteran's letter is still on your desk. Earlier, you chose how to respond. Now you have a clearer picture of Congress's limits.\n\nWrite back as your character. Be direct about what you can do, what you can't promise, and what you think needs to change. He deserves more than “we're working on it.”",
+ prompt:'Write 2–4 sentences back to the soldier. What can you honestly tell him?',next:'G9'},
+G9:{p:58,year:'JANUARY 1787',place:'CONGRESS · NEW YORK CITY',scene:'arsenal',badges:['doc'],title:'Springfield News',crisis:1,
+ body:"News reaches Congress: Regulators are approaching Springfield's federal [[arsenal]]. Unpaid veterans, Massachusetts grievances, and concerns about national capacity are now part of the same political conversation—but they aren't all the same problem.\n\nYour path joins the farmer's and state leader's paths here. The next screens separate immediate causes, documented events, and the arguments people made afterward.",
  choices:[{l:'See what actually happened',to:'H1',go:1}]},
 
 /* ---------- HISTORY CONVERGENCE ---------- */
 H1:{p:62,year:'1786–1787',place:'HISTORY CHECK',scene:'check',badges:['doc'],kind:'cfu',check:1,title:'What Actually Caused It?',card:'jurisdiction',
- body:`Shays’ Rebellion was not caused simply by “the Articles being weak.” Its direct causes were in **Massachusetts**: heavy taxation, [[debt]], court costs, scarce money and postwar hardship.\n\nThe Articles matter because they shaped the national system and the response to the crisis. Keep two arrows in mind:\n**Massachusetts grievances → rebellion.**\n**Confederation weaknesses + rebellion → stronger arguments for reform.**`,
- cfu:{key:'h1',pts:2,q:'Which explanation is strongest?',next:'H2',opts:[
+ body:"Don't pin the whole rebellion on “weak Articles.” The immediate causes were in **Massachusetts**: heavy taxes, [[debt]], court costs, scarce coin, and postwar hardship.\n\nThe Articles matter to the national context and the response. Keep both connections straight:\n**Massachusetts grievances → rebellion.**\n**Confederation weaknesses + rebellion → stronger arguments for national reform.**\nSame crisis. Different causal questions.",
+ cfu:{key:'h1',pts:1,q:'Which explanation is strongest?',next:'H2',opts:[
   {l:'The Articles directly created the Massachusetts tax crisis.',fb:'Massachusetts, not Congress, set those taxes. The Articles shaped the national context, not the state tax bill.'},
   {l:'Massachusetts grievances drove the rebellion; Confederation weaknesses shaped why it mattered nationally.',ok:1,fb:'Exactly. Two different causal questions, two different answers.'},
-  {l:'Britain secretly ordered the rebellion.',fb:'No evidence supports this. The grievances were local: taxes, debt, courts and scarce money.'}]}},
-H2:{p:68,year:'JANUARY 25, 1787',place:'SPRINGFIELD ARSENAL',scene:'arsenal',badges:['doc'],check:1,title:'Springfield',card:'springfield',
- body:`On **January 25, 1787**, Daniel Shays and other insurgents approached the federal arsenal at Springfield. Massachusetts militia defended it and fired on the advancing force. The attempt failed.\n\nThe rebellion did not overthrow Massachusetts, and state forces soon broke organized resistance. No player could “win” this battle. The real question is what Americans **concluded** from it.`,
- choices:[{l:'Hear two reactions',to:'H3',go:1}]},
-H3:{p:74,year:'1786–1787',place:'SOURCE LENS',scene:'letters',badges:['int','doc'],kind:'cfu',needSrc:['knox','jefferson'],title:'Two Americans, Two Reactions',card:'reactions',
- body:`Americans did not agree on what the rebellion meant. **Henry Knox** warned George Washington that the uprising revealed deep danger. **Thomas Jefferson**, writing from France, was far less alarmed.\n\nOpen both letters. Your job is to identify each author’s view, not to decide which man was automatically “right.”`,
+  {l:'Britain secretly ordered the rebellion.',fb:'No evidence supports this. The grievances were local: taxes, debt, courts and scarce coin.'}]}},
+H2:{p:65,year:'JANUARY 25, 1787',place:'SPRINGFIELD ARSENAL',scene:'arsenal',badges:['doc'],check:1,title:'Springfield',card:'springfield',
+ body:"At Springfield, Shays and other Regulators advance toward the arsenal. Massachusetts militia under **General William Shepard** fires warning shots, then cannon loaded with grapeshot.\n\n**Four Regulators are killed**, and about twenty are wounded. The attack collapses. Some people on both sides are veterans or neighbors. These losses are documented history, not a game outcome. Take a moment before continuing.",
+ choices:[{l:'Continue',to:'H2F'}]},
+H2F:{p:68,year:'JANUARY 1787',place:'AFTER SPRINGFIELD',scene:'arsenal',badges:['sa'],kind:'feel',title:'How Does It Land?',
+ body:"That wasn't just a turning point on a timeline. People died, and others had to live with what happened.\n\nYou might feel upset, conflicted, angry, or something else. You might still be processing it. Name a feeling if you can, then keep examining the evidence. A reaction can be a starting point for inquiry, not the end of it.",
+ prompt:'Knowing how Springfield ended, what do you feel?',next:'H2B'},
+H2B:{p:71,year:'1786–1787',place:'FACES OF THE REBELLION',scene:'portraits',badges:['doc','so'],kind:'cfu',needSrc:['sash'],needPeople:1,people:['sash','hall'],title:'Same Crisis, Different Choices',
+ body:"**Moses Sash**, a Black veteran and farmer from Worthington, joins the Regulators and is later indicted as one of their leaders. **Prince Hall**, a Black community leader in Boston, offers volunteers to defend the state.\n\nShared identity doesn't mean a shared position. Open both character files and Sash's indictment. What shaped their different responses, and whose perspective does the court record capture?",
+ cfu:{key:'h2b',pts:0,q:'What does their story show?',next:'H2C',opts:[
+  {l:'All Black residents of Massachusetts took the same side.',fb:'Sash and Hall chose opposite sides. Communities are not a single opinion.'},
+  {l:'People in the same community can make different choices about the same crisis, for real reasons.',ok:1,fb:'Yes. Sash was a struggling hill-town farmer; Hall was a Boston leader seeking full citizenship. Both claimed the Revolution’s promises.'},
+  {l:'Only wealthy people cared about Shays’ Rebellion.',fb:'Sash was a farmer and laborer. The rebellion reached ordinary people across the state.'}]}},
+H2C:{p:74,year:'FEBRUARY 4, 1787',place:'PETERSHAM, MASSACHUSETTS',scene:'snow',badges:['doc'],kind:'cfu',check:1,people:['lincoln'],title:'After the Snow',card:'merchants',
+ body:"Massachusetts organizes a force led by **General Benjamin Lincoln**, financed through private loans from Boston merchants. On February 4, 1787, Lincoln surprises the Regulators at Petersham after a night march through a snowstorm. They scatter; Shays escapes north.\n\nThousands later seek [[amnesty]]. Most death sentences are pardoned, but John Bly and Charles Rose are hanged in December. Defeat doesn't mean everyone gets the same ending.",
+ cfu:{key:'after',pts:1,q:'Who paid for the army that ended the rebellion?',next:'H2D',opts:[
+  {l:'The Confederation Congress',fb:'Congress had almost no money. That’s exactly the weakness reformers pointed to.'},
+  {l:'Loans from more than 125 Boston merchants',ok:1,fb:'Right. Private lenders paid for the state’s army, and Congress sent no money. Notice who had money, and who owed it.'},
+  {l:'The British government',fb:'Britain had no role. The money came from wealthy Bostonians.'}]}},
+H2D:{p:77,year:'1787–1825',place:'WHAT HAPPENED TO SHAYS',scene:'grave',badges:['doc','so'],title:'What Happened to Daniel Shays?',card:'voters',people:['shays'],
+ body:"Shays flees, is sentenced to death, and is **pardoned in 1788**. He later receives a military pension and dies in New York in 1825.\n\nBack in Massachusetts, voters replace Governor Bowdoin with **John Hancock**. Tax and debt policies become less strict. The Regulators lose militarily, but their grievances don't disappear from politics. What can change at the ballot box after a rebellion is defeated?",
+ think:'Historians suspect Shays’s role was exaggerated by powerful critics. Why might leaders put one man’s name on a movement of thousands? And what does it mean that voters changed the policy after the rebels lost?',
+ choices:[{l:'Hear how leaders reacted',to:'H3',go:1}]},
+H3:{p:81,year:'1786–1787',place:'SOURCE LENS',scene:'letters',badges:['int','doc'],kind:'cfu',needSrc:['knox','jefferson'],people:['knox','jefferson'],title:'Two Leaders, Two Reactions',
+ body:"Same rebellion, very different reactions. **Henry Knox** sees a serious threat and warns George Washington. **Thomas Jefferson**, writing from France, is less alarmed.\n\nRead both letters before answering. You're identifying their views, not picking the founder you like better. What does each writer fear? What might his position—and his distance from the crisis—help him notice or overlook?",
  cfu:{key:'h3',pts:1,q:'Who treats the rebellion as stronger evidence that government is in danger?',next:'H4',opts:[
-  {l:'Henry Knox',ok:1,fb:'Yes. Knox reads the uprising as proof of weak government and a threat to property. That is his interpretation, shaped by where he stood.'},
-  {l:'Thomas Jefferson',fb:'Look again. Jefferson calls “a little rebellion now and then” a good thing.'},
-  {l:'Both were equally alarmed',fb:'Compare their tone. One sounds an alarm; the other shrugs from across the ocean.'}]}},
-H4:{p:80,year:'1786',place:'HISTORY CHECK',scene:'check',badges:['doc'],kind:'cfu',check:1,src:['jay'],title:'Shays Was Not the Beginning',card:'timeline',
- body:`Calls to revise the Articles did **not** begin after Shays’ Rebellion. John Jay wrote to Washington in **March 1786** that support was growing for a general convention, and the Annapolis Convention met in **September 1786**.\n\nShays’ Rebellion intensified the debate and became powerful evidence for advocates of stronger government. It was one part of a larger reform movement.`,
+  {l:'Henry Knox',ok:1,fb:'Yes. Knox reads the uprising as proof of weak government and a threat to property. That’s his interpretation, shaped by where he stood.'},
+  {l:'Thomas Jefferson',fb:'Check his words again. Jefferson is less alarmed and calls “a little rebellion now and then” a good thing.'},
+  {l:'Both were equally alarmed',fb:'Compare their tone. Knox sounds an alarm; Jefferson is more tolerant of rebellion. They are interpreting the crisis differently.'}]}},
+H4:{p:85,year:'1786',place:'HISTORY CHECK',scene:'check',badges:['doc'],kind:'cfu',check:1,src:['jay'],title:'Shays Was Not the Beginning',card:'timeline',
+ body:"The dates matter. **John Jay writes in March 1786** about growing support for a convention. **Annapolis meets in September 1786**. Both come before the January 1787 Springfield confrontation.\n\nShays' Rebellion adds urgency and gives advocates of stronger government a powerful example. It helps intensify an existing debate; it doesn't invent constitutional reform overnight.",
  cfu:{key:'h4',pts:1,q:'Shays’ Rebellion is best described as…',next:'H5',opts:[
   {l:'The sole cause of the movement for a new constitution.',fb:'Check the dates. Jay’s letter and Annapolis came first.'},
   {l:'An accelerator and evidence within a reform movement already underway.',ok:1,fb:'Right. It added urgency and ammunition to an existing argument.'},
   {l:'Unrelated to the debate over the Articles.',fb:'Leaders like Knox and Washington used it as evidence. It mattered.'}]}},
-H5:{p:86,year:'MAY–SEPT. 1787',place:'PHILADELPHIA',scene:'philly',badges:['doc'],kind:'sort',check:1,src:['const'],title:'What Changes?',card:'article1',
- body:`Delegates arrive in Philadelphia to address defects in the Confederation. They soon move beyond repairs and debate a new structure.\n\nSort each power: does it describe the **Articles** or the **Constitution**?`},
-H6:{p:92,year:'1787',place:'FINAL CHALLENGE',scene:'check',badges:['doc'],kind:'chain',title:'Final Causal Challenge',
- body:`Build the causal chain **without** using the sentence “The Articles caused Shays’ Rebellion.” Pick one link for each step.\n\nYour score comes from this reasoning and your evidence checks, not from whether you chose protest, compromise, force or caution in the role-play.`},
-'D-H6':{p:92,year:'1787',place:'CAUSALITY CHECK',scene:'stop',kind:'deadend',label:'CAUSALITY CHECK',title:'Rebuild the Chain',
- body:`Try again without turning one event into a single-cause story.\n\n**Start** with conditions inside Massachusetts: taxes, debt, court costs, hardship. **Then** add the Confederation’s national limits. **Finally**, explain the political effect: the rebellion strengthened arguments for reform, even though reform efforts had already begun.`,
+H5:{p:89,year:'MAY–SEPT. 1787',place:'PHILADELPHIA',scene:'philly',badges:['doc'],kind:'sort',check:1,src:['const'],title:'What Changes?',card:'article1',
+ body:"Delegates arrive in Philadelphia to address problems in the Confederation. They go beyond small repairs and debate a new structure.\n\nSort the statements: **Articles or Constitution?** Look at who holds each power and how decisions get made. Congress already has important war-related powers under the Articles. The Constitution changes national authority and capacity; it doesn't create government out of nothing."},
+H6:{p:93,year:'1787',place:'FINAL CHALLENGE',scene:'check',badges:['doc'],kind:'chain',title:'Final Causal Challenge',
+ body:"Time to connect the evidence. Build a causal chain **without saying “The Articles caused Shays' Rebellion.”**\n\nStart with Massachusetts grievances. Explain the Confederation's structural limits. Then show how the rebellion affects a reform debate that's already happening. Your reasoning earns mastery—not your decision to protest, negotiate, use force, or step back. If a link doesn't hold up, revise it."},
+'D-H6':{p:93,year:'1787',place:'CAUSALITY CHECK',scene:'stop',kind:'deadend',label:'CAUSALITY CHECK',title:'Rebuild the Chain',
+ body:"A one-cause explanation skips too much. Let's rebuild it.\n\n**First:** Massachusetts taxes, debt, court costs, and hardship help drive resistance. **Next:** Confederation limits shape national capacity and concern. **Then:** the rebellion strengthens arguments for reform that already exist.\n\nHead back and connect all three parts. A correction isn't a penalty; it's a chance to make your explanation stronger.",
  choices:[{l:'Return to the final challenge',to:'H6',go:1}]},
-H7:{p:97,year:'1787',place:'A CONTESTED NEW DIRECTION',scene:'philly',badges:['doc','int'],title:'The Argument Isn’t Over',
- body:`Your path ends in 1787, but the argument doesn’t. The Articles reflected a real Revolutionary fear of concentrated power and produced important national actions, including western land policy. They also left serious revenue and coordination problems.\n\nShays’ Rebellion made those problems feel urgent to many leaders, while others feared a stronger national government. **The Constitution was a contested response, not an inevitable ending.**`,
- choices:[{l:'See your mission report',to:'END',go:1}]}
+H7:{p:96,year:'1787',place:'A CONTESTED NEW DIRECTION',scene:'philly',badges:['doc','int'],title:'The Argument Isn’t Over',
+ body:"The Articles were built by people who feared concentrated power. They gave Congress real responsibilities and produced important achievements, but also made national funding and cooperation difficult.\n\nShays' Rebellion makes those limits feel urgent to many leaders. Others worry about handing more power to a national government. **The Constitution is a contested response, not an automatic happy ending.** The argument is still open.",
+ choices:[{l:'One last reflection',to:'H8',go:1}]},
+H8:{p:98,year:'TODAY',place:'YOUR TURN',scene:'title',badges:['sa','dm'],kind:'journal',private:1,title:'Connect It to Now',
+ body:"You've seen petitions, protests, armed resistance, public service, and elections. Different people faced the same crisis and chose different ways to respond.\n\nNow make a connection to today—or use an example from fiction. You don't have to share anything personal. This reflection **stays out of your copied report unless you choose to include it**, and you can skip it.",
+ prompt:'Think of a time a rule or system felt unfair, to you, someone you know, or a character from a book or show. What did people do about it? What worked, and what didn’t?',next:'END'}
 };
 const ROLES=[
- {id:'farmer',start:'F1',scene:'farm',nm:'Farmer / Veteran',rq:'“I fought for liberty. Why might I lose my farm, and who can actually help me?”',tag:'DEBT · TAXES · COURTS · PROTEST',rec:1},
- {id:'state',start:'S1',scene:'statehouse',nm:'Massachusetts State Leader',rq:'“How do I pay public debts, keep courts open, respond to suffering and preserve order?”',tag:'STATE AUTHORITY · BUDGETS · LEGITIMACY'},
- {id:'congress',start:'G1',scene:'congress',nm:'Member of Congress',rq:'“How do I govern a union when the money depends on thirteen states?”',tag:'REQUISITIONS · SOVEREIGNTY · REFORM'}
+ {id:'farmer',start:'F1',scene:'kitchen',nm:'Farmer / Veteran',rq:'“I fought for liberty. Why might I lose my farm, and who can actually help me?”',tag:'FAMILY · DEBT · COURTS · PROTEST',rec:1},
+ {id:'state',start:'S1',scene:'statehouse',nm:'Massachusetts Lawmaker',rq:'“How do I pay the state’s debts, keep courts open, answer suffering and keep order?”',tag:'PETITIONS · BUDGETS · LEGITIMACY'},
+ {id:'congress',start:'G1',scene:'congress',nm:'Member of Congress',rq:'“How do I keep promises to soldiers when the money depends on thirteen states?”',tag:'UNPAID SOLDIERS · SOVEREIGNTY · REFORM'}
 ];
-const ROLE_NAME={farmer:'Farmer / Veteran',state:'Massachusetts State Leader',congress:'Member of Congress'};
+const ROLE_NAME={farmer:'Farmer / Veteran',state:'Massachusetts Lawmaker',congress:'Member of Congress'};
 const SORT=[
  {t:'Congress asks the states for money (requisitions).',a:'A'},
  {t:'Congress can lay and collect taxes itself.',a:'C'},
@@ -450,7 +593,7 @@ const SORT=[
 const CHAIN=[
  {h:'STEP 1 · THE SPARK',q:'What drove people in western Massachusetts to act?',o:[
   ['The Articles ordered Massachusetts to raise taxes.',0],
-  ['Heavy state taxes, private debt, court costs, scarce money and postwar hardship.',1],
+  ['Heavy state taxes, private debt, court costs, scarce coin and postwar hardship.',1],
   ['Britain secretly organized the farmers.',0]]},
  {h:'STEP 2 · THE SYSTEM',q:'What larger national weakness did the crisis expose?',o:[
   ['Congress depended on the states for money and soldiers, and the rules were very hard to change.',1],
@@ -461,27 +604,32 @@ const CHAIN=[
   ['It had no effect outside Massachusetts.',0],
   ['It added urgency and evidence to a reform movement that had already begun.',1]]}
 ];
-const ASSESS=[['c2','Power Check · who supplies the treasury',1],['h1','Massachusetts causes vs. national context',2],['h3','Knox vs. Jefferson source lens',1],['h4','Reform came before Shays',1],['h5','Articles vs. Constitution sort',2],['h6','Final three-part causal chain',3]];
-
+const ASSESS=[['c2','Power Check · who supplies the treasury',1],['h1','Massachusetts causes vs. national context',1],['after','Who paid to end the rebellion',1],['h3','Knox vs. Jefferson source lens',1],['h4','Reform came before Shays',1],['h5','Articles vs. Constitution sort',2],['h6','Final three-part causal chain',3]];
+</script>
+<script>
 /* =========================================================
    STATE
    ========================================================= */
-const KEY='new-country-sim-v1';
-const fresh=()=>({node:'TITLE',role:null,m:{union:3,treasury:1,unrest:1},score:{},first:{},flags:{},cards:[],retries:0,opened:{},seen:{},sort:{},chain:[]});
+const KEY='new-country-sim-v2';
+const fresh=()=>({node:'TITLE',role:null,m:{hope:3,trust:2,tension:1},score:{},first:{},flags:{},cards:[],people:[],retries:0,opened:{},seen:{},sort:{},chain:[],feel:{},values:{},lastValues:null,journal:{}});
 let S=fresh();
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));saveNotice(false)}catch(e){saveNotice(true)}}
-function saveNotice(failed){let note=document.getElementById('saveNotice');if(!note){note=document.createElement('p');note.id='saveNotice';note.className='note';note.style.cssText='max-width:1180px;margin:12px auto;padding:0 16px;color:#d9d0bb';document.body.appendChild(note)}note.textContent=failed?'Browser storage unavailable. Progress lasts only for this visit.':'Progress saves in this browser only. No account or teacher submission.'}
+function saveNotice(failed){let note=document.getElementById('saveNotice');if(!note){note=document.createElement('p');note.id='saveNotice';note.className='note';note.setAttribute('role','status');note.style.cssText='max-width:1180px;margin:12px auto;padding:0 16px;color:#d9d0bb';document.body.appendChild(note)}note.textContent=failed?'Browser storage is unavailable. Progress lasts only for this visit.':'Progress and reflections stay in this browser. Nothing is sent to a teacher automatically.'}
 
 function load(){
   try{
-    const r=localStorage.getItem(KEY);if(!r)return null;const s=JSON.parse(r);
+    const raw=localStorage.getItem(KEY);if(!raw)return null;const s=JSON.parse(raw);
     const record=v=>v&&typeof v==='object'&&!Array.isArray(v);
-    const nodes=['TITLE','END',...Object.keys(N)];
-    if(!record(s)||!nodes.includes(s.node)||!(s.role===null||Object.hasOwn(ROLE_NAME,s.role)))return null;
-    if(!record(s.m)||!['union','treasury','unrest'].every(k=>Number.isInteger(s.m[k])&&s.m[k]>=0&&s.m[k]<=5))return null;
-    if(!['score','first','flags','opened','seen','sort'].every(k=>record(s[k]))||!Array.isArray(s.cards)||!s.cards.every(k=>Object.hasOwn(CARDS,k)))return null;
-    if(!Array.isArray(s.chain)||!s.chain.every(v=>Number.isInteger(v)&&v>=0&&v<3)||!Number.isInteger(s.retries)||s.retries<0)return null;
+    if(!record(s)||!['TITLE','END',...Object.keys(N)].includes(s.node)||!(s.role===null||Object.hasOwn(ROLE_NAME,s.role)))return null;
+    if(!record(s.m)||!['hope','trust','tension'].every(k=>Number.isInteger(s.m[k])&&s.m[k]>=0&&s.m[k]<=5))return null;
+    if(!['score','first','flags','opened','seen','sort','feel','values','journal'].every(k=>record(s[k])))return null;
+    if(!Array.isArray(s.cards)||!s.cards.every(k=>Object.hasOwn(CARDS,k))||!Array.isArray(s.people)||!s.people.every(k=>Object.hasOwn(PEOPLE,k)))return null;
+    if(!Array.isArray(s.chain)||!s.chain.every(v=>v===null||(Number.isInteger(v)&&v>=0&&v<3))||!Number.isInteger(s.retries)||s.retries<0)return null;
     if(!Object.entries(s.score).every(([k,v])=>ASSESS.some(([id,,max])=>k===id&&Number.isInteger(v)&&v>=0&&v<=max)))return null;
+    if(!Object.entries(s.feel).every(([k,v])=>Object.hasOwn(N,k)&&FEELS.some(f=>f[0]===v)))return null;
+    if(!Object.values(s.values).every(v=>Array.isArray(v)&&v.length<=2&&v.every(x=>VALUES.includes(x))))return null;
+    if(!(s.lastValues===null||(Array.isArray(s.lastValues)&&s.lastValues.length===2&&s.lastValues.every(x=>VALUES.includes(x)))))return null;
+    if(!Object.entries(s.journal).every(([k,j])=>Object.hasOwn(N,k)&&record(j)&&typeof j.text==='string'&&typeof j.include==='boolean'&&typeof j.title==='string'&&typeof j.prompt==='string'))return null;
     return s;
   }catch(e){return null}
 }
@@ -489,28 +637,28 @@ function clearSave(){try{localStorage.removeItem(KEY)}catch(e){}}
 const total=()=>Object.values(S.score).reduce((a,b)=>a+b,0);
 
 /* =========================================================
-   SOUND (off by default, square-wave blips)
+   SOUND (off by default)
    ========================================================= */
 let AC=null,soundOn=false;
 function beep(kind){
   if(!soundOn)return;
   try{
     AC=AC||new (window.AudioContext||window.webkitAudioContext)();
-    const seq={click:[[660,.05]],good:[[523,.08],[659,.08],[784,.14]],bad:[[220,.12],[165,.2]],fanfare:[[392,.1],[523,.1],[659,.1],[784,.28]],start:[[523,.07],[784,.07],[1046,.16]]}[kind]||[[660,.05]];
+    const seq={click:[[660,.05]],good:[[523,.08],[659,.08],[784,.14]],bad:[[220,.12],[165,.2]],fanfare:[[392,.1],[523,.1],[659,.1],[784,.28]],start:[[523,.07],[784,.07],[1046,.16]],soft:[[440,.12],[523,.18]]}[kind]||[[660,.05]];
     let t=AC.currentTime;
-    for(const [f,d] of seq){const o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.value=f;g.gain.setValueAtTime(.05,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+.02);t+=d}
+    for(const [f,d] of seq){const o=AC.createOscillator(),g=AC.createGain();o.type=kind==='soft'?'triangle':'square';o.frequency.value=f;g.gain.setValueAtTime(.05,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+.02);t+=d}
   }catch(e){}
 }
 document.getElementById('sndBtn').addEventListener('click',e=>{soundOn=!soundOn;e.currentTarget.setAttribute('aria-pressed',soundOn);e.currentTarget.textContent=soundOn?'SOUND ON':'SOUND OFF';beep('click')});
 
 /* =========================================================
-   PIXEL ART ENGINE — 192×108 canvases scaled with pixelated rendering
+   PIXEL ART ENGINE — 192×108 canvases, pixelated scaling
    ========================================================= */
 const W=192,H=108;
 const C={night:'#0d1b33',night2:'#24386a',cream:'#f3e9d2',white:'#f7f3ea',red:'#b5352a',redd:'#7f231b',gold:'#e8b43a',navy:'#14213d',blue:'#3d6fa3',hill:'#22304f',hill2:'#18223b',brick:'#9a4a32',brick2:'#743522',stone:'#d6ccb2',stone2:'#a39779',roof:'#3a3036',wood:'#6e4a2b',wood2:'#4f341f',snow:'#e9eef4',snow2:'#c3cfdc',ink:'#0b1426',gray:'#5d6470',smoke:'#d7dbe2'};
 const SKINS=['#e2b48c','#a86e46','#6b4429','#c98e62','#4e3020','#d8a47c'];
 const COATS=['#5b4a3a','#3d4f6b','#6e3b2e','#4b5a3c','#7a6a52','#2f3a4f'];
-let g; // current context
+let g;
 const R=(x,y,w,h,c)=>{g.fillStyle=c;g.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))};
 function hex(h){return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16))}
 function mix(a,b,t){const A=hex(a),B=hex(b);return 'rgb('+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(',')+')'}
@@ -524,45 +672,69 @@ function person(x,y,o={}){
   if(o.pole)R(x+4,y-16,1,14,o.pole);
   if(o.sign){R(x+4,y-20,1,18,C.wood);R(x+1,y-25,8,6,C.cream);R(x+2,y-23,6,1,C.gray)}
   if(hat){R(x-1,y-12,5,1,hat);R(x,y-13,3,1,hat)}
-  R(x,y-11,3,3,skin);R(x-1,y-8,5,5,coat);R(x,y-3,1,3,legs);R(x+2,y-3,1,3,legs);
+  if(o.cap)R(x,y-12,3,1,C.white);
+  R(x,y-11,3,3,skin);R(x-1,y-8,5,o.dress?8:5,coat);
+  if(!o.dress){R(x,y-3,1,3,legs);R(x+2,y-3,1,3,legs)}
 }
-function windows(x,y,cols,rows,dx,dy,c,lit,t){for(let i=0;i<cols;i++)for(let j=0;j<rows;j++){const on=lit&&((i*7+j*3+(t>>4))%5===0);R(x+i*dx,y+j*dy,3,4,on?C.gold:c);R(x+i*dx+1,y+j*dy,1,4,'rgba(0,0,0,.25)')}}
+function child(x,y,coat,skin){R(x,y-8,3,3,skin);R(x-1,y-5,5,4,coat);R(x,y-1,1,1,'#2b261f');R(x+2,y-1,1,1,'#2b261f')}
+function windows(x,y,cols,rows,dx,dy,c){for(let i=0;i<cols;i++)for(let j=0;j<rows;j++){R(x+i*dx,y+j*dy,3,4,c);R(x+i*dx+1,y+j*dy,1,4,'rgba(0,0,0,.25)')}}
 function flag(x,y,t,w=56){
-  const starPts=[];for(let i=0;i<13;i++){const a=i/13*Math.PI*2-Math.PI/2;starPts.push([11+Math.round(Math.cos(a)*7),7+Math.round(Math.sin(a)*5)])}
-  const ss=new Set(starPts.map(p=>p[0]+','+p[1]));
-  for(let c=0;c<w;c++){const off=Math.round(Math.sin(c*.17-t*.35)*1.6*(c/w+.15));
-    for(let r=0;r<26;r++){let col=(Math.floor(r/2)%2===0)?C.red:C.white;if(c<23&&r<14)col=ss.has(c+','+r)?C.white:C.navy;
-      if(Math.sin(c*.17-t*.35)>.7&&col!==C.navy)col=mix(col==C.red?'#b5352a':'#f7f3ea','#000000',.18);R(x+c,y+r+off,1,1,col)}}
+  const ss=new Set();for(let i=0;i<13;i++){const a=i/13*Math.PI*2-Math.PI/2;ss.add((11+Math.round(Math.cos(a)*7))+','+(7+Math.round(Math.sin(a)*5)))}
+  for(let c=0;c<w;c++){const wv=Math.sin(c*.17-t*.35),off=Math.round(wv*1.6*(c/w+.15));
+    for(let r=0;r<26;r++){let col=(Math.floor(r/2)%2===0)?'#b5352a':'#f7f3ea';if(c<23&&r<14)col=ss.has(c+','+r)?C.white:C.navy;
+      if(wv>.7&&col!==C.navy)col=mix(col,'#000000',.18);R(x+c,y+r+off,1,1,col)}}
 }
 function smallFlag(x,y){R(x,y,1,10,C.stone2);for(let r=0;r<6;r++)R(x+1,y+r,9,1,r%2?C.white:C.red);R(x+1,y,4,3,C.navy)}
 function bareTree(x,y){R(x,y-18,2,18,C.wood2);R(x-4,y-14,4,1,C.wood2);R(x-5,y-16,1,2,C.wood2);R(x+2,y-12,5,1,C.wood2);R(x+6,y-15,1,3,C.wood2);R(x-2,y-20,1,3,C.wood2);R(x+2,y-21,1,4,C.wood2)}
 function leafTree(x,y){R(x,y-10,2,10,C.wood2);disc(x+1,y-15,6,'#2f5f3a');disc(x-1,y-17,3,'#3f7a48')}
+const GLYPH={S:['111','100','111','001','111'],H:['101','101','111','101','101'],A:['010','101','111','101','101'],Y:['101','101','010','010','010']};
+function word(x,y,w,c){[...w].forEach((ch,i)=>GLYPH[ch].forEach((row,ry)=>[...row].forEach((b,rx)=>{if(b==='1')R(x+i*4+rx,y+ry,1,1,c)})))}
+function candle(x,y,t){R(x,y,4,14,C.cream);const fl=t%3;R(x+1,y-5,2,5,fl?C.gold:'#f6d36b');R(x+1,y-7+(fl==1?1:0),1,2,'#fff3c4')}
 
 const SCENES={
  title(t){sky(C.night,C.night2,H);stars(7,70,72,t);disc(160,20,6,'#e9e2c8');disc(162,18,5,C.night);
    hills(84,C.hill,4,.05,0);hills(95,C.hill2,3,.08,2);
    R(70,10,2,92,C.stone2);R(69,7,4,3,C.gold);flag(72,13,t);
-   const r=rng(3);for(let i=0;i<9;i++)person(16+i*19+(i>4?40:0),106,{coat:C.ink,skin:C.ink,hat:C.ink,legs:C.ink,pole:i%3==0?C.ink:null});
+   for(let i=0;i<9;i++)person(16+i*19+(i>4?40:0),106,{coat:C.ink,skin:C.ink,hat:C.ink,legs:C.ink,pole:i%3==0?C.ink:null});
  },
  charter(t,variant){R(0,0,W,H,'#3a2a1c');for(let x=0;x<W;x+=24)R(x,0,1,68,'#2c2015');
    R(138,8,40,40,C.wood2);R(141,11,34,34,C.night);const r=rng(9);for(let i=0;i<12;i++)R(142+r()*32,12+r()*32,1,1,C.cream);R(157,11,2,34,C.wood2);R(141,27,34,2,C.wood2);
    R(0,68,W,40,C.wood);R(0,66,W,3,'#8a6340');
    const doc=(x,y,w,h,seal)=>{R(x,y,w,h,C.cream);R(x,y,w,1,'#c9bb98');R(x,y+h-1,w,1,'#c9bb98');R(x+4,y+4,w*.6,2,'#5a4a32');const rr=rng(x);for(let yy=y+9;yy<y+h-5;yy+=3)R(x+4,yy,(w-8)*(.6+rr()*.4),1,'#8b7d63');if(seal){disc(x+w-8,y+h-7,4,C.red);R(x+w-9,y+h-8,2,2,C.gold)}};
    if(variant==='letters'){doc(24,44,58,34,0);doc(104,40,58,38,0);R(30,49,20,2,C.navy);R(110,45,20,2,C.redd)}
-   else{doc(46,42,82,34,variant==='check');}
+   else doc(46,42,82,34,variant==='check');
    R(134,58,8,9,C.ink);R(135,57,6,1,C.gray);
-   for(let i=0;i<22;i++){R(141-i*.55,36+i,i<14?3:1,1,C.white)}
-   R(16,48,5,19,C.cream);const fl=(t%3);R(17,43-fl*0,3,5,fl?C.gold:'#f6d36b');R(18,41+(fl==1?1:0),1,2,'#fff3c4');
+   for(let i=0;i<22;i++)R(141-i*.55,36+i,i<14?3:1,1,C.white);
+   candle(16,50,t);
    if(variant==='check'){for(let i=0;i<8;i++){const a=i/8*Math.PI*2+t*.05;R(87+Math.cos(a)*48,59+Math.sin(a)*28,2,2,'rgba(232,180,58,.5)')}}
  },
- farm(t){sky('#4b5a8f','#e7a774',72);disc(150,64,10,'#f3c46b');R(0,0,W,1,'#4b5a8f');
+ sword(t){R(0,0,W,H,'#2e2218');for(let x=0;x<W;x+=24)R(x,0,1,60,'#241a12');
+   R(0,60,W,48,C.wood);R(0,58,W,3,'#8a6340');for(let x=0;x<W;x+=31)R(x,62,1,46,C.wood2);
+   R(22,66,46,30,C.cream);R(26,70,26,2,'#5a4a32');for(let y=75;y<92;y+=3)R(26,y,36,1,'#8b7d63');R(50,88,10,1,C.red);
+   for(let i=0;i<104;i++){const x=64+i,y=92-i*.32;R(x,y,1,2,i%9==0?'#ffffff':'#c8ccd4');R(x,y+2,1,1,'#7d838e')}
+   R(60,88,3,10,C.gold);R(56,92,11,2,C.gold);R(58,94,2,6,'#5a3b22');disc(59,101,2,C.gold);
+   const gl=(t%20);if(gl<6)R(100+gl*8,79-gl*2.6,2,2,'#ffffff');
+   [[140,88],[146,90],[152,87],[143,94]].forEach(([x,y])=>{disc(x,y,3,C.gold);R(x-1,y-1,2,1,'#fff0b0')});
+   candle(172,62,t);disc(174,52,9,'rgba(246,211,107,.12)');
+ },
+ kitchen(t){R(0,0,W,H,'#4a3424');for(let x=0;x<W;x+=12)R(x,0,1,74,'#3c2a1c');
+   R(8,26,58,58,C.stone2);for(let y=30;y<84;y+=6)for(let x=8+(y%12?0:5);x<66;x+=10)R(x,y,1,4,'#8a8068');
+   R(18,48,38,36,'#120d0a');const f=t%4;disc(37,78,7+(f%2),'#c2410c');disc(37,79,5,C.gold);disc(36+(f>1?1:-1),80,2,'#fff3c4');
+   R(24,40,26,4,C.wood2);R(34,62,8,7,'#2a2a30');
+   R(140,14,30,26,C.wood2);R(143,17,24,20,C.night);const r=rng(3);for(let i=0;i<8;i++)R(144+r()*22,18+r()*18,1,1,C.cream);R(154,17,2,20,C.wood2);
+   R(0,84,W,24,'#5a3f2a');for(let x=0;x<W;x+=16)R(x,84,1,24,'#4a3322');
+   R(84,70,72,4,C.wood);R(88,74,3,16,C.wood2);R(148,74,3,16,C.wood2);candle(116,58,t);disc(118,52,10,'rgba(246,211,107,.10)');
+   person(98,90,{coat:'#5b4a3a',skin:SKINS[3],hat:null});person(136,90,{coat:'#7a3b4a',skin:SKINS[3],hat:null,cap:1,dress:1});
+   child(170,90,'#3d4f6b',SKINS[3]);child(178,90,'#6e3b2e',SKINS[3]);
+ },
+ farm(t){sky('#4b5a8f','#e7a774',72);disc(150,64,10,'#f3c46b');
    hills(60,'#5d7086',4,.04,1);hills(68,'#6f7e6a',3,.07,3);
    R(0,74,W,34,'#8a7a48');for(let y=78;y<H;y+=5)R(0,y,W,1,'#76683c');
    const x=24,y=76;R(x,y-20,36,20,'#8f3b2b');for(let i=0;i<11;i++)R(x-3+i*2,y-21-i,42-i*4,1,C.roof);R(x+26,y-34,4,10,C.brick2);
-   R(x+15,y-11,6,11,C.wood2);windows(x+4,y-15,1,1,0,0,C.gold,0,0);windows(x+28,y-15,1,1,0,0,C.gold,0,0);
-   for(let px=78;px<W;px+=10){R(px,72,2,10,C.wood2)}R(78,74,W,1,C.wood);R(78,78,W,1,C.wood);
+   R(x+15,y-11,6,11,C.wood2);R(x+4,y-15,3,4,C.gold);R(x+28,y-15,3,4,C.gold);
+   for(let px=78;px<W;px+=10)R(px,72,2,10,C.wood2);R(78,74,W,1,C.wood);R(78,78,W,1,C.wood);
    bareTree(176,76);
-   person(110,96,{coat:COATS[0],skin:SKINS[2],pole:C.wood});person(126,98,{coat:'#6e3b2e',skin:SKINS[0],hat:null});
+   person(110,96,{coat:COATS[0],skin:SKINS[3],pole:C.wood});person(126,98,{coat:'#3d4a5c',skin:SKINS[1]});
    const r=rng(11);for(let i=0;i<5;i++){const bx=(r()*W+t*.6)%W;R(bx,20+r()*20,2,1,C.ink);R(bx+2,19+r()*20,1,1,C.ink)}
  },
  court(t){sky('#8fa3b8','#dfe5ea',80);hills(70,'#9aa8a0',2,.05,0);
@@ -574,45 +746,79 @@ const SCENES={
  },
  statehouse(t){sky('#5c86b3','#cfe0ec',84);
    R(0,84,W,24,'#7d7466');R(0,84,W,2,'#958a78');
-   const x=70;R(x,44,52,40,C.brick);for(let i=0;i<10;i+=2)R(x-1,44-i,4+i/2,2,C.brick2);for(let i=0;i<10;i+=2)R(x+49-i/2,44-i,4+i/2,2,C.brick2);
-   R(x+6,34,40,10,C.brick);windows(x+6,50,6,3,7,10,C.white,0,0);R(x+22,72,8,12,C.wood2);R(x+18,62,16,2,C.ink);
-   R(x+20,14,12,20,C.white);R(x+22,6,8,8,C.white);R(x+24,0,4,6,C.white);R(x+25,-4,2,5,C.gold);windows(x+23,18,2,1,4,0,C.ink,0,0);
-   R(x+22,24,8,1,C.stone2);
+   const x=70;R(x,44,52,40,C.brick);R(x+6,34,40,10,C.brick);windows(x+6,50,6,3,7,10,C.white);R(x+22,72,8,12,C.wood2);R(x+18,62,16,2,C.ink);
+   R(x+20,14,12,20,C.white);R(x+22,6,8,8,C.white);R(x+24,0,4,6,C.white);windows(x+23,18,2,1,4,0,C.ink);R(x+22,24,8,1,C.stone2);
    [[20,'#4b3a2e'],[36,'#2f3a4f'],[150,'#5b4a3a'],[166,'#3d4f6b']].forEach(([px,c],i)=>person(px,102,{coat:c,skin:SKINS[(i+2)%6]}));
-   R(0,96,W,1,'#6a6257');
  },
  congress(t){sky('#3d6fa3','#a9c6de',84);const r=rng(4);for(let i=0;i<3;i++){const cx=(r()*W+t*.25)%(W+40)-20;R(cx,14+i*9,22,4,'#e6eef5');R(cx+5,11+i*9,12,3,'#e6eef5')}
    R(0,86,W,22,'#6d6a5f');R(0,86,W,2,'#8a8574');
-   const x=30;R(x,46,132,40,C.brick);R(x,44,132,3,C.stone2);windows(x+6,52,15,2,8.4,14,C.white,0,0);R(x+60,70,12,16,C.wood2);R(x+56,66,20,3,C.stone);
+   const x=30;R(x,46,132,40,C.brick);R(x,44,132,3,C.stone2);windows(x+6,52,15,2,8.4,14,C.white);R(x+60,70,12,16,C.wood2);R(x+56,66,20,3,C.stone);
    R(x+56,26,20,20,C.white);R(x+59,14,14,12,C.white);R(x+62,6,8,8,C.white);disc(x+66,34,4,C.gold);R(x+66,32,1,3,C.ink);smallFlag(x+65,-4);
    for(let i=0;i<7;i++)person(14+i*28,104,{coat:i%2?C.navy:'#3a2f2a',skin:SKINS[(i+1)%6],hat:i%3?C.ink:'#e8e2d0'});
  },
  arsenal(t){sky('#5f6e88','#cdd6e2',74);hills(66,'#8e9bb0',3,.05,0);
    R(0,74,W,34,C.snow);for(let x=0;x<W;x+=6)R(x,74+(x%12?0:1),3,1,C.snow2);
-   const bx=104;R(bx,48,80,26,C.brick);for(let i=0;i<6;i++)R(bx-2+i,48-i-1,84-2*i,1,'#4a4a52');windows(bx+5,54,9,2,8.4,9,C.white,0,0);R(bx+36,64,8,10,C.wood2);smallFlag(bx+38,30);
-   R(bx+10,40,6,5,C.snow);
+   const bx=104;R(bx,48,80,26,C.brick);for(let i=0;i<6;i++)R(bx-2+i,48-i-1,84-2*i,1,'#4a4a52');windows(bx+5,54,9,2,8.4,9,C.white);R(bx+36,64,8,10,C.wood2);smallFlag(bx+38,30);
    R(88,88,12,3,'#2a2a30');disc(92,92,3,C.wood2);R(99,87,3,2,'#2a2a30');
-   const puff=(t%24);if(puff<10){disc(84-puff,86-puff/3,2+puff/2,C.smoke)}
+   const puff=(t%24);if(puff<10)disc(84-puff,86-puff/3,2+puff/2,C.smoke);
    for(let i=0;i<4;i++)person(106+i*10,98,{coat:'#3d4a5c',skin:SKINS[(i*2)%6],pole:'#3a2a1a'});
    for(let i=0;i<9;i++)person(8+i*8,100-(i%3)*2,{coat:COATS[i%6],skin:SKINS[(i+3)%6],pole:i%2?C.wood:null});
    const r=rng(21);for(let i=0;i<60;i++){const sx=(r()*W+t*.4)%W,sy=(r()*H+t*(.7+r()*.5))%H;R(sx,sy,1,1,'#ffffff')}
  },
- philly(t){sky('#4f8ac0','#f2d9a8',80);disc(30,24,9,'#f6d36b');
-   R(0,82,W,26,'#5f8a4a');R(0,82,W,2,'#7aa25e');R(0,94,W,4,'#b9a98a');
-   const x=46;R(x,46,100,36,C.brick);R(x,44,100,3,C.white);windows(x+5,51,11,2,8.6,14,C.white,0,0);R(x+46,68,8,14,C.wood2);
-   R(x+40,24,20,22,C.brick);R(x+42,14,16,10,C.white);R(x+44,6,12,8,C.white);R(x+47,0,6,6,C.white);R(x+49,-4,2,4,C.gold);disc(x+50,32,4,C.cream);R(x+50,30,1,3,C.ink);
-   leafTree(26,84);leafTree(166,84);leafTree(180,86);
-   for(let i=0;i<6;i++)person(60+i*14,106,{coat:i%2?C.navy:'#2b2b2b',skin:SKINS[i%6],hat:i%2?C.ink:'#e8e2d0'});
+ snow(t){sky('#1a2340','#4a5878',70);hills(58,'#b8c4d4',4,.04,0);hills(70,'#d6dee8',3,.07,2);R(0,80,W,28,C.snow);
+   for(let i=0;i<4;i++){const tx=140+i*12;for(let k=0;k<6;k++)R(tx+k,84-k,10-2*k,1,'#c9bb98');}
+   for(let i=0;i<14;i++){const px=((i*9+t*.7)%120)-10;person(px,100-(i%2),{coat:'#3d4a5c',skin:SKINS[i%6],pole:'#3a2a1a'})}
+   const r=rng(31);for(let i=0;i<120;i++){const sx=(r()*W+t*(1.2+r()))%W,sy=(r()*H+t*(1+r()*.8))%H;R(sx,sy,1,1,'#ffffff')}
  },
- stop(t){for(let i=-H;i<W;i+=16){for(let y=0;y<H;y++){R(i+y,y,8,1,C.redd)}}R(0,0,W,H,'rgba(11,20,38,.55)');
+ grave(t){sky('#6f9ccc','#e9dcb4',80);disc(160,24,8,'#f6d36b');hills(70,'#7a9a5e',3,.05,1);
+   R(0,78,W,30,'#5f8a4a');for(let x=0;x<W;x+=5)R(x,78-(x%10?0:1),1,2,'#7aa25e');
+   leafTree(30,80);leafTree(170,80);
+   R(76,46,40,36,'#9a9a98');disc(96,46,20,'#9a9a98');R(76,46,40,1,'#9a9a98');R(78,48,36,32,'#a8a8a6');disc(96,47,17,'#a8a8a6');
+   word(89,52,'SHAY','#5a5a58');R(84,62,24,1,'#7a7a78');R(86,66,20,1,'#7a7a78');R(88,70,16,1,'#7a7a78');
+   R(72,80,48,3,'#7a7a78');smallFlag(122,70);
+   [[60,86],[66,90],[130,88],[136,85],[100,90]].forEach(([x,y],i)=>{R(x,y,1,4,'#3f7a48');R(x-1,y-1,3,2,i%2?C.gold:'#e6e0f0')});
+ },
+ portraits(t){sky('#14213d','#2f4f86',H);stars(5,30,40,t);
+   [[56,'sash'],[136,'hall']].forEach(([cx,k])=>{R(cx-30,20,60,72,C.cream);R(cx-27,23,54,66,'#e3d6b8');drawBust(cx-24,26,48,PEOPLE[k].look)});
+ },
+ stop(t){for(let i=-H;i<W;i+=16){for(let y=0;y<H;y++)R(i+y,y,8,1,C.redd)}R(0,0,W,H,'rgba(11,20,38,.55)');
    const cx=96,cy=54,r=34,blink=(t%10)<5;
    for(let dy=-r;dy<=r;dy++){const hw=Math.min(r,Math.round(r*1.42-Math.abs(dy)));R(cx-hw,cy+dy,hw*2,1,blink?C.white:C.cream)}
    const r2=r-4;for(let dy=-r2;dy<=r2;dy++){const hw=Math.min(r2,Math.round(r2*1.42-Math.abs(dy)));R(cx-hw,cy+dy,hw*2,1,C.red)}
    R(cx-20,cy-4,40,8,C.white);
  },
+ philly(t){sky('#4f8ac0','#f2d9a8',80);disc(30,24,9,'#f6d36b');
+   R(0,82,W,26,'#5f8a4a');R(0,82,W,2,'#7aa25e');R(0,94,W,4,'#b9a98a');
+   const x=46;R(x,46,100,36,C.brick);R(x,44,100,3,C.white);windows(x+5,51,11,2,8.6,14,C.white);R(x+46,68,8,14,C.wood2);
+   R(x+40,24,20,22,C.brick);R(x+42,14,16,10,C.white);R(x+44,6,12,8,C.white);R(x+47,0,6,6,C.white);disc(x+50,32,4,C.cream);R(x+50,30,1,3,C.ink);
+   leafTree(26,84);leafTree(166,84);leafTree(180,86);
+   for(let i=0;i<6;i++)person(60+i*14,106,{coat:i%2?C.navy:'#2b2b2b',skin:SKINS[i%6],hat:i%2?C.ink:'#e8e2d0'});
+ },
  check(t){SCENES.charter(t,'check')},
  letters(t){SCENES.charter(t,'letters')}
 };
+/* bust portrait in a box (x,y,size) on current context */
+function drawBust(x,y,s,L){
+  const u=s/48;const P=(px,py,w,h,c)=>R(x+px*u,y+py*u,w*u,h*u,c);
+  const sh=mix(L.skin,'#000000',.25);
+  P(L.wide?4:7,34,L.wide?40:34,14,L.coat);P(19,34,10,14,L.face||L.coat);
+  if(L.crav)P(20,32,8,6,'#f7f3ea');else P(21,32,6,4,'#f7f3ea');
+  if(L.ep){P(L.wide?4:7,34,8,3,C.gold);P(L.wide?36:33,34,8,3,C.gold)}
+  P(20,28,8,5,L.skin);
+  P(14,10,20,20,L.skin);P(14,10,2,20,sh);
+  P(12,12,3,14,L.hair);P(33,12,3,14,L.hair);
+  P(18,18,4,2,'#f3e9d2');P(27,18,4,2,'#f3e9d2');P(19,18,2,2,C.ink);P(28,18,2,2,C.ink);P(17,16,4,1,L.hair);P(26,16,4,1,L.hair);
+  P(23,20,2,4,sh);P(20,26,8,1,mix(L.skin,'#5a1a1a',.5));
+  if(L.hat){P(8,8,32,4,C.ink);P(14,3,20,6,C.ink);P(8,8,32,1,L.ep?C.gold:'#2b2b2b')}else P(14,8,20,4,L.hair);
+}
+function portrait(cv,k){cv.width=48;cv.height=48;g=cv.getContext('2d');g.imageSmoothingEnabled=false;g.fillStyle='#e3d6b8';g.fillRect(0,0,48,48);for(let i=0;i<48;i+=4){g.fillStyle='rgba(0,0,0,.04)';g.fillRect(0,i,48,2)}drawBust(0,0,48,PEOPLE[k].look)}
+/* tiny emotion faces 12×12 */
+function face(cv,k,col){cv.width=12;cv.height=12;g=cv.getContext('2d');R(0,0,12,12,col);R(2,2,8,8,'#f3e9d2');
+  const I='#0b1426',E={angry:()=>{R(3,4,2,1,I);R(7,4,2,1,I);R(3,3,1,1,I);R(8,3,1,1,I);R(4,8,4,1,I);R(3,9,1,1,I);R(8,9,1,1,I)},
+  afraid:()=>{R(3,4,2,2,I);R(7,4,2,2,I);R(5,7,2,2,I)},betrayed:()=>{R(3,5,2,1,I);R(7,5,2,1,I);R(4,8,4,1,I);R(8,6,1,2,'#3d6fa3')},
+  hopeful:()=>{R(3,4,1,2,I);R(8,4,1,2,I);R(4,8,4,1,I);R(3,7,1,1,I);R(8,7,1,1,I)},proud:()=>{R(3,4,2,1,I);R(7,4,2,1,I);R(3,7,6,1,I);R(4,8,4,1,I)},
+  ashamed:()=>{R(3,6,2,1,I);R(7,6,2,1,I);R(5,8,2,1,I);R(2,7,1,1,'#d98a8a');R(9,7,1,1,'#d98a8a')},determined:()=>{R(3,4,2,1,I);R(7,4,2,1,I);R(3,3,2,1,I);R(7,3,2,1,I);R(3,8,6,1,I)},
+  torn:()=>{R(3,4,2,1,I);R(7,5,2,1,I);R(3,8,1,1,I);R(4,9,1,1,I);R(5,8,1,1,I);R(6,9,1,1,I);R(7,8,1,1,I);R(8,9,1,1,I)}};E[k]()}
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let anim=null,frame=0,last=0;
 function paint(cv,scene,t){g=cv.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,W,H);(SCENES[scene]||SCENES.title)(t)}
@@ -625,22 +831,23 @@ function mountArt(cv,scene){cv.width=W;cv.height=H;paint(cv,scene,frame);anim={c
    ========================================================= */
 const $=(s,r=document)=>r.querySelector(s);
 const el=(tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e};
-const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 function fmt(s){
-  return esc(s).split(/\n\n/).map(p=>'<p>'+p
+  return esc(s).split(/\n\n+/).filter(p=>p.trim()).map(p=>'<p>'+p
     .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
     .replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,(m,lab,key)=>{const k=(key||lab).toLowerCase();return GLOSS[k]?`<button type="button" class="term" data-k="${k}">${lab}</button>`:lab})
     .replace(/\n/g,'<br>')+'</p>').join('');
 }
-const BADGE={doc:['doc','DOCUMENTED'],role:['role','ROLE-PLAY'],sim:['sim','SIMULATION'],int:['int','INTERPRETATION']};
+const inline=s=>fmt(s).replace(/<\/?p>/g,'');
+const BADGE={doc:['doc','DOCUMENTED'],role:['role','ROLE-PLAY'],sim:['sim','SIMULATION'],int:['int','INTERPRETATION'],sa:['sel','SEL · SELF-AWARENESS'],so:['sel','SEL · SOCIAL AWARENESS'],rs:['sel','SEL · RELATIONSHIPS'],dm:['sel','SEL · DECISION-MAKING']};
 function say(msg){$('#live').textContent=msg}
-function unlock(k){if(k&&!S.cards.includes(k)){S.cards.push(k);toast('CARD UNLOCKED: '+CARDS[k][0])}}
-
 let toastBox=null;
 function toast(txt,dn){if(!toastBox)return;const s=el('span',dn?'dn':'',esc(txt));toastBox.appendChild(s);say(txt);setTimeout(()=>s.remove(),2500)}
+function unlock(k){if(k&&!S.cards.includes(k)){S.cards.push(k);toast('CARD: '+CARDS[k][0])}}
+function meet(k){if(k&&!S.people.includes(k)){S.people.push(k);toast('NEW FILE: '+PEOPLE[k].nm.toUpperCase())}}
 function applyFx(fx){
   if(!fx)return;
-  for(const k of ['union','treasury','unrest']){if(fx[k]){const before=S.m[k];S.m[k]=Math.max(0,Math.min(5,S.m[k]+fx[k]));const d=S.m[k]-before;if(d)toast((d>0?'+':'')+d+' '+k.toUpperCase(),k==='unrest'?d>0:d<0)}}
+  for(const k of ['hope','trust','tension']){if(fx[k]){const b=S.m[k];S.m[k]=Math.max(0,Math.min(5,S.m[k]+fx[k]));const d=S.m[k]-b;if(d)toast((d>0?'+':'')+d+' '+k.toUpperCase(),k==='tension'?d>0:d<0)}}
 }
 
 /* HUD */
@@ -648,10 +855,10 @@ function renderHud(){
   const on=S.node!=='TITLE';
   $('#meters').hidden=!on;$('#xp').hidden=!on;
   if(!on)return;
-  const M=[['union','UNION'],['treasury','TREASURY'],['unrest','UNREST']];
+  const M=[['hope','HOPE'],['trust','TRUST'],['tension','TENSION']];
   $('#meters').innerHTML=M.map(([k,l])=>`<div class="meter" data-k="${k}" role="img" aria-label="${l}: ${S.m[k]} of 5. Simulation indicator, not a historical statistic."><span class="lbl">${l}</span><span class="segs">${[0,1,2,3,4].map(i=>`<span class="seg${i<S.m[k]?' on':''}"></span>`).join('')}</span><span class="num">${S.m[k]}/5</span></div>`).join('')+
-   `<button type="button" class="simtag" id="simInfo" title="Simulation indicators: these meters help you see consequences. Historians did not measure Union or Unrest on a five-point scale.">SIMULATION ?</button>`;
-  $('#simInfo').onclick=e=>showPop(e.currentTarget,'SIMULATION INDICATORS','These meters help you see consequences. Historians did not measure “Union” or “Unrest” on a five-point scale. Your meters are not your grade.');
+   `<button type="button" class="simtag" id="simInfo">SIMULATION ?</button>`;
+  $('#simInfo').onclick=e=>showPop(e.currentTarget,'SIMULATION METERS','HOPE: your character’s sense that things can get better. TRUST: how much people trust each other and their government. TENSION: pressure building toward conflict. Historians never measured these. They are not your grade.');
   $('#xp').innerHTML=`<span aria-hidden="true">★</span> MASTERY ${total()}/10`;
 }
 
@@ -678,38 +885,52 @@ modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});
 let onModalClose=null;
 modal.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();modal.close()}});
 modal.addEventListener('close',()=>{if(onModalClose){const f=onModalClose;onModalClose=null;f()}});
-function openModal(title,html,after){$('#mTitle').textContent=title;$('#mBody').innerHTML=html;onModalClose=after||null;modal.showModal();$('#mBody').scrollTop=0}
+function openModal(title,html,after){$('#mTitle').textContent=title;$('#mBody').innerHTML=html;onModalClose=after||null;if(!modal.open)modal.showModal();$('#mBody').scrollTop=0}
 function openSource(k,after){
   const s=SRC[k];S.opened[k]=true;save();beep('click');
   openModal('SOURCE LENS · '+s.t.toUpperCase(),
    `<dl class="meta"><dt>WHO?</dt><dd>${esc(s.who)}</dd><dt>WHEN?</dt><dd>${esc(s.when)}</dd>${s.to?`<dt>TO WHOM?</dt><dd>${esc(s.to)}</dd>`:''}<dt>CONTEXT</dt><dd>${esc(s.ctx)}</dd></dl>
-    <blockquote class="${s.sum?'sum':''}">${esc(s.q)}</blockquote>
+    <blockquote class="${s.sum?'sum':''}">${esc(s.q)}</blockquote>${s.extra?`<p class="note">${esc(s.extra)}</p>`:''}
     <p class="q">${esc(s.ask)}</p>
     <p class="note"><a href="${s.link}" target="_blank" rel="noopener">${esc(s.ln)} ↗</a></p>`,after);
 }
+function openPerson(k,after){
+  const p=PEOPLE[k];S.opened['p_'+k]=true;meet(k);save();beep('click');
+  openModal('CHARACTER FILE',`<div class="dossier"><canvas id="pc" aria-hidden="true"></canvas><div><p class="cls">${esc(p.cls)}</p><p class="nm">${esc(p.nm)}</p><p class="lf">${esc(p.life)}</p></div></div>
+    <dl class="stats">${p.rows.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join('')}</dl>
+    <div class="think"><b>REMEMBER</b>${esc(p.note)}</div>
+    <p class="note">Pixel illustration, not a portrait from life.</p>`,after);
+  portrait($('#pc'),k);
+}
 function openNotebook(){
+  const ppl=Object.keys(PEOPLE).map(k=>S.people.includes(k)?`<button type="button" class="pbtn" data-p="${k}"><canvas data-pc="${k}" aria-hidden="true"></canvas>${esc(PEOPLE[k].nm.toUpperCase())}</button>`:`<button type="button" class="pbtn" disabled><canvas aria-hidden="true"></canvas>???</button>`).join('');
   const cards=Object.entries(CARDS).map(([k,[t,d]])=>S.cards.includes(k)?`<div class="card"><b>${esc(t)}</b>${esc(d)}</div>`:`<div class="card locked"><b>LOCKED</b>Keep playing to unlock.</div>`).join('');
   const gl=Object.values(GLOSS).map(([n,d])=>`<dt>${esc(n)}</dt><dd>${esc(d)}</dd>`).join('');
-  openModal('YOUR NOTEBOOK',`<p class="note">Power cards unlock as you discover how the system works. ${S.cards.length}/${Object.keys(CARDS).length} unlocked.</p><div class="cards">${cards}</div><h3 class="q" style="margin-top:8px">Vocabulary</h3><dl class="gl">${gl}</dl>`);
+  openModal('YOUR NOTEBOOK',`<p class="sech">PEOPLE · ${S.people.length}/${Object.keys(PEOPLE).length}</p><div class="people">${ppl}</div>
+   <p class="sech">POWER CARDS · ${S.cards.length}/${Object.keys(CARDS).length}</p><div class="cards">${cards}</div>
+   <p class="sech">VOCABULARY</p><dl class="gl">${gl}</dl>`);
+  document.querySelectorAll('[data-pc]').forEach(cv=>portrait(cv,cv.dataset.pc));
+  document.querySelectorAll('.pbtn[data-p]').forEach(b=>b.onclick=()=>openPerson(b.dataset.p,null));
 }
 $('#nbBtn').onclick=openNotebook;
 function openTeacher(){
   openModal('TEACHER GUIDE',`
-   <p><strong>The one rule to say out loud:</strong> “Your choices change your perspective. History Checks tell you what actually happened.”</p>
+   <p><strong>Say this out loud first:</strong> “Your choices change your story and your feelings. History Checks tell you what actually happened.”</p>
    <table class="tg"><tbody>
-    <tr><td>2–3 min</td><td>Launch. Assign roles (about ⅓ each) or let students choose.</td></tr>
-    <tr><td>5–6 min</td><td>Opening: the Articles, first Power Check, choose a perspective.</td></tr>
-    <tr><td>10–13 min</td><td>Six role scenes (Farmer, State Leader, or Congress).</td></tr>
-    <tr><td>4–5 min</td><td>History Check: causes + Springfield.</td></tr>
-    <tr><td>4 min</td><td>Source Lens: Knox vs. Jefferson.</td></tr>
-    <tr><td>7–8 min</td><td>Chronology, Articles vs. Constitution sort, final causal chain.</td></tr>
-    <tr><td>4–5 min</td><td>Mission report + exit ticket. Students copy their report to submit.</td></tr>
+    <tr><td>5 min</td><td>Prologue: Daniel Shays and the sword. First feelings check.</td></tr>
+    <tr><td>6 min</td><td>How the Articles worked + Power Check.</td></tr>
+    <tr><td>14–16 min</td><td>Role path: family/petition/letter, a hard conversation, Stop–Think–Choose, a written journal.</td></tr>
+    <tr><td>10 min</td><td>Springfield, faces of the rebellion (Moses Sash, Prince Hall), Petersham, Shays’s fate.</td></tr>
+    <tr><td>12 min</td><td>Knox vs. Jefferson, reform timeline, Articles vs. Constitution, causal chain.</td></tr>
+    <tr><td>4 min</td><td>Private reflection + mission report.</td></tr>
    </tbody></table>
-   <p><strong>Scoring.</strong> Mastery (10 pts) comes only from knowledge checks, with full mastery available after retries. Role-play choices and the Union / Treasury / Unrest meters are never graded. Wrong turns lead to short correction screens, never a game over.</p>
-   <p><strong>Extend to 55–60 min.</strong> Pair students who played different roles: “What problem did your character think mattered most?” Then debrief the two statements on the final screen.</p>
-   <p><strong>Keyboard.</strong> Number keys 1–3 pick choices. Esc closes pop-ups. Progress saves in each student’s browser.</p>
-   <div class="tools"><button class="chip" type="button" id="tjR">JUMP TO ROLES</button><button class="chip" type="button" id="tjH">JUMP TO HISTORY CHECK</button><button class="chip" type="button" id="tjE">JUMP TO SORT</button></div>`);
-  $('#tjR').onclick=()=>{modal.close();go('R0')};$('#tjH').onclick=()=>{modal.close();go('H1')};$('#tjE').onclick=()=>{modal.close();go('H5')};
+   <p><strong>Pacing.</strong> The full run is about 50–55 minutes. For 45-minute periods, stop at “What Happened to Daniel Shays?” on day one; progress saves in each browser.</p>
+   <p><strong>SEL built in (CASEL).</strong> Feelings checks (self-awareness), petitions and faces of the rebellion (social awareness), hard conversations with a neighbor or colleague (relationship skills), and Stop–Think–Choose values picks (responsible decision-making). None of it is graded.</p>
+   <p><strong>Care note.</strong> Debt, losing a home, jail and police or militia force may be close to home for some students. Journals are optional. The final “Connect It to Now” reflection stays private unless a student chooses to include it. Invite sharing; never require it.</p>
+   <p><strong>Scoring.</strong> Mastery (10 pts) comes only from knowledge checks, with full credit available after retries. Meters, feelings, values and role-play choices are discussion material, not grades.</p>
+   <p><strong>Debrief idea.</strong> Pair students who played different roles: “What did your character feel at Springfield, and why?”</p>
+   <div class="tools"><button class="chip" type="button" id="tjR">JUMP TO ROLES</button><button class="chip" type="button" id="tjH">JUMP TO HISTORY CHECK</button><button class="chip" type="button" id="tjS">JUMP TO SHAYS’S FATE</button></div>`);
+  $('#tjR').onclick=()=>{modal.close();go('R0')};$('#tjH').onclick=()=>{modal.close();go('H1')};$('#tjS').onclick=()=>{modal.close();go('H2D')};
 }
 
 /* =========================================================
@@ -718,14 +939,15 @@ function openTeacher(){
 function go(id){
   closePop();
   const n=N[id];
+  S.node=id;
   if(n&&!S.seen[id]){
     S.seen[id]=1;
-    if(n.card&&n.kind!=='cfu')unlock(n.card);
-    if(n.crisis&&S.m.unrest<4){S.m.unrest=4;setTimeout(()=>toast('CRISIS PEAKS · UNREST 4',1),300)}
+    if(n.card&&n.kind!=='cfu')setTimeout(()=>unlock(n.card),200);
+    if(n.crisis&&S.m.tension<4){S.m.tension=4;setTimeout(()=>toast('CRISIS PEAKS · TENSION 4',1),400)}
   }
-  S.node=id;save();render();
+  save();render();
   window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});
-  if(n&&(n.check))beep('fanfare');
+  if(n&&n.check)beep('fanfare');
 }
 function render(){
   try{speechSynthesis.cancel()}catch(e){}
@@ -737,10 +959,9 @@ function render(){
   if(n.kind==='roles')return renderRoles(st);
   renderNode(st,n);
 }
-
 function timeline(p,label){
   const t=el('div','tl');
-  t.innerHTML=`<div class="tl-lbl">${esc(label)} · ${p}% COMPLETE</div><div class="tl-bar" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100" aria-label="Mission progress"><div class="tl-fill" style="width:${p}%"></div></div><div class="tl-yrs"><span>1781</span><span>1783</span><span>1786</span><span>1787</span></div>`;
+  t.innerHTML=`<div class="tl-lbl">${esc(label)} · ${p}% COMPLETE</div><div class="tl-bar" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100" aria-label="Mission progress"><div class="tl-fill" style="width:${p}%"></div></div><div class="tl-yrs"><span>1780</span><span>1783</span><span>1786</span><span>1787</span></div>`;
   return t;
 }
 
@@ -748,9 +969,9 @@ function renderTitle(st){
   const saved=load();
   const sec=el('section','title');
   sec.innerHTML=`<div>
-     <p class="kicker">★ A U.S. HISTORY MISSION ★<br>AMERICA UNDER THE ARTICLES, 1781–1787</p>
+     <p class="kicker">★ A U.S. HISTORY MISSION ★<br>SHAYS’ REBELLION &amp; THE ARTICLES, 1780–1787</p>
      <h1 tabindex="-1">Can the New Country <em>Survive?</em></h1>
-     <p class="sub">Step into 1780s America as a debt-strapped farmer, a Massachusetts lawmaker, or a member of Congress. Make hard calls. Then find out what really happened.</p>
+     <p class="sub">They won the war. Now they’re losing their farms. Live it as a veteran farmer, a Massachusetts lawmaker, or a member of Congress. Feel the pressure, make hard calls, then find out what really happened.</p>
      <div class="start-row">
        <button class="start" type="button" id="startBtn"><span class="blink">▶</span> PRESS START</button>
        ${saved&&saved.node!=='TITLE'?'<button class="ghost" type="button" id="contBtn">CONTINUE SAVED GAME</button>':''}
@@ -761,30 +982,30 @@ function renderTitle(st){
      <div class="cap"><span class="yr">EST. 1781</span><span class="pl">13 STATES · 1 VOTE EACH</span></div></div>`;
   st.appendChild(sec);
   const rules=el('div','rules');
-  rules.innerHTML=`<div class="rule"><h3>1 · CHOOSE A SIDE</h3><p>Pick a perspective. Your choices shape your story and move the meters.</p></div>
-   <div class="rule"><h3>2 · HIT HISTORY CHECKS</h3><p>At key moments the game freezes and shows what really happened. History doesn’t bend.</p></div>
-   <div class="rule"><h3>3 · EARN MASTERY</h3><p>Ten mastery points come from what you understand, not from which side you took.</p></div>`;
+  rules.innerHTML=`<div class="rule"><h3>1 · LIVE A LIFE</h3><p>Pick a perspective. Your choices shape your story and move the meters.</p></div>
+   <div class="rule"><h3>2 · NAME IT</h3><p>Feelings checks ask what your character feels and why. Real people felt this.</p></div>
+   <div class="rule"><h3>3 · HISTORY CHECKS</h3><p>At key moments the game freezes and shows what really happened.</p></div>
+   <div class="rule"><h3>4 · EARN MASTERY</h3><p>Ten points come from what you understand, not which side you took.</p></div>`;
   st.appendChild(rules);
   mountArt($('canvas',sec),'title');
-  $('#startBtn').onclick=()=>{beep('start');S=fresh();clearSave();go('C0')};
+  $('#startBtn').onclick=()=>{beep('start');S=fresh();clearSave();go('P0')};
   const cb=$('#contBtn');if(cb)cb.onclick=()=>{beep('start');S=Object.assign(fresh(),saved);render()};
   $('#teachBtn').onclick=openTeacher;
 }
 
 function renderRoles(st){
-  const head=el('div','rolehead',`<h2 tabindex="-1">Choose Your Perspective</h2><p>The war is over. Whose problems will you face? All three paths reach the same historical events from different angles. No one here is the hero or the villain.</p>`);
+  const head=el('div','rolehead',`<h2 tabindex="-1">Choose Your Life</h2><p>Shays is one man. Thousands of people lived through this crisis. Whose life will you step into? All three paths reach the same historical events. No one here is the hero or the villain.</p>`);
   st.appendChild(head);
   const grid=el('div','roles');
   ROLES.forEach((r,i)=>{
-    const b=el('button','rolecard');b.type='button';
+    const b=el('button','rolecard');b.type='button';b.dataset.i=i+1;
     b.innerHTML=`<canvas aria-hidden="true"></canvas><span class="in">${r.rec?'<span class="rec">RECOMMENDED START</span>':''}<span class="nm">${esc(r.nm)}</span><span class="rq">${esc(r.rq)}</span><span class="tag">${esc(r.tag)}</span><span class="pick">PRESS ${i+1} · PLAY</span></span>`;
-    b.dataset.i=i+1;b.classList.add('choice-k');
     b.onclick=()=>{beep('good');S.role=r.id;go(r.start)};
     grid.appendChild(b);
     const cv=$('canvas',b);cv.width=W;cv.height=H;paint(cv,r.scene,0);
   });
   st.appendChild(grid);
-  st.appendChild(timeline(20,'CHOOSE A PERSPECTIVE'));
+  st.appendChild(timeline(20,'CHOOSE A LIFE'));
   anim=null;
   $('h2',head).focus({preventScroll:true});
 }
@@ -796,20 +1017,19 @@ function renderNode(st,n){
   scr.appendChild(art);
   toastBox=$('.toast',art);
   const p=el('article','panel');
-  if(n.kind==='deadend')p.appendChild(el('div','banner hz',`<span class="t">⚠ ${esc(n.label)}</span><span class="s">Historically impossible move. No penalty, just a correction.</span>`));
+  if(n.kind==='deadend')p.appendChild(el('div','banner hz',`<span class="t">⚠ ${esc(n.label)}</span><span class="s">Historically impossible move. No game over, just a correction.</span>`));
   else if(n.check)p.appendChild(el('div','banner',`<span class="t">★ HISTORY CHECK</span><span class="s">Your choices pause here. This really happened.</span>`));
-  if(n.badges){p.appendChild(el('div','badges',n.badges.map(b=>`<span class="badge ${BADGE[b][0]}">${BADGE[b][1]}</span>`).join('')))}
+  if(n.badges)p.appendChild(el('div','badges',n.badges.map(b=>`<span class="badge ${BADGE[b][0]}">${BADGE[b][1]}</span>`).join('')));
   const h=el('h2','',esc(n.title));h.tabIndex=-1;p.appendChild(h);
   const bodyTxt=typeof n.body==='function'?n.body(S):n.body;
   p.appendChild(el('div','body',fmt(bodyTxt)));
+  if(n.think)p.appendChild(el('div','think',`<b>THINK ABOUT IT</b>${esc(n.think)}`));
 
   const tools=el('div','tools');
-  const srcs=(n.src||[]).concat(n.needSrc||[]);
-  srcs.forEach(k=>{const b=el('button','chip src'+(S.opened[k]?' done':''));
-    b.textContent='SOURCE: '+({art2:'ARTICLE II',art8:'ARTICLE VIII',art13:'ARTICLE XIII',nwo:'NORTHWEST ORDINANCE',knox:'KNOX LETTER, 1786',jefferson:'JEFFERSON LETTER, 1787',jay:'JAY LETTER, 1786',const:'ART. I, SEC. 8'}[k]);
-    b.type='button';b.onclick=()=>openSource(k,()=>{render()});tools.appendChild(b)});
+  (n.people||[]).forEach(k=>{const b=el('button','chip'+(S.opened['p_'+k]?' done':''));b.type='button';b.textContent='FILE: '+PEOPLE[k].nm.toUpperCase();b.onclick=()=>openPerson(k,()=>render());tools.appendChild(b)});
+  (n.src||[]).concat(n.needSrc||[]).forEach(k=>{const b=el('button','chip src'+(S.opened[k]?' done':''));b.type='button';b.textContent='SOURCE: '+SRC[k].btn;b.onclick=()=>openSource(k,()=>render());tools.appendChild(b)});
   const rd=el('button','chip','READ TO ME');rd.type='button';
-  rd.onclick=()=>{try{speechSynthesis.cancel();const tmp=document.createElement('div');tmp.innerHTML=fmt(bodyTxt);const u=new SpeechSynthesisUtterance(n.title+'. '+tmp.textContent);u.rate=.95;speechSynthesis.speak(u)}catch(e){rd.textContent='READ-ALOUD UNAVAILABLE'}};
+  rd.onclick=()=>{try{speechSynthesis.cancel();const tmp=document.createElement('div');tmp.innerHTML=fmt(bodyTxt);const u=new SpeechSynthesisUtterance(n.title+'. '+tmp.textContent+(n.prompt?' '+n.prompt:''));u.rate=.95;speechSynthesis.speak(u)}catch(e){rd.textContent='READ-ALOUD UNAVAILABLE'}};
   tools.appendChild(rd);
   const pause=el('button','chip','PAUSE READING');pause.type='button';
   const stop=el('button','chip','STOP READING');stop.type='button';
@@ -821,14 +1041,12 @@ function renderNode(st,n){
 
   const area=el('div','');area.style.display='flex';area.style.flexDirection='column';area.style.gap='14px';
   p.appendChild(area);
-  if(n.kind==='cfu')renderCfu(area,n);
-  else if(n.kind==='sort')renderSort(area,n);
-  else if(n.kind==='chain')renderChain(area,n);
-  else renderChoices(area,n.choices,n);
+  ({cfu:renderCfu,sort:renderSort,chain:renderChain,feel:renderFeel,values:renderValues,journal:renderJournal}[n.kind]||((a,n)=>renderChoices(a,n.choices,n)))(area,n);
   scr.appendChild(p);
   st.appendChild(scr);
   st.appendChild(timeline(n.p,n.year));
   mountArt($('canvas',art),n.scene);
+  if(n.people&&n.people[0]==='shays'&&S.node==='P0')setTimeout(()=>meet('shays'),300);
   h.focus({preventScroll:true});
 }
 
@@ -843,20 +1061,20 @@ function renderChoices(area,choices,n){
       if(c.card)unlock(c.card);
       if(c.retry)S.retries++;
       applyFx(c.fx);renderHud();
-      S.flags.log=(S.flags.log||[]);S.flags.log.push(S.node+':'+String.fromCharCode(65+i));
-      const delay=c.fx?650:0;
       box.querySelectorAll('button').forEach(x=>x.disabled=true);
-      setTimeout(()=>go(c.to),delay);
+      setTimeout(()=>go(c.to),c.fx?650:0);
     };
     box.appendChild(b);
   });
   area.appendChild(box);
 }
+const nextBtn=(wrap,to,label,n)=>{wrap.innerHTML='';renderChoices(wrap,[{l:label||'Continue',to,go:1}],n)};
 
 function renderCfu(area,n){
   const q=n.cfu;
-  const locked=(n.needSrc||[]).some(k=>!S.opened[k]);
-  if(locked){area.appendChild(el('p','fb','<b>OPEN BOTH SOURCES</b>Read both letters above to unlock the question.'));return}
+  const need=(n.needSrc||[]).concat(n.needPeople?n.people.map(k=>'p_'+k):[]);
+  const missing=need.filter(k=>!S.opened[k]);
+  if(missing.length){area.appendChild(el('p','fb',`<b>OPEN EVERYTHING ABOVE</b>Read ${missing.length===1?'the last item':'all '+missing.length+' items'} above to unlock the question.`));return}
   area.appendChild(el('p','q',esc(q.q)));
   const box=el('div','choices');const fb=el('div','');
   const solved=S.flags['solved_'+q.key];
@@ -866,31 +1084,74 @@ function renderCfu(area,n){
     b.onclick=()=>{
       const first=S.first[q.key]===undefined;
       if(first)S.first[q.key]=!!o.ok;
-      const earned=o.ok&&q.pts ? Math.max(0,q.pts-(S.score[q.key]||0)) : 0;
+      const earned=o.ok&&q.pts?Math.max(0,q.pts-(S.score[q.key]||0)):0;
       if(o.ok&&q.pts)S.score[q.key]=q.pts;
-      if(!o.ok){S.retries++;beep('bad');
-        if(o.to){save();setTimeout(()=>go(o.to),250);b.classList.add('wrong');return}
-        b.classList.add('wrong');b.disabled=true;
-        fb.innerHTML=`<div class="fb no"><b>NOT QUITE · TRY AGAIN</b>${fmt(o.fb).replace(/<\/?p>/g,'')}</div>`;save();renderHud();return}
-      beep('good');S.flags['solved_'+q.key]=1;if(q.flag)S.flags[q.flag]=true;if(q.card)unlock(q.card);if(n.card)unlock(n.card);
+      if(!o.ok){S.retries++;beep('bad');b.classList.add('wrong');
+        if(o.to){save();setTimeout(()=>go(o.to),250);return}
+        b.disabled=true;fb.innerHTML=`<div class="fb no"><b>NOT QUITE · TRY AGAIN</b>${inline(o.fb)}</div>`;save();renderHud();return}
+      beep('good');S.flags['solved_'+q.key]=1;if(q.card)unlock(q.card);if(n.card)unlock(n.card);
       box.querySelectorAll('.choice').forEach(x=>x.disabled=true);b.classList.add('right');
       const pts=earned?` · +${earned} MASTERY`:'';
-      fb.innerHTML=`<div class="fb ok"><b>CORRECT${pts}</b>${fmt(o.fb).replace(/<\/?p>/g,'')}</div>`;
+      fb.innerHTML=`<div class="fb ok"><b>${q.pts?'CORRECT':'YES'}${pts}</b>${inline(o.fb)}</div>`;
       save();renderHud();if(pts)toast('+'+earned+' MASTERY');
-      showNext();
+      nextBtn(nextWrap,q.next,null,n);
     };
     box.appendChild(b);
   });
   area.appendChild(box);area.appendChild(fb);
   const nextWrap=el('div','');area.appendChild(nextWrap);
-  function showNext(){nextWrap.innerHTML='';renderChoices(nextWrap,[{l:'Continue',to:q.next,go:1}],n)}
-  if(solved){const o=q.opts.find(x=>x.ok);fb.innerHTML=`<div class="fb ok"><b>CORRECT</b>${fmt(o.fb).replace(/<\/?p>/g,'')}</div>`;showNext()}
+  if(solved){const o=q.opts.find(x=>x.ok);fb.innerHTML=`<div class="fb ok"><b>CORRECT</b>${inline(o.fb)}</div>`;nextBtn(nextWrap,q.next,null,n)}
+}
+
+function renderFeel(area,n){
+  area.appendChild(el('p','q',esc(n.prompt)));
+  const grid=el('div','feelgrid');grid.setAttribute('role','group');grid.setAttribute('aria-label','Choose a feeling');
+  const out=el('div','');const nextWrap=el('div','');
+  const show=k=>{const f=FEELS.find(x=>x[0]===k);out.innerHTML=`<div class="under"><b>UNDER THE FEELING · ${f[1]}</b>${esc(f[3])}<br><span class="note">There’s no wrong answer. Feelings checks are never graded.</span></div>`;nextBtn(nextWrap,n.next,null,n)};
+  FEELS.forEach(([k,lab,col],i)=>{
+    const b=el('button','ftile',`<canvas aria-hidden="true"></canvas>${lab}`);b.type='button';b.setAttribute('aria-pressed',S.feel[S.node]===k);
+    face($('canvas',b),k,col);
+    b.onclick=()=>{beep('soft');S.feel[S.node]=k;save();grid.querySelectorAll('.ftile').forEach(x=>x.setAttribute('aria-pressed',x===b));show(k)};
+    grid.appendChild(b);
+  });
+  area.appendChild(grid);area.appendChild(out);area.appendChild(nextWrap);
+  if(S.feel[S.node])show(S.feel[S.node]);
+}
+
+function renderValues(area,n){
+  const pick=(S.values[S.node]||[]).slice();
+  area.appendChild(el('p','q','Pick exactly two.'));
+  const grid=el('div','valgrid');grid.setAttribute('role','group');grid.setAttribute('aria-label','Choose two values');
+  const nextWrap=el('div','');
+  const sync=()=>{grid.querySelectorAll('.vtile').forEach(b=>{const on=pick.includes(b.dataset.v);b.setAttribute('aria-pressed',on);b.disabled=!on&&pick.length>=2});
+    if(pick.length===2){S.values[S.node]=pick.slice();S.lastValues=pick.slice();save();nextWrap.innerHTML='';nextWrap.appendChild(el('div','under',`<b>VALUES LOCKED</b>Your character stands for <strong>${esc(pick[0])}</strong> and <strong>${esc(pick[1])}</strong>. Watch whether your next choice matches.`));const w=el('div','');nextWrap.appendChild(w);renderChoices(w,[{l:'Make the decision',to:n.next,go:1}],n)}else nextWrap.innerHTML=''};
+  VALUES.forEach(v=>{const b=el('button','vtile',esc(v));b.type='button';b.dataset.v=v;b.onclick=()=>{beep('click');const i=pick.indexOf(v);if(i>=0)pick.splice(i,1);else if(pick.length<2)pick.push(v);sync()};grid.appendChild(b)});
+  area.appendChild(grid);area.appendChild(nextWrap);sync();
+}
+
+function renderJournal(area,n){
+  const j=S.journal[S.node]||{text:'',include:!n.private};
+  area.appendChild(el('p','q',esc(n.prompt)));
+  const ta=el('textarea','jr');ta.id='jr_'+S.node;ta.value=j.text;ta.setAttribute('aria-label',n.prompt);
+  area.appendChild(ta);
+  let cb=null;
+  if(n.private){const l=el('label','chk',`<input type="checkbox" id="inc_${S.node}" ${j.include?'checked':''}> Include this in my mission report`);area.appendChild(l);cb=$('input',l)}
+  const upd=()=>{S.journal[S.node]={text:ta.value,include:cb?cb.checked:true,prompt:n.prompt,title:n.title};save()};
+  ta.oninput=upd;if(cb)cb.onchange=upd;
+  const row=el('div','choices');
+  const sv=el('button','choice go','<span class="k">✎</span><span>Save &amp; continue</span>');sv.type='button';sv.dataset.i=1;
+  sv.onclick=()=>{upd();beep('good');if(ta.value.trim())toast('JOURNAL SAVED');setTimeout(()=>go(n.next),ta.value.trim()?500:0)};
+  const sk=el('button','choice','<span class="k">→</span><span>Skip for now</span>');sk.type='button';sk.dataset.i=2;
+  sk.onclick=()=>{beep('click');go(n.next)};
+  row.appendChild(sv);row.appendChild(sk);area.appendChild(row);
+  area.appendChild(el('p','note',n.private?'Left out of your copied report by default. Saved in this browser; check the box only if you want to share it.':'Writing as your character. This goes in your mission report.'));
 }
 
 function renderSort(area,n){
   const done=!!S.flags.solved_h5;
   const sel=S.sort;
   const list=el('div','');list.style.display='flex';list.style.flexDirection='column';list.style.gap='8px';
+  const chk=el('button','choice go','<span class="k">✓</span><span>Check my sort</span>');chk.type='button';
   SORT.forEach((c,i)=>{
     const row=el('div','sortrow');
     const res=done?(sel[i]===c.a?'right':'wrong'):'';if(res)row.classList.add(res);
@@ -899,42 +1160,39 @@ function renderSort(area,n){
     list.appendChild(row);
   });
   area.appendChild(list);
-  const nextWrap=el('div','');
-  const chk=el('button','choice go','<span class="k">✓</span><span>Check my sort</span>');chk.type='button';
   chk.disabled=Object.keys(sel).length<SORT.length;
   chk.onclick=()=>{
     const right=SORT.filter((c,i)=>sel[i]===c.a).length;
     S.first.h5=right;S.score.h5=Math.max(S.score.h5||0,right===6?2:right>=4?1:0);S.flags.sortRight=right;S.flags.sortAttempted=true;S.flags.solved_h5=right===6;if(right<6)S.retries++;
-    beep(right>=4?'good':'bad');if(S.score.h5)toast('+'+S.score.h5+' MASTERY');
-    save();render();
+    beep(right>=4?'good':'bad');unlock('article1');save();render();if(S.score.h5)toast('+'+S.score.h5+' MASTERY');
   };
-  if(!done){area.appendChild(chk);if(S.flags.sortAttempted)area.appendChild(el('div','fb no',`<b>${S.flags.sortRight}/6 MATCHED · TRY AGAIN</b>Use Article VIII for state contributions, Article V for one state/one vote, Article XIII for amendments, and Article I, Section 8 for the Constitution’s tax, commerce, and militia clauses. You can still earn full mastery.`));}
+  if(!done){area.appendChild(chk);if(S.flags.sortAttempted)area.appendChild(el('div','fb no',`<b>${S.flags.sortRight}/6 MATCHED · TRY AGAIN</b>Check Articles V, VIII, and XIII for state voting, contributions, and amendments. Article I, Section 8 gives the Constitution’s tax, commerce, and militia powers. You can still earn full mastery.`));}
   else{
     const r=S.flags.sortRight;
-    area.appendChild(el('div','fb '+(r>=4?'ok':'no'),`<b>${r}/6 SORTED CORRECTLY · +${S.score.h5||0} MASTERY</b>The Articles supplied the treasury through states and preserved important national war powers. The Constitution explicitly grants broader taxation, commerce, army and militia powers. This is a change in authority and capacity, not a change from no government to government.`));
-    area.appendChild(nextWrap);renderChoices(nextWrap,[{l:'Final challenge',to:'H6',go:1}],n);
+    area.appendChild(el('div','fb '+(r>=4?'ok':'no'),`<b>${r}/6 SORTED CORRECTLY · +${S.score.h5||0} MASTERY</b>Under the Articles, the treasury relied on states, and Congress already held important war powers. The Constitution explicitly grants broader tax, commerce, army, and militia powers. Think about the unpaid soldiers: which power answers their problem?`));
+    const w=el('div','');area.appendChild(w);renderChoices(w,[{l:'Final challenge',to:'H6',go:1}],n);
   }
 }
 
 function renderChain(area,n){
   const pick=S.chain;
+  const lock=el('button','choice go','<span class="k">★</span><span>Lock in my causal chain</span>');lock.type='button';
   CHAIN.forEach((s,si)=>{
     if(si>0)area.appendChild(el('div','arrow','▼'));
     const box=el('div','step');box.innerHTML=`<h3>${s.h}</h3><p>${esc(s.q)}</p>`;
     s.o.forEach(([t],oi)=>{const b=el('button','opt',`<span class="dot"></span><span>${esc(t)}</span>`);b.type='button';b.setAttribute('aria-pressed',pick[si]===oi);
-      b.onclick=()=>{beep('click');pick[si]=oi;save();box.querySelectorAll('.opt').forEach((x,xi)=>x.setAttribute('aria-pressed',xi===oi));lock.disabled=CHAIN.some((_,k)=>pick[k]===undefined)};box.appendChild(b)});
+      b.onclick=()=>{beep('click');pick[si]=oi;save();box.querySelectorAll('.opt').forEach((x,xi)=>x.setAttribute('aria-pressed',xi===oi));lock.disabled=CHAIN.some((_,k)=>pick[k]===undefined||pick[k]===null)};box.appendChild(b)});
     area.appendChild(box);
   });
-  const lock=el('button','choice go','<span class="k">★</span><span>Lock in my causal chain</span>');lock.type='button';
-  lock.disabled=CHAIN.some((_,k)=>pick[k]===undefined);
+  lock.disabled=CHAIN.some((_,k)=>pick[k]===undefined||pick[k]===null);
   lock.onclick=()=>{
     const right=CHAIN.filter((s,k)=>s.o[pick[k]][1]).length;
-    const earned=Math.max(0,right-(S.score.h6||0));if(S.first.h6===undefined)S.first.h6=right;S.score.h6=Math.max(S.score.h6||0,right);if(earned)toast('+'+earned+' MASTERY');
-    if(right===3){beep('fanfare');S.flags.solved_h6=1;save();go('H7')}
+    if(S.first.h6===undefined)S.first.h6=right;S.score.h6=Math.max(S.score.h6||0,right);
+    if(right===3){beep('fanfare');save();go('H7')}
     else{beep('bad');S.retries++;S.chain=[];save();go('D-H6')}
   };
   area.appendChild(lock);
-  area.appendChild(el('p','note','If a link is weak, you’ll get a quick correction and can rebuild it. Retries can earn full mastery.'));
+  area.appendChild(el('p','note','A weak link gets feedback and a chance to rebuild. Retries can earn full mastery.'));
 }
 
 /* =========================================================
@@ -944,69 +1202,90 @@ function rankOf(s){return s>=9?'MASTER HISTORIAN':s>=6?'SHARP INVESTIGATOR':s>=3
 function pathEcho(){
   const f=S.flags;
   if(S.role==='farmer'){
-    const a={armed:'You marched with the armed men toward Springfield.',nonviolent:'You refused to take up arms but kept demanding reform.',withdraw:'You withdrew from the movement before Springfield.'}[f.final]||'You lived through the crisis as a western farmer.';
-    return a+' That did not change what happened at Springfield, but it changed how you experienced the crisis. Your key evidence: separating Massachusetts’s tax dispute from Congress’s national money problem.';
+    const a={armed:'You marched with the armed men toward Springfield.',nonviolent:'You refused to take up arms but kept demanding reform.',withdraw:'You stepped away for your family before Springfield.'}[f.final]||'You lived through the crisis as a hill-town farmer.';
+    const b={listen:' You listened to Asa even though you disagreed.',argue:' You and Asa ended up on opposite sides.',walk:' You walked away from Asa.'}[f.talk]||'';
+    return a+b+' None of that changed what happened at Springfield, but it changed how you lived the crisis.';
   }
   if(S.role==='state'){
-    const a={force:'You leaned on armed force to restore order.',negotiation:'You leaned on negotiation and concessions.',mixed:'You prepared force while keeping talks open.'}[f.response]||'You governed Massachusetts through the crisis.';
-    const b={relief:' You started out favoring tax relief.',strict:' You started out defending strict collection.',mixed:' You started out seeking compromise.'}[f.fiscal]||'';
-    return a+b+' Either way, you saw that this was a state crisis handled by a state government, while national leaders watched what the Confederation could and couldn’t do.';
+    const a={force:'You leaned on armed force to restore order.',negotiation:'You leaned on negotiation and concessions.',mixed:'You prepared force while keeping talks open.'}[f.response]||'You governed through the crisis.';
+    const b={relief:' You pushed for relief for the widow and families like hers.',strict:' You kept the tax program in place despite the widow’s petition.',mixed:' You offered the widow time, but no tax cut.'}[f.petition]||'';
+    return a+b+' You saw that this was a state crisis, handled by a state government, with real people on every side.';
   }
-  const a=f.reform===true?'You backed a broader convention before news from Springfield arrived. That matters: Americans were already debating reform before Shays’ Rebellion became a national symbol.':f.reform===false?'You opposed expanding national power. Plenty of Americans agreed with you, and they would keep making that case in 1787 and 1788.':'You waited to see how reform would unfold.';
-  return a+(f.direct_tax?' You also tried to pass a national tax and ran into Article VIII and Article XIII.':'');
+  const a=f.reform===true?'You backed a broader convention before Springfield. Americans were already debating reform before Shays became a national symbol.':f.reform===false?'You opposed expanding national power. Many Americans agreed, and kept making that case in 1787–88.':'You waited to see how reform would unfold.';
+  const b={honest:' You told the soldier the hard truth.',promise:' You promised the soldier money Congress didn’t have.',ignore:' You set the soldier’s letter aside.'}[f.letter]||'';
+  return a+b+(f.direct_tax?' You tried a national tax and ran into Articles VIII and XIII.':'');
 }
-function reportText(name,ticket){
+const feelList=()=>Object.entries(S.feel).map(([nid,k])=>[N[nid]?N[nid].title:nid,FEELS.find(f=>f[0]===k)]).filter(x=>x[1]);
+const journalList=(all)=>Object.entries(S.journal).filter(([,j])=>j.text&&j.text.trim()&&(all||j.include));
+function reportText(name){
   const sc=total();
+  const fl=feelList().map(([t,f])=>`${t}: ${f[1]}`).join(' → ')||'(none)';
+  const vals=S.lastValues?S.lastValues.join(' + '):'(none)';
+  const js=journalList(false).map(([,j])=>`${j.title}\n${j.text.trim()}`).join('\n\n')||'(none)';
   return `CAN THE NEW COUNTRY SURVIVE? — MISSION REPORT
 Name: ${name||'(not entered)'}
 Role: ${ROLE_NAME[S.role]||'—'}
 Mastery: ${sc}/10 · ${rankOf(sc)}
 ${ASSESS.map(([k,l,m])=>`  - ${l}: ${S.score[k]||0}/${m}`).join('\n')}
 Corrections visited: ${S.retries}
-Final meters (simulation only): Union ${S.m.union}/5 · Treasury ${S.m.treasury}/5 · Unrest ${S.m.unrest}/5
-Path: ${pathEcho()}
+People met: ${S.people.map(k=>PEOPLE[k].nm).join(', ')||'(none)'}
+
+SEL
+Feelings journey: ${fl}
+Values I chose: ${vals}
+Final meters (simulation only): Hope ${S.m.hope}/5 · Trust ${S.m.trust}/5 · Tension ${S.m.tension}/5
+My path: ${pathEcho()}
+
+JOURNAL
+${js}
 
 EXIT TICKET — What problem did the Constitution attempt to solve, and what new problem might stronger national power create?
-${ticket||'(no answer yet)'}`;
+${S.flags.ticket||'(no answer yet)'}`;
 }
 function renderEnd(st){
-  anim=null;
+  anim=null;toastBox=null;
   const sc=total();
   st.appendChild(el('section','finale',`<div class="y">1787</div>
-    <p>The Articles were created by Americans who feared concentrated power. Now many Americans fear something different: a national government too weak to solve shared problems.</p>
+    <p>The Articles were created by Americans who feared concentrated power. Now many fear something different: a national government too weak to keep its promises to the people who fought for it.</p>
     <p>But giving the national government more power creates a new question.</p>
     <div class="big">How powerful should it become?</div>
     <p style="color:var(--gold);font-family:var(--f-pixel);font-size:11px;line-height:1.8;margin-top:22px">THAT ARGUMENT IS ABOUT TO TAKE OVER PHILADELPHIA.</p>`));
   const rep=el('div','report');
   const left=el('article','panel');
+  const fl=feelList();
   left.innerHTML=`<div class="badges"><span class="badge doc">MISSION REPORT</span><span class="badge role">${esc((ROLE_NAME[S.role]||'').toUpperCase())}</span></div>
    <h2 tabindex="-1">Your Results</h2>
    <div><div class="score">${sc}<small>/10</small></div><div class="rank">${rankOf(sc)}</div></div>
    <table class="sc"><tbody>${ASSESS.map(([k,l,m])=>`<tr><td>${esc(l)}</td><td>${S.score[k]||0}/${m}</td></tr>`).join('')}</tbody></table>
-   <p class="note">Mastery reflects your best demonstrated understanding. Retries do not reduce your score. Corrections visited: ${S.retries}. Meters are simulation only and never affect your grade: Union ${S.m.union}/5 · Treasury ${S.m.treasury}/5 · Unrest ${S.m.unrest}/5.</p>
-   <div class="fb"><b>YOUR PATH</b>${esc(pathEcho())}</div>`;
+   <p class="note">Mastery reflects your best demonstrated understanding. Retries do not lower your score. Corrections visited: ${S.retries}.</p>
+   <p class="sech">YOUR FEELINGS JOURNEY</p>
+   <div class="journey" id="jy">${fl.length?fl.map(([t,f],i)=>`<span class="jchip"><canvas data-f="${f[0]}" data-c="${f[2]}" aria-hidden="true"></canvas><span><b>${f[1]}</b><br>${esc(t)}</span></span>`).join(''):'<span class="note">No feelings checks recorded.</span>'}</div>
+   ${S.lastValues?`<div class="under"><b>WHAT YOU STOOD FOR</b>${esc(S.lastValues.join(' + '))}</div>`:''}
+   <div class="fb"><b>YOUR PATH</b>${esc(pathEcho())}</div>
+   <p class="note">Meters (simulation only, never graded): Hope ${S.m.hope}/5 · Trust ${S.m.trust}/5 · Tension ${S.m.tension}/5.</p>`;
   const right=el('article','panel');
   right.innerHTML=`<div class="debrief"><p><strong>Debrief: which statement is more accurate, and why?</strong></p>
      <p><strong>A.</strong> “The Articles of Confederation caused Shays’ Rebellion.”</p>
      <p style="margin:0"><strong>B.</strong> “Massachusetts’s economic and political crisis caused the rebellion, while weaknesses in the Confederation shaped its national significance and strengthened an existing reform movement.”</p></div>
+   <div class="think"><b>TALK IT OUT</b>Find someone who played a different role. What did each of your characters feel at Springfield, and why might you both be right?</div>
    <label for="nm">YOUR NAME</label><input id="nm" type="text" autocomplete="name" value="${esc(S.flags.name||'')}">
    <label for="tk">EXIT TICKET · What problem did the Constitution attempt to solve, and what new problem might stronger national power create?</label>
    <textarea id="tk">${esc(S.flags.ticket||'')}</textarea>
-   <div class="choices">
-     <button class="choice go" type="button" id="cpBtn"><span class="k">⧉</span><span>Copy my report</span></button>
-   </div>
+   <div class="choices"><button class="choice go" type="button" id="cpBtn"><span class="k">⧉</span><span>Copy my report</span></button></div>
+   <p class="note">Your report includes your journal entries. Your private reflection is included only if you checked the box.</p>
    <pre class="rep" id="repTxt" hidden></pre>
    <div class="tools"><button class="chip" type="button" id="againBtn">PLAY ANOTHER ROLE</button><button class="chip" type="button" id="resetBtn">RESTART FROM TITLE</button></div>`;
   rep.appendChild(left);rep.appendChild(right);st.appendChild(rep);
+  left.querySelectorAll('canvas[data-f]').forEach(cv=>face(cv,cv.dataset.f,cv.dataset.c));
   const nm=$('#nm'),tk=$('#tk');
   const upd=()=>{S.flags.name=nm.value;S.flags.ticket=tk.value;save()};nm.oninput=upd;tk.oninput=upd;
   $('#cpBtn').onclick=e=>{
-    const txt=reportText(nm.value,tk.value);const pre=$('#repTxt');pre.textContent=txt;pre.hidden=false;
+    upd();const txt=reportText(nm.value);const pre=$('#repTxt');pre.textContent=txt;pre.hidden=false;
     const lab=e.currentTarget.querySelector('span:last-child');
     const sel=()=>{const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);lab.textContent='Selected. Press Ctrl/Cmd+C to copy'};
     try{navigator.clipboard.writeText(txt).then(()=>{lab.textContent='Copied! Paste it where your teacher asks';beep('good')},sel)}catch(err){sel()}
   };
-  $('#againBtn').onclick=()=>{const keep={score:{c2:S.score.c2||0},first:{c2:S.first.c2},cards:S.cards.filter(c=>['sovereignty','requisition','notpowerless'].includes(c)),flags:{solved_c2:1,name:S.flags.name||'',ticket:S.flags.ticket||''}};S=Object.assign(fresh(),keep);if(!S.score.c2)delete S.score.c2;go('R0')};
+  $('#againBtn').onclick=()=>{const keep={score:S.score.c2?{c2:S.score.c2}:{},first:{c2:S.first.c2},cards:S.cards.filter(c=>['sovereignty','requisition','notpowerless'].includes(c)),people:['shays'],flags:{solved_c2:1},feel:S.feel.P1?{P1:S.feel.P1}:{},seen:{P0:1,P1:1,C0:1,C1:1,C2:1,C3:1}};S=Object.assign(fresh(),keep);go('R0')};
   $('#resetBtn').onclick=()=>{S=fresh();clearSave();render()};
   $('h2',left).focus({preventScroll:true});
 }
@@ -1019,10 +1298,7 @@ document.addEventListener('keydown',e=>{
 });
 
 /* boot */
-function start(data){
-  if(data&&data.node){S=Object.assign(fresh(),data)}
-  render();
-}
+function start(data){if(data&&data.node)S=Object.assign(fresh(),data);render()}
 start();
 </script>
 

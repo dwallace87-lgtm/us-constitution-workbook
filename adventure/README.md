@@ -1,6 +1,6 @@
 # Can the New Country Survive?
 
-The arcade-style historical decision adventure supplied by the user, adopted as the baseline for this site. It combines animated pixel-art scenes, role-selection portraits, a sticky simulation HUD, optional sound cues, source cards, an evidence notebook, keyboard shortcuts, and a final mission report.
+The newest user-supplied arcade adventure, with a conversational American-English revision across 52 narrative passages and selected fictional dialogue/choices. Primary-source definitions and the glossary remain exactly as supplied. The pixel art, character files, expanded historical aftermath, feelings checks, values choices, and journals are retained.
 
 ## Run
 
@@ -10,22 +10,24 @@ From the repository root:
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Visit the `/adventure/` path on that server. Everything is in `adventure/index.html`; no installation, build, or backend is needed. Google Fonts are optional; local font fallbacks keep the adventure playable when those requests are unavailable. The original workbook remains at `/`.
+Visit `/adventure/` on that server. Everything is in `adventure/index.html`; no installation, build, or backend is needed. Google Fonts are optional, with local fallbacks. The original workbook remains at `/`.
 
-## Historical and classroom design
+## Learning design
 
-35 authored nodes: five introductory screens, six for each of three roles, seven concluding screens, and five corrective loops. A typical route contains 18 substantive scenes plus the title and mission report. Characters and personal decisions are fictional. History Checks preserve the documented outcome at Springfield and distinguish Massachusetts grievances from national fiscal and coordination problems. Sources present both Knox and Jefferson's interpretations, not one definitive verdict.
+53 authored scenes across three perspectives, including a Daniel Shays prologue, productive dead ends, role-play conversations, feelings/values choices, journals, historical convergence, evidence checks, and a personal connection. Allow about 50–55 minutes plus discussion; the title-screen teacher guide suggests a two-day option.
 
-Use Farmer/Veteran for a concrete first journey or assign all three roles across a class. Allow about 35 minutes plus debrief. The teacher guide is available from the title screen.
+Fictional dialogue uses a contemporary voice, while key terms such as sovereignty, requisition, legislature, militia, arsenal, amnesty, and Articles of Confederation retain their historical meaning. Primary-source quotations are unchanged. Player choices cannot reopen the historically closed Northampton court or change the Springfield outcome. The Constitution comparison preserves Congress’s existing war-related powers under the Articles.
 
-Knowledge, not role-play strategy, earns the ten mastery points: Articles revenue (1), causes/context (2), source interpretation (1), chronology (1), constitutional sort (2), and causal chain (3). The uploaded version's first-attempt-only scoring has been corrected: retries can earn full mastery, including revisions to the sort and causal chain. Simulation indicators are not historical statistics or grades. Congress already possessed important war-related powers under the Articles; the Constitution comparison acknowledges this.
+Ten mastery points come from knowledge: Articles revenue (1), causes/context (1), financing the state response (1), source interpretation (1), reform chronology (1), constitutional comparison (2), causal chain (3). Retries can earn full mastery. Feelings, values, Hope/Trust/Tension simulation indicators, and role-play decisions are never graded.
 
-## Browser features
+## Progress, reflection, and accessibility
 
-Progress, name, and exit reflection stay in this browser's localStorage. No accounts, analytics, teacher dashboard, or automatic LMS submission are included. Copy the mission report to share it where the teacher requests. Storage failures show a warning and allow continued play for the current visit; malformed saved state is ignored safely. Shared-device users should clear their saved game when finished.
+Progress, names, feelings, values, and writing stay in this browser’s localStorage. Nothing is automatically sent to a teacher or server. “Copy my report” includes role-play journals and the exit ticket; the final personal reflection is excluded unless the learner checks its explicit inclusion box. It may also be skipped. Shared-device users should clear their saved game after copying their results.
 
-Tab and Enter operate buttons; number keys 1–4 choose available story options; Escape closes popovers and source/notebook dialogs. Reduced-motion preferences disable pixel-art animation. Optional sound starts off. Read-to-me uses browser speech synthesis with pause/resume and stop controls; installed voices and browser support vary.
+Malformed saved data is ignored safely. Storage failures show a notice and still allow play for the current visit. Names and writing are escaped when rendered.
 
-The site was tested with Chromium through all three paths and all 35 nodes, including wrong answers, retries, source gates, save/resume, input escaping, mobile layout, keyboard navigation, and unavailable storage. This does not constitute an independently audited accessibility certification.
+Tab and Enter operate buttons. Number keys 1–4 choose available story options; Escape closes dialogs and popovers. Reduced-motion preferences disable pixel-art animation. Sound starts off. Browser speech synthesis offers read, pause/resume, and stop; browser voices vary.
 
-Source links require external network access only when opened. The main adventure, artwork, story, assessments, and excerpts render locally. See source-card metadata and links for National Archives and Founders Online records.
+All three paths and all 53 scenes were tested, including corrective loops, source/character-file gates, feelings/values/journals, mastery retries, private-reflection inclusion and exclusion, save/resume, input escaping, keyboard navigation, mobile layout, and malformed/unavailable storage. This is not an independently audited accessibility certification.
+
+Source links are optional external references to archival records and historical research. The story, excerpts, assessments, and pixel art render locally. The Moses Sash source links to the Worthington Historical Society.
